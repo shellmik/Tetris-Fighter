@@ -7,12 +7,6 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-/**
- * The {@code BoardPanel} class is responsible for displaying the game grid and
- * handling things related to the game board.
- * @author Brendan Jones
- *
- */
 public class BoardPanel extends JPanel implements Panel{
 
 	/**
