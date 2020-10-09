@@ -10,7 +10,7 @@ public class drawer {
 		TILE_SIZE = a;
 		SHADE_WIDTH = b;
 	}
-	
+	// acdsjncv
 	public void drawTile(Tiles type, int x, int y, Graphics g) {
 		g.setColor(type.getBaseColor());
 		g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
