@@ -8,6 +8,5 @@ public class Main {
 	public static void main(String[] args) {
 		GameController tetris = new GameController();
 		tetris.startGame();
-		////////
 	}
 }
