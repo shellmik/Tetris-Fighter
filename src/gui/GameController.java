@@ -196,12 +196,13 @@ public class GameController extends JFrame {
 		this.random = new Random();
 		this.isNewGame = true;
 		this.gameSpeed = 1.0f;
+		this.logicTimer = new Clock(gameSpeed);
 		pc = new PieceController(this);
 		/*
 		 * Setup the timer to keep the game from running before the user presses enter
 		 * to start it.
 		 */
-		this.logicTimer = new Clock(gameSpeed);
+
 		logicTimer.setPaused(true);
 		
 		while(true) {
