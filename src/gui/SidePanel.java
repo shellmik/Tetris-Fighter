@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * The {@code SidePanel} class is responsible for displaying various information
@@ -101,11 +106,41 @@ public class SidePanel extends JPanel implements Panel{
 	 * Creates a new SidePanel and sets it's display properties.
 	 * @param tetris The Tetris instance to use.
 	 */
+	private JLabel label;
+	private JTextField textField;
+
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
-		
+
 		setPreferredSize(new Dimension(200, BoardPanel.PANEL_HEIGHT));
 		setBackground(Color.BLACK);
+
+		label = new JLabel("Name: Please Input User Name");
+		label.setFont(new Font("acefont-family", Font.BOLD, 10));
+		label.setForeground(Color.red);
+		label.setBounds(18, 15, 30, 4);
+
+		Dimension d = label.getPreferredSize();
+		label.setPreferredSize(new Dimension(d.width + 6, d.height));
+
+		textField = new JTextField(20);
+		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
+		textField.setBounds(18, 20, 25, 4);
+
+		JButton b1 = new JButton("submit user name");
+		add(b1);
+
+		b1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				label.setText("Name: " + textField.getText());
+				tetris.requestFocus();
+			}
+		});
+
+		add(label);
+		add(textField);
+
 	}
 	
 	@Override

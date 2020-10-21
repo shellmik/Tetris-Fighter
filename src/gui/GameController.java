@@ -1,11 +1,15 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import timer.Clock;
 
@@ -220,7 +224,6 @@ public class GameController extends JFrame {
 				updateGame();
 				
 			}
-			// updateGame();
 			//Decrement the drop cool down if necessary.
 			if(dropCooldown > 0) {
 				dropCooldown--;
