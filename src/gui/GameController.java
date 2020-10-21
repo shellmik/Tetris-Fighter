@@ -14,13 +14,14 @@ import javax.swing.JTextField;
 import timer.Clock;
 
 public class GameController extends JFrame {
-	
+	private Level gameLevel;
 	
 	private static final long serialVersionUID = -4722429764792514382L;
 
 	private static final long FRAME_TIME = 1000L / 50L;
 	
-	private static final int TYPE_COUNT = PieceGenerator.getInstance().piecesCollection.length;
+	//private static final int TYPE_COUNT = PieceGenerator.getInstance().piecesCollection.length;
+	private int TYPE_COUNT;
 		
 	public BoardPanel board;
 	
@@ -42,7 +43,7 @@ public class GameController extends JFrame {
 	
 	private int dropCooldown;
 	
-	private float gameSpeed;
+	private float gameSpeed,gameAcceleration;
 	
 	private PieceController pc;
 	
@@ -60,6 +61,10 @@ public class GameController extends JFrame {
 		 */
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
+		this.gameLevel=side.getLevel();
+		//this.gameSpeed=this.gameLevel.getSpeed();
+		//this.gameAcceleration=this.gameLevel.getAccelaration();
+		this.TYPE_COUNT=this.gameLevel.getTileCnt();
 		
 		/*
 		 * Add the BoardPanel and SidePanel instances to the window.
@@ -199,7 +204,10 @@ public class GameController extends JFrame {
 		 */
 		this.random = new Random();
 		this.isNewGame = true;
-		this.gameSpeed = 1.0f;
+		//this.gameSpeed = 1.0f;
+		this.gameSpeed=this.gameLevel.getSpeed();
+		System.out.println("gameSpeed="+gameSpeed);
+		
 		this.logicTimer = new Clock(gameSpeed);
 		pc = new PieceController(this);
 		/*
@@ -277,7 +285,10 @@ public class GameController extends JFrame {
 			 * Increase the speed slightly for the next piece and update the game's timer
 			 * to reflect the increase.
 			 */
-			gameSpeed += 0.035f;
+			System.out.println("gbefore change: "+gameSpeed);
+			this.gameAcceleration=this.gameLevel.getAccelaration();
+			gameSpeed += this.gameAcceleration;//0.035f
+			System.out.println("gameSpeed chaned to"+gameSpeed);
 			logicTimer.setCyclesPerSecond(gameSpeed);
 			logicTimer.reset();
 			
@@ -318,8 +329,11 @@ public class GameController extends JFrame {
 		
 		this.level = 1;
 		this.score = 0;
-		this.gameSpeed = 1.0f;
+		//this.gameSpeed = 1.0f;
+		this.gameSpeed=this.gameLevel.getSpeed();
+
 		pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
+		//pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
 		this.isGameOver = false;		
@@ -419,6 +433,11 @@ public class GameController extends JFrame {
 	 */
 	public int getPieceRotation() {
 		return pc.currentRotation;
+	}
+	
+	public int getTypeCnt() {
+		
+		return this.TYPE_COUNT;
 	}
 
 	

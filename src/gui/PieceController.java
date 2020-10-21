@@ -38,6 +38,7 @@ public class PieceController {
 			 * Poll the last piece and reset our position and rotation to
 			 * their default variables, then pick the next piece to use.
 			 */
+			
 			this.currentType = nextType;
 			// game.currentType = this.currentType;
 			
@@ -50,7 +51,10 @@ public class PieceController {
 			this.currentRotation = 0;
 			// game.currentRotation = 0;
 			// System.out.println(board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation));
-			this.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
+			
+			int num=random.nextInt(this.game.getTypeCnt());
+			System.out.println("random:  "+num);
+			this.nextType = PieceGenerator.getInstance().piecesCollection[num];
 			// game.nextType = this.nextType;
 			
 			/*

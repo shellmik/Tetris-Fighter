@@ -37,6 +37,29 @@ public class PieceGenerator {
 			}),
 			
 			/**
+			 * Piece TypeO.
+			 */
+			new Tiles(new Color(BoardPanel.COLOR_MAX, BoardPanel.COLOR_MAX, BoardPanel.COLOR_MIN), 2, 2, 2, new boolean[][] {
+				{
+					true,	true,
+					true,	true,
+				},
+				{
+					true,	true,
+					true,	true,
+				},
+				{	
+					true,	true,
+					true,	true,
+				},
+				{
+					true,	true,
+					true,	true,
+				}
+			}),
+
+			
+			/**
 			 * Piece TypeJ.
 			 */
 			new Tiles(new Color(BoardPanel.COLOR_MIN, BoardPanel.COLOR_MIN, BoardPanel.COLOR_MAX), 3, 3, 2, new boolean[][] {
@@ -88,27 +111,6 @@ public class PieceGenerator {
 				}
 			}),
 			
-			/**
-			 * Piece TypeO.
-			 */
-			new Tiles(new Color(BoardPanel.COLOR_MAX, BoardPanel.COLOR_MAX, BoardPanel.COLOR_MIN), 2, 2, 2, new boolean[][] {
-				{
-					true,	true,
-					true,	true,
-				},
-				{
-					true,	true,
-					true,	true,
-				},
-				{	
-					true,	true,
-					true,	true,
-				},
-				{
-					true,	true,
-					true,	true,
-				}
-			}),
 			
 			/**
 			 * Piece TypeS.
