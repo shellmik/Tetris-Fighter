@@ -84,7 +84,7 @@ public class BoardPanel extends JPanel implements Panel{
 	/**
 	 * The larger font to display.
 	 */
-	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 16);
+	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 26);
 
 	/**
 	 * The smaller font to display.
@@ -285,7 +285,7 @@ public class BoardPanel extends JPanel implements Panel{
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, CENTER_Y);
 		} else if(tetris.isNewGame() || tetris.isGameOver()) {
 			g.setFont(LARGE_FONT);
-			g.setColor(Color.WHITE);
+			g.setColor(new Color(255,182,193));
 			
 			/*
 			 * Because both the game over and new game screens are nearly identical,

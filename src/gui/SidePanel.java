@@ -44,12 +44,12 @@ public class SidePanel extends JPanel implements Panel{
 	/**
 	 * The center x of the next piece preview box.
 	 */
-	private static final int SQUARE_CENTER_X = 130;
+	private static final int SQUARE_CENTER_X = 150;
 	
 	/**
 	 * The center y of the next piece preview box.
 	 */
-	private static final int SQUARE_CENTER_Y = 65;
+	private static final int SQUARE_CENTER_Y = 150;
 	
 	/**
 	 * The size of the next piece preview box.
@@ -69,7 +69,7 @@ public class SidePanel extends JPanel implements Panel{
 	/**
 	 * The y coordinate of the stats category.
 	 */
-	private static final int STATS_INSET = 175;
+	private static final int STATS_INSET = 230;
 	
 	/**
 	 * The y coordinate of the controls category.
@@ -94,7 +94,7 @@ public class SidePanel extends JPanel implements Panel{
 	/**
 	 * The color to draw the text and preview box in.
 	 */
-	private static final Color DRAW_COLOR = new Color(128, 192, 128);
+	private static final Color DRAW_COLOR = Color.BLACK;
 	
 	/**
 	 * The Tetris instance.
@@ -111,29 +111,34 @@ public class SidePanel extends JPanel implements Panel{
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
+		setLayout(null);//为了调按钮的位置
 
-		setPreferredSize(new Dimension(200, BoardPanel.PANEL_HEIGHT));
-		setBackground(Color.BLACK);
+		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
+		setBackground(new Color(255,182,193));
 
-		label = new JLabel("Name: Please Input User Name");
-		label.setFont(new Font("acefont-family", Font.BOLD, 10));
-		label.setForeground(Color.red);
+		label = new JLabel("Name: Please Input A User Name  ");
+		label.setFont(LARGE_FONT);
+		label.setForeground(Color.BLACK);
 		label.setBounds(18, 15, 30, 4);
+		label.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
 
 		Dimension d = label.getPreferredSize();
 		label.setPreferredSize(new Dimension(d.width + 6, d.height));
 
 		textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
-		textField.setBounds(18, 20, 25, 4);
+		textField.setBounds(SMALL_INSET, 60, 200, 30);//这个大小为什么改不了
 
-		JButton b1 = new JButton("submit user name");
+		JButton b1 = new JButton("submit");
+		b1.setBounds(220, 60, 80, 30);//x, y, width, height
 		add(b1);
 
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				label.setText("Name: " + textField.getText());
+				textField.setVisible(false);
+				b1.setVisible(false);
 				tetris.requestFocus();
 			}
 		});
@@ -163,8 +168,8 @@ public class SidePanel extends JPanel implements Panel{
 		g.setFont(LARGE_FONT);
 		g.drawString("Stats", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
-		g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("Level: " + tetris.getLevel() + "     Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
+
 		
 		/*
 		 * Draw the "Controls" category.
@@ -172,18 +177,16 @@ public class SidePanel extends JPanel implements Panel{
 		g.setFont(LARGE_FONT);
 		g.drawString("Controls", SMALL_INSET, offset = CONTROLS_INSET);
 		g.setFont(SMALL_FONT);
-		g.drawString("A - Move Left", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("D - Move Right", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("Q - Rotate Anticlockwise", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("E - Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("S - Drop", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("P - Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[A]- Move Left               [D]- Move Right", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[J]- Rotate Anticlockwise    [K]- Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[S]- Drop                    [P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
+
 		
 		/*
 		 * Draw the next piece preview box.
 		 */
 		g.setFont(LARGE_FONT);
-		g.drawString("Next Piece:", SMALL_INSET, 70);
+		g.drawString("Next Piece:", SMALL_INSET, 150);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 		
 		/*
