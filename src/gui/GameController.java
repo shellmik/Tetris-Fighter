@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -358,8 +359,29 @@ public class GameController extends JFrame {
 	}
 	
 	public void showRank() {
-		gameSave.openRankingList();
+		ArrayList list = gameSave.openRankingList();
 		System.out.println("show rank");
+		
+		JFrame frame = new JFrame();
+        frame.setTitle("Ranking");
+        frame.setSize(300, 700);
+        frame.setDefaultCloseOperation(2);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setResizable(false);
+
+        JLabel lab = new JLabel("User        Max        ");
+        lab.setBounds(30, 60, 400, 50);
+        frame.add(lab);
+        
+        for (int i = 0; i < list.size(); i++) {
+            User user = (User) list.get(i);
+            JLabel label = new JLabel(user.toString());
+            label.setBounds(30, 60 + (i + 1) * 50, 400, 60);
+            frame.add(label);
+        }
+
+        frame.setVisible(true);
 	}
 	
 	/**

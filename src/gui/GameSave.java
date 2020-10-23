@@ -27,67 +27,6 @@ public class GameSave {
 		System.out.println("save");
 	}
 
-    /**
-     * @param array要存档的数据
-     */
-    public boolean saveInfo(int[][] array) {
-        try {
-            // 实例化一个输出流对象
-            OutputStream os = new FileOutputStream("./output.txt");
-
-            os.write(array.length);// 写入数组的行数
-            os.write(array[0].length);// 写入数组的列数
-
-            // 将数组中的元素写入到文件中
-            for (int r = 0; r < array.length; r++) {
-                for (int c = 0; c < array.length; c++) {
-                    os.write(array[r][c]);
-                }
-            }
-
-            os.close();//关文件
-            return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 读取文档中的数据
-     *
-     * @return 返回读取到存档信息
-     */
-    @SuppressWarnings("resource")
-    public int[][] openInfo() {
-        try {
-            // 实例化一个输入流对象
-            InputStream is = new FileInputStream("./output.txt");
-
-            int row = is.read();
-            int column = is.read();
-            if (row != -1 && column != -1) {
-                int[][] array = new int[row][column];
-
-                for (int r = 0; r < array.length; r++) {
-                    for (int c = 0; c < array.length; c++) {
-                        array[r][c] = is.read();
-                    }
-                }
-
-                is.close();
-
-                return array;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * 存储游戏排行版信息的方法
