@@ -23,10 +23,10 @@ import javax.swing.JTextField;
  */
 public class SidePanel extends JPanel implements Panel{
 	
-	private float gameSpeed;//=1.0f;//1-5
-	private float gameAcc;//=0.14f;//0.04/6/8/0.1/12
-	private int gameTileCnt;//=2;//2,4,5,7
-	private Level sideLevel;
+	private float gameSpeed=5.0f;//1-5
+	private float gameAcc=0.14f;//0.04/6/8/0.1/12
+	private int gameTileCnt=2;//2,4,5,7
+	private Level sideLevel=Level.getInstance();
 	
 	
 	public Level getLevel() {
@@ -159,6 +159,8 @@ public class SidePanel extends JPanel implements Panel{
 		JLabel chooseType = new JLabel("Type count：");
 		chooseType.setForeground(Color.red);
         add(chooseType);
+        
+        
         int[] listType = new int[]{2, 4, 5, 7};
         JComboBox<Integer> cmbType=new JComboBox<Integer>();
         for(int i=0;i<listType.length;i++) {
@@ -171,7 +173,8 @@ public class SidePanel extends JPanel implements Panel{
                 	
                     gameTileCnt=(int) cmbType.getSelectedItem();
                     System.out.println("select: "+gameTileCnt);
-                    sideLevel=new Level(gameTileCnt,gameSpeed,gameAcc);
+                    sideLevel.setTileCnt(gameTileCnt);
+                    
                 }
             }
         });
@@ -181,6 +184,8 @@ public class SidePanel extends JPanel implements Panel{
 		JLabel chooseSpeed = new JLabel("Speed：");
 		chooseSpeed.setForeground(Color.red);
         add(chooseSpeed);
+        
+        
         float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
         JComboBox cmbSpeed=new JComboBox();
         for(int i=0;i<listSpeed.length;i++) {
@@ -192,7 +197,7 @@ public class SidePanel extends JPanel implements Panel{
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     gameSpeed=(float) cmbSpeed.getSelectedItem();
                     System.out.println("select: "+gameSpeed);
-                    sideLevel=new Level(gameTileCnt,gameSpeed,gameAcc);
+                    sideLevel.setSpeed(gameSpeed);
                 }
             }
         });
@@ -202,6 +207,8 @@ public class SidePanel extends JPanel implements Panel{
 		JLabel chooseAcc = new JLabel("Acceleration：");
 		chooseAcc.setForeground(Color.red);
         add(chooseAcc);
+        
+        
         float[] listAcc = new float[]{0.04f,0.06f,0.08f,0.1f,0.12f};
         JComboBox cmbAcc=new JComboBox();
         for(int i=0;i<listAcc.length;i++) {
@@ -213,14 +220,15 @@ public class SidePanel extends JPanel implements Panel{
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     gameAcc=(float) cmbAcc.getSelectedItem();
                     System.out.println("select: "+gameAcc);
-                    sideLevel=new Level(gameTileCnt,gameSpeed,gameAcc);
+                    sideLevel.setAccelaration(gameAcc);
+                    
                 }
             }
         });
         cmbAcc.setSelectedIndex(1);
         add(cmbAcc);
         
-        sideLevel=new Level(gameTileCnt,gameSpeed,gameAcc);
+        
         
         
         	

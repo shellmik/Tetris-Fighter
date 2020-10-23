@@ -64,7 +64,7 @@ public class GameController extends JFrame {
 		this.gameLevel=side.getLevel();
 		//this.gameSpeed=this.gameLevel.getSpeed();
 		//this.gameAcceleration=this.gameLevel.getAccelaration();
-		this.TYPE_COUNT=this.gameLevel.getTileCnt();
+		//this.TYPE_COUNT=this.gameLevel.getTileCnt();
 		
 		/*
 		 * Add the BoardPanel and SidePanel instances to the window.
@@ -332,7 +332,8 @@ public class GameController extends JFrame {
 		//this.gameSpeed = 1.0f;
 		this.gameSpeed=this.gameLevel.getSpeed();
 
-		pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
+		pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(this.gameLevel.getTileCnt())];
+		System.out.println(this.gameLevel.getTileCnt());
 		//pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
@@ -436,8 +437,8 @@ public class GameController extends JFrame {
 	}
 	
 	public int getTypeCnt() {
-		
-		return this.TYPE_COUNT;
+		//System.out.println(this.gameLevel.getTileCnt());
+		return this.gameLevel.getTileCnt();
 	}
 
 	
