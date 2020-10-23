@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,6 +22,18 @@ import javax.swing.JTextField;
  *
  */
 public class SidePanel extends JPanel implements Panel{
+	
+	private float gameSpeed=5.0f;//1-5
+	private float gameAcc=0.14f;//0.04/6/8/0.1/12
+	private int gameTileCnt=2;//2,4,5,7
+	private Level sideLevel=Level.getInstance();
+	
+	
+	public Level getLevel() {
+	return this.sideLevel;
+	}
+	
+	
 	
 	/**
 	 * Serial Version UID.
@@ -157,6 +172,82 @@ public class SidePanel extends JPanel implements Panel{
 		add(label);
 		add(textField);
 		
+		JLabel chooseType = new JLabel("Type count：");
+		chooseType.setForeground(Color.red);
+        add(chooseType);
+        
+        
+        int[] listType = new int[]{2, 4, 5, 7};
+        JComboBox<Integer> cmbType=new JComboBox<Integer>();
+        for(int i=0;i<listType.length;i++) {
+        	cmbType.addItem(listType[i]);
+        }
+        cmbType.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	
+                    gameTileCnt=(int) cmbType.getSelectedItem();
+                    System.out.println("select: "+gameTileCnt);
+                    sideLevel.setTileCnt(gameTileCnt);
+                    
+                }
+            }
+        });
+        cmbType.setSelectedIndex(1);
+        add(cmbType);
+        
+		JLabel chooseSpeed = new JLabel("Speed：");
+		chooseSpeed.setForeground(Color.red);
+        add(chooseSpeed);
+        
+        
+        float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
+        JComboBox cmbSpeed=new JComboBox();
+        for(int i=0;i<listSpeed.length;i++) {
+        	cmbSpeed.addItem(listSpeed[i]);
+        }
+        cmbSpeed.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    gameSpeed=(float) cmbSpeed.getSelectedItem();
+                    System.out.println("select: "+gameSpeed);
+                    sideLevel.setSpeed(gameSpeed);
+                }
+            }
+        });
+        cmbSpeed.setSelectedIndex(1);
+        add(cmbSpeed);
+        
+		JLabel chooseAcc = new JLabel("Acceleration：");
+		chooseAcc.setForeground(Color.red);
+        add(chooseAcc);
+        
+        
+        float[] listAcc = new float[]{0.04f,0.06f,0.08f,0.1f,0.12f};
+        JComboBox cmbAcc=new JComboBox();
+        for(int i=0;i<listAcc.length;i++) {
+        	cmbAcc.addItem(listAcc[i]);
+        }
+        cmbAcc.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    gameAcc=(float) cmbAcc.getSelectedItem();
+                    System.out.println("select: "+gameAcc);
+                    sideLevel.setAccelaration(gameAcc);
+                    
+                }
+            }
+        });
+        cmbAcc.setSelectedIndex(1);
+        add(cmbAcc);
+        
+        
+        
+        
+        	
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
 		sb.setBounds(70, 210, 80, 30);//x, y, width, height
@@ -204,8 +295,8 @@ public class SidePanel extends JPanel implements Panel{
 		g.setFont(LARGE_FONT);
 		g.drawString("Stats", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
-		g.drawString("Level: " + tetris.getLevel() + "     Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
-
+		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
 		
 		/*
 		 * Draw the "Controls" category.
