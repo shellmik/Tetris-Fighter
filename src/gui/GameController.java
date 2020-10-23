@@ -24,7 +24,9 @@ public class GameController extends JFrame {
 		
 	public BoardPanel board;
 	
-	private SidePanel side;
+	public SidePanel side;//Felicia modified for storage
+	
+	public GameSave gameSave;
 	
 	private boolean isPaused;
 	
@@ -60,6 +62,7 @@ public class GameController extends JFrame {
 		 */
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
+		this.gameSave = new GameSave(this);
 		
 		/*
 		 * Add the BoardPanel and SidePanel instances to the window.
@@ -320,7 +323,6 @@ public class GameController extends JFrame {
 		this.score = 0;
 		this.gameSpeed = 1.0f;
 		pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
-		pc.nextType = pc.nextType;
 		this.isNewGame = false;
 		this.isGameOver = false;		
 		board.clear();
@@ -347,6 +349,17 @@ public class GameController extends JFrame {
 	 */
 	public boolean isPaused() {
 		return isPaused;
+	}
+	
+	public void saveCurrent() {
+		String name = side.getUserName();
+		gameSave.save(name, score);
+		System.out.println("saveCurrent");
+	}
+	
+	public void showRank() {
+		gameSave.openRankingList();
+		System.out.println("show rank");
 	}
 	
 	/**

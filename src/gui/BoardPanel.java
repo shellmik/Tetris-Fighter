@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel implements Panel{
@@ -269,6 +272,8 @@ public class BoardPanel extends JPanel implements Panel{
 		return tiles[y][x];
 	}
 	
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -296,7 +301,9 @@ public class BoardPanel extends JPanel implements Panel{
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 150);
 			g.setFont(SMALL_FONT);
 			msg = "Press Enter to Play" + (tetris.isNewGame() ? "" : " Again");
-			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 300);
+			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 350);
+			
+			
 		} else {
 			
 			/*

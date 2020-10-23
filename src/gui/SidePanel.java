@@ -96,6 +96,8 @@ public class SidePanel extends JPanel implements Panel{
 	 */
 	private static final Color DRAW_COLOR = Color.BLACK;
 	
+	private String userName;
+	
 	/**
 	 * The Tetris instance.
 	 */
@@ -108,10 +110,18 @@ public class SidePanel extends JPanel implements Panel{
 	 */
 	private JLabel label;
 	private JTextField textField;
+	
+	public JLabel getLabel() {
+		return label;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
-		setLayout(null);//为了调按钮的位置
+		setLayout(null);
 
 		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
 		setBackground(new Color(255,182,193));
@@ -137,6 +147,7 @@ public class SidePanel extends JPanel implements Panel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				label.setText("Name: " + textField.getText());
+				userName = textField.getText();
 				textField.setVisible(false);
 				b1.setVisible(false);
 				tetris.requestFocus();
@@ -145,6 +156,31 @@ public class SidePanel extends JPanel implements Panel{
 
 		add(label);
 		add(textField);
+		
+		JButton sb = new JButton("store");
+		JButton show = new JButton("show rank");
+		sb.setBounds(70, 210, 80, 30);//x, y, width, height
+		show.setBounds(40, 250, 150, 30);
+		add(sb);
+		add(show);
+		
+		sb.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tetris.saveCurrent();
+				System.out.println("sb");
+				tetris.requestFocus();
+			}
+		});
+		
+		show.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tetris.showRank();
+				System.out.println("show");
+				tetris.requestFocus();
+			}
+		});
 
 	}
 	
