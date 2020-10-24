@@ -59,7 +59,7 @@ public class SidePanel extends JPanel implements Panel{
 	/**
 	 * The center x of the next piece preview box.
 	 */
-	private static final int SQUARE_CENTER_X = 150;
+	private static final int SQUARE_CENTER_X = 170;
 	
 	/**
 	 * The center y of the next piece preview box.
@@ -136,15 +136,13 @@ public class SidePanel extends JPanel implements Panel{
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
-		//setLayout(null);
-
+		setLayout(null);
 		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
 		setBackground(new Color(255,182,193));
 
 		label = new JLabel("Name: Please Input A User Name  ");
 		label.setFont(LARGE_FONT);
 		label.setForeground(Color.BLACK);
-		label.setBounds(18, 15, 30, 4);
 		label.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
 
 		Dimension d = label.getPreferredSize();
@@ -177,6 +175,7 @@ public class SidePanel extends JPanel implements Panel{
         add(chooseType);
         
         
+        
         int[] listType = new int[]{2, 4, 5, 7};
         JComboBox<Integer> cmbType=new JComboBox<Integer>();
         for(int i=0;i<listType.length;i++) {
@@ -195,6 +194,7 @@ public class SidePanel extends JPanel implements Panel{
             }
         });
         cmbType.setSelectedIndex(1);
+        
         add(cmbType);
         
 		JLabel chooseSpeed = new JLabel("Speed：");
@@ -245,13 +245,19 @@ public class SidePanel extends JPanel implements Panel{
         add(cmbAcc);
         
         
+        //layout
+        chooseType.setBounds(SMALL_INSET, 390, 100, 25);//x, y, width, height
+        cmbType.setBounds(130, 390, 50, 30);//x, y, width, height
+        chooseSpeed.setBounds(SMALL_INSET, 425, 100, 25);//x, y, width, height
+        cmbSpeed.setBounds(130, 425, 50, 30);//x, y, width, height
+        chooseAcc.setBounds(SMALL_INSET, 460, 100, 25);//x, y, width, height
+        cmbAcc.setBounds(130, 460, 50, 30);//x, y, width, height
         
-        
-        	
+       	
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
-		sb.setBounds(70, 210, 80, 30);//x, y, width, height
-		show.setBounds(40, 250, 150, 30);
+		sb.setBounds(70, 210, 100, 30);//x, y, width, height
+		show.setBounds(40, 250, 100, 30);
 		add(sb);
 		add(show);
 		
