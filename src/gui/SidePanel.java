@@ -136,7 +136,7 @@ public class SidePanel extends JPanel implements Panel{
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
-		setLayout(null);
+		//setLayout(null);
 
 		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
 		setBackground(new Color(255,182,193));
