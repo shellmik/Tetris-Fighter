@@ -15,12 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- * The {@code SidePanel} class is responsible for displaying various information
- * on the game such as the next piece, the score and current level, and controls.
- * @author Brendan Jones
- *
- */
 public class SidePanel extends JPanel implements Panel{
 	
 	private float gameSpeed=5.0f;//1-5
@@ -28,26 +22,9 @@ public class SidePanel extends JPanel implements Panel{
 	private int gameTileCnt=2;//2,4,5,7
 	private Level sideLevel=Level.getInstance();
 	
-	
-	public Level getLevel() {
-	return this.sideLevel;
-	}
-	
-	
-	
-	/**
-	 * Serial Version UID.
-	 */
 	private static final long serialVersionUID = 2181495598854992747L;
 
-	/**
-	 * The dimensions of each tile on the next piece preview.
-	 */
-	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >> 1;
-	
-	/**
-	 * The width of the shading on each tile on the next piece preview.
-	 */
+	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >> 1;//dimensions of each tile on the next piece preview
 	private static final int SHADE_WIDTH = BoardPanel.SHADE_WIDTH >> 1;
 	
 	/**
@@ -56,78 +33,28 @@ public class SidePanel extends JPanel implements Panel{
 	 */
 	private static final int TILE_COUNT = 5;
 	
-	/**
-	 * The center x of the next piece preview box.
-	 */
-	private static final int SQUARE_CENTER_X = 170;
-	
-	/**
-	 * The center y of the next piece preview box.
-	 */
+	private static final int SQUARE_CENTER_X = 170;//center x y of the next piece preview box.
 	private static final int SQUARE_CENTER_Y = 150;
 	
-	/**
-	 * The size of the next piece preview box.
-	 */
-	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);
+	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);//size of the next piece preview box
 	
-	/**
-	 * The number of pixels used on a small insets (generally used for categories).
-	 */
-	private static final int SMALL_INSET = 20;
+	private static final int SMALL_INSET = 20;//pixel number used on a small insets (generally used for categories
+	private static final int LARGE_INSET = 40;//number of pixels used on a large insets
 	
-	/**
-	 * The number of pixels used on a large insets.
-	 */
-	private static final int LARGE_INSET = 40;
+	private static final int STATS_INSET = 230;//y coordinate of the stats category
+	private static final int CONTROLS_INSET = 300;//y coordinate of the controls category
+	private static final int TEXT_STRIDE = 25;//number of pixels to offset between each string
 	
-	/**
-	 * The y coordinate of the stats category.
-	 */
-	private static final int STATS_INSET = 230;
-	
-	/**
-	 * The y coordinate of the controls category.
-	 */
-	private static final int CONTROLS_INSET = 300;
-	
-	/**
-	 * The number of pixels to offset between each string.
-	 */
-	private static final int TEXT_STRIDE = 25;
-	
-	/**
-	 * The small font.
-	 */
 	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 11);
-	
-	/**
-	 * The large font.
-	 */
 	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
-	
-	/**
-	 * The color to draw the text and preview box in.
-	 */
-	private static final Color DRAW_COLOR = Color.BLACK;
+	private static final Color DRAW_COLOR = Color.BLACK;// for text and preview box 
+	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	private String userName;
-	
-	/**
-	 * The Tetris instance.
-	 */
 	private GameController tetris;
 	
-	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
-	/**
-	 * Creates a new SidePanel and sets it's display properties.
-	 * @param tetris The Tetris instance to use.
-	 */
-	private JLabel label;
-	private JTextField textField;
-	
-	public JLabel getLabel() {
-		return label;
+	public Level getLevel() {
+	return this.sideLevel;
 	}
 	
 	public String getUserName() {
@@ -139,16 +66,17 @@ public class SidePanel extends JPanel implements Panel{
 		setLayout(null);
 		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
 		setBackground(new Color(255,182,193));
+		
+		//input user name
+		JLabel labelUser = new JLabel("Name: Please Input A User Name  ");
+		labelUser.setFont(LARGE_FONT);
+		labelUser.setForeground(Color.BLACK);
+		labelUser.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
 
-		label = new JLabel("Name: Please Input A User Name  ");
-		label.setFont(LARGE_FONT);
-		label.setForeground(Color.BLACK);
-		label.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
+		Dimension d = labelUser.getPreferredSize();
+		labelUser.setPreferredSize(new Dimension(d.width + 6, d.height));
 
-		Dimension d = label.getPreferredSize();
-		label.setPreferredSize(new Dimension(d.width + 6, d.height));
-
-		textField = new JTextField(20);
+		JTextField textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
 		textField.setBounds(SMALL_INSET, 60, 200, 30);//这个大小为什么改不了
 
@@ -159,7 +87,7 @@ public class SidePanel extends JPanel implements Panel{
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				label.setText("Name: " + textField.getText());
+				labelUser.setText("Name: " + textField.getText());
 				userName = textField.getText();
 				textField.setVisible(false);
 				//b1.setVisible(false);
@@ -167,14 +95,13 @@ public class SidePanel extends JPanel implements Panel{
 			}
 		});
 
-		add(label);
+		add(labelUser);
 		add(textField);
 		
+		//choose level: tile type count
 		JLabel chooseType = new JLabel("Type count：");
 		chooseType.setForeground(Color.black);
         add(chooseType);
-        
-        
         
         int[] listType = new int[]{2, 4, 5, 7};
         JComboBox<Integer> cmbType=new JComboBox<Integer>();
@@ -194,13 +121,12 @@ public class SidePanel extends JPanel implements Panel{
             }
         });
         cmbType.setSelectedIndex(1);
-        
         add(cmbType);
         
+        //choose level: speed
 		JLabel chooseSpeed = new JLabel("Speed：");
 		chooseSpeed.setForeground(Color.black);
         add(chooseSpeed);
-        
         
         float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
         JComboBox cmbSpeed=new JComboBox();
@@ -220,11 +146,11 @@ public class SidePanel extends JPanel implements Panel{
         cmbSpeed.setSelectedIndex(1);
         add(cmbSpeed);
         
+        //choose level: acceleration
 		JLabel chooseAcc = new JLabel("Acceleration：");
 		chooseAcc.setForeground(Color.black);
         add(chooseAcc);
-        
-        
+               
         float[] listAcc = new float[]{0.04f,0.06f,0.08f,0.1f,0.12f};
         JComboBox cmbAcc=new JComboBox();
         for(int i=0;i<listAcc.length;i++) {
@@ -243,9 +169,8 @@ public class SidePanel extends JPanel implements Panel{
         });
         cmbAcc.setSelectedIndex(1);
         add(cmbAcc);
-        
-        
-        //layout
+             
+        //layout for level choices
         chooseType.setBounds(40, 390, 100, 25);//x, y, width, height
         cmbType.setBounds(130, 390, 90, 30);//x, y, width, height
         chooseSpeed.setBounds(40, 425, 100, 25);//x, y, width, height
@@ -253,7 +178,8 @@ public class SidePanel extends JPanel implements Panel{
         chooseAcc.setBounds(40, 460, 100, 25);//x, y, width, height
         cmbAcc.setBounds(130, 460, 90, 30);//x, y, width, height
         
-       	
+        
+        //store game record & show rank
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
 		sb.setBounds(200, 210, 100, 30);//x, y, width, height
@@ -285,7 +211,6 @@ public class SidePanel extends JPanel implements Panel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		//Set the color for drawing.
 		g.setColor(DRAW_COLOR);
 		
 		/*
@@ -295,29 +220,24 @@ public class SidePanel extends JPanel implements Panel{
 		 */
 		int offset;
 		
-		/*
-		 * Draw the "Status" category.
-		 */
+		
+        //Draw the "Status" category.
 		g.setFont(LARGE_FONT);
 		g.drawString("Status", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
 		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
 		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
 		
-		/*
-		 * Draw the "Controls" category.
-		 */
+		
+		//Draw the "Controls" category.
 		g.setFont(LARGE_FONT);
 		g.drawString("Controls", SMALL_INSET, offset = CONTROLS_INSET);
 		g.setFont(SMALL_FONT);
-		g.drawString("[A]- Move Left               [D]- Move Right", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("[J]- Rotate Anticlockwise    [K]- Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("[S]- Drop                    [P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[A]- Move Left                          [D]- Move Right", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[J]- Rotate Anticlockwise     [K]- Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
+		g.drawString("[S]- Drop                                   [P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
 
-		
-		/*
-		 * Draw the next piece preview box.
-		 */
+		//Draw the next piece preview box
 		g.setFont(LARGE_FONT);
 		g.drawString("Next Piece:", SMALL_INSET, 150);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);

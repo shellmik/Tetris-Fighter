@@ -50,7 +50,12 @@ public class GameController extends JFrame {
 	
 	private PieceController pc;
 	
-	public GameController() {
+	
+	//singleton
+	private static GameController theInstance = new GameController();
+	public static GameController getInstance() {return theInstance;}	 
+
+	private GameController() {
 		/*
 		 * Set the basic properties of the window.
 		 */

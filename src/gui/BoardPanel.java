@@ -12,9 +12,6 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel implements Panel{
 
-	/**
-	 * Serial Version UID.
-	 */
 	private static final long serialVersionUID = 5055679736784226108L;
 
 	/**
@@ -22,107 +19,41 @@ public class BoardPanel extends JPanel implements Panel{
 	 * want to show both light and dark shading on our tiles.
 	 */
 	public static final int COLOR_MIN = 35;
-	
-	/**
-	 * Maximum color component values for tiles. This is required if we
-	 * want to show both light and dark shading on our tiles.
-	 */
 	public static final int COLOR_MAX = 255 - COLOR_MIN;
 	
-	/**
-	 * The width of the border around the game board.
-	 */
-	private static final int BORDER_WIDTH = 5;
+	private static final int BORDER_WIDTH = 5;//border around the game board width
+	public static final int COL_COUNT = 10;//number of columns on the board
+	private static final int VISIBLE_ROW_COUNT = 20;//number of visible rows on the board
+	private static final int HIDDEN_ROW_COUNT = 2;//number of rows that are hidden from view.
+	public static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;//total row number the board contains
 	
-	/**
-	 * The number of columns on the board.
-	 */
-	public static final int COL_COUNT = 10;
-		
-	/**
-	 * The number of visible rows on the board.
-	 */
-	private static final int VISIBLE_ROW_COUNT = 20;
+	public static final int TILE_SIZE = 24;//number of pixels that a tile takes up
 	
-	/**
-	 * The number of rows that are hidden from view.
-	 */
-	private static final int HIDDEN_ROW_COUNT = 2;
+	public static final int SHADE_WIDTH = 4;//tile shading width
 	
-	/**
-	 * The total number of rows that the board contains.
-	 */
-	public static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;
-	
-	/**
-	 * The number of pixels that a tile takes up.
-	 */
-	public static final int TILE_SIZE = 24;
-	
-	/**
-	 * The width of the shading on the tiles.
-	 */
-	public static final int SHADE_WIDTH = 4;
-	
-	/**
-	 * The central x coordinate on the game board.
-	 */
-	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;
-	
-	/**
-	 * The central y coordinate on the game board.
-	 */
+	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;//central x coordinate on the game board
 	private static final int CENTER_Y = VISIBLE_ROW_COUNT * TILE_SIZE / 2;
 		
-	/**
-	 * The total width of the panel.
-	 */
-	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
-	
-	/**
-	 * The total height of the panel.
-	 */
+	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;//total panel width
 	public static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 	
-	/**
-	 * The larger font to display.
-	 */
 	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 26);
-
-	/**
-	 * The smaller font to display.
-	 */
 	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 12);
 	
-	/**
-	 * The Tetris instance.
-	 */
 	private GameController tetris;
 	
-	/**
-	 * The tiles that make up the board.
-	 */
-	private Tiles[][] tiles;
+	private Tiles[][] tiles;//tiles that make up the board
 	
 	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
-	/**
-	 * Crates a new GameBoard instance.
-	 * @param tetris The Tetris instance to use.
-	 */
+
 	public BoardPanel(GameController tetris) {
 		this.tetris = tetris;
 		this.tiles = new Tiles[ROW_COUNT][COL_COUNT];
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		setBackground(Color.BLACK);
 	}
-	/**
-	 * Resets the board and clears away any tiles.
-	 */
-	public void clear() {
-		/*
-		 * Loop through every tile index and set it's value
-		 * to null to clear the board.
-		 */
+
+	public void clear() {//Resets the board and clears away any tiles
 		for(int i = 0; i < ROW_COUNT; i++) {
 			for(int j = 0; j < COL_COUNT; j++) {
 				tiles[i][j] = null;
@@ -175,11 +106,6 @@ public class BoardPanel extends JPanel implements Panel{
 	 * @param rotation The rotation of the piece.
 	 */
 	public void addPiece(Tiles type, int x, int y, int rotation) {
-		/*
-		 * Loop through every tile within the piece and add it
-		 * to the board only if the boolean that represents that
-		 * tile is set to true.
-		 */
 		for(int col = 0; col < type.getDimension(); col++) {
 			for(int row = 0; row < type.getDimension(); row++) {
 				if(type.isTile(col, row, rotation)) {
@@ -242,12 +168,6 @@ public class BoardPanel extends JPanel implements Panel{
 	}
 	
 	
-	/**
-	 * Checks to see if the tile is already occupied.
-	 * @param x The x coordinate to check.
-	 * @param y The y coordinate to check.
-	 * @return Whether or not the tile is occupied.
-	 */
 	private boolean isOccupied(int x, int y) {
 		return tiles[y][x] != null;
 	}
