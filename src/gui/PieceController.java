@@ -13,8 +13,6 @@ public class PieceController {
 		
 		private Random random;
 		
-		private static final int TYPE_COUNT = PieceGenerator.getInstance().piecesCollection.length;
-		
 		public int currentCol;
 		
 		public int currentRow;

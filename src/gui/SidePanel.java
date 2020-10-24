@@ -162,7 +162,7 @@ public class SidePanel extends JPanel implements Panel{
 				label.setText("Name: " + textField.getText());
 				userName = textField.getText();
 				textField.setVisible(false);
-				b1.setVisible(false);
+				//b1.setVisible(false);
 				tetris.requestFocus();
 			}
 		});
@@ -171,7 +171,7 @@ public class SidePanel extends JPanel implements Panel{
 		add(textField);
 		
 		JLabel chooseType = new JLabel("Type count：");
-		chooseType.setForeground(Color.red);
+		chooseType.setForeground(Color.black);
         add(chooseType);
         
         
@@ -198,7 +198,7 @@ public class SidePanel extends JPanel implements Panel{
         add(cmbType);
         
 		JLabel chooseSpeed = new JLabel("Speed：");
-		chooseSpeed.setForeground(Color.red);
+		chooseSpeed.setForeground(Color.black);
         add(chooseSpeed);
         
         
@@ -221,7 +221,7 @@ public class SidePanel extends JPanel implements Panel{
         add(cmbSpeed);
         
 		JLabel chooseAcc = new JLabel("Acceleration：");
-		chooseAcc.setForeground(Color.red);
+		chooseAcc.setForeground(Color.black);
         add(chooseAcc);
         
         
@@ -246,18 +246,18 @@ public class SidePanel extends JPanel implements Panel{
         
         
         //layout
-        chooseType.setBounds(SMALL_INSET, 390, 100, 25);//x, y, width, height
-        cmbType.setBounds(130, 390, 50, 30);//x, y, width, height
-        chooseSpeed.setBounds(SMALL_INSET, 425, 100, 25);//x, y, width, height
-        cmbSpeed.setBounds(130, 425, 50, 30);//x, y, width, height
-        chooseAcc.setBounds(SMALL_INSET, 460, 100, 25);//x, y, width, height
-        cmbAcc.setBounds(130, 460, 50, 30);//x, y, width, height
+        chooseType.setBounds(40, 390, 100, 25);//x, y, width, height
+        cmbType.setBounds(130, 390, 90, 30);//x, y, width, height
+        chooseSpeed.setBounds(40, 425, 100, 25);//x, y, width, height
+        cmbSpeed.setBounds(130, 425, 90, 30);//x, y, width, height
+        chooseAcc.setBounds(40, 460, 100, 25);//x, y, width, height
+        cmbAcc.setBounds(130, 460, 90, 30);//x, y, width, height
         
        	
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
-		sb.setBounds(70, 210, 100, 30);//x, y, width, height
-		show.setBounds(40, 250, 100, 30);
+		sb.setBounds(200, 210, 100, 30);//x, y, width, height
+		show.setBounds(200, 250, 100, 30);
 		add(sb);
 		add(show);
 		
@@ -296,10 +296,10 @@ public class SidePanel extends JPanel implements Panel{
 		int offset;
 		
 		/*
-		 * Draw the "Stats" category.
+		 * Draw the "Status" category.
 		 */
 		g.setFont(LARGE_FONT);
-		g.drawString("Stats", SMALL_INSET, offset = STATS_INSET);
+		g.drawString("Status", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
 		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
 		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
