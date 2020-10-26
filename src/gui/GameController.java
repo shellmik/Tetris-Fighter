@@ -55,6 +55,11 @@ public class GameController extends JFrame {
 	private static GameController theInstance = new GameController();
 	public static GameController getInstance() {return theInstance;}	 
 
+	
+	public void setLevel(Level level) {
+		this.gameLevel=level;
+		
+	}
 	private GameController() {
 		/*
 		 * Set the basic properties of the window.
@@ -64,20 +69,10 @@ public class GameController extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		/*
-		 * Initialize the BoardPanel and SidePanel instances.
-		 */
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
-		this.gameLevel=side.getLevel();
-		//this.gameSpeed=this.gameLevel.getSpeed();
-		//this.gameAcceleration=this.gameLevel.getAccelaration();
-		//this.TYPE_COUNT=this.gameLevel.getTileCnt();
+		//this.gameLevel=side.getLevel();
 		this.gameSave = new GameSave(this);
-		
-		/*
-		 * Add the BoardPanel and SidePanel instances to the window.
-		 */
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
 		
@@ -441,7 +436,7 @@ public class GameController extends JFrame {
 	 * Gets the current type of piece we're using.
 	 * @return The piece type.
 	 */
-	public Tiles getPieceType() {
+	public Tile getPieceType() {
 		return pc.currentType;
 	}
 	
@@ -449,7 +444,7 @@ public class GameController extends JFrame {
 	 * Gets the next type of piece we're using.
 	 * @return The next piece.
 	 */
-	public Tiles getNextPieceType() {
+	public Tile getNextPieceType() {
 		return pc.nextType;
 	}
 	

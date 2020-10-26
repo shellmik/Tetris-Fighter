@@ -5,9 +5,9 @@ import java.util.Random;
 import timer.Clock;
 
 public class PieceController {
-		public Tiles currentType;
+		public Tile currentType;
 	
-		public Tiles nextType;
+		public Tile nextType;
 		
 		private GameController game;
 		
@@ -123,22 +123,22 @@ public class PieceController {
 		
 		
 		
-		public Tiles getCurrentType() {
+		public Tile getCurrentType() {
 			// TODO Auto-generated method stub
 			return currentType;
 		}
 
-		public void setCurrentType(Tiles t) {
+		public void setCurrentType(Tile t) {
 			// TODO Auto-generated method stub
 			currentType = t;
 		}
 		
-		public Tiles getNextType() {
+		public Tile getNextType() {
 			// TODO Auto-generated method stub
 			return nextType;
 		}
 		
-		public void setNextType(Tiles t) {
+		public void setNextType(Tile t) {
 			System.out.println("???");
 			nextType = t;
 		}

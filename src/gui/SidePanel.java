@@ -20,7 +20,8 @@ public class SidePanel extends JPanel implements Panel{
 	private float gameSpeed=5.0f;//1-5
 	private float gameAcc=0.14f;//0.04/6/8/0.1/12
 	private int gameTileCnt=2;//2,4,5,7
-	private Level sideLevel=Level.getInstance();
+	//private Level sideLevel=Level.getInstance();
+	private Level sideLevel;
 	
 	private static final long serialVersionUID = 2181495598854992747L;
 
@@ -53,9 +54,12 @@ public class SidePanel extends JPanel implements Panel{
 	private String userName;
 	private GameController tetris;
 	
-	public Level getLevel() {
-	return this.sideLevel;
-	}
+	
+	JComboBox cmbLevel;
+	JComboBox<Integer> cmbType;
+	JComboBox cmbSpeed;
+	JComboBox cmbAcc;
+	
 	
 	public String getUserName() {
 		return userName;
@@ -98,16 +102,85 @@ public class SidePanel extends JPanel implements Panel{
 		add(labelUser);
 		add(textField);
 		
-		//choose level: tile type count
+		//all 3 labels
+		JLabel chooseLevel = new JLabel("Level：");
+		chooseLevel.setForeground(Color.black);
+        add(chooseLevel);
+		
 		JLabel chooseType = new JLabel("Type count：");
 		chooseType.setForeground(Color.black);
         add(chooseType);
         
+		JLabel chooseSpeed = new JLabel("Speed：");
+		chooseSpeed.setForeground(Color.black);
+        add(chooseSpeed);
+        
+		JLabel chooseAcc = new JLabel("Acceleration：");
+		chooseAcc.setForeground(Color.black);
+        add(chooseAcc);
+        //labels end
+   
+        //1
         int[] listType = new int[]{2, 4, 5, 7};
-        JComboBox<Integer> cmbType=new JComboBox<Integer>();
+        cmbType=new JComboBox<Integer>();
         for(int i=0;i<listType.length;i++) {
         	cmbType.addItem(listType[i]);
         }
+        add(cmbType);
+        
+        //2
+        float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
+        cmbSpeed=new JComboBox();
+        for(int i=0;i<listSpeed.length;i++) {
+        	cmbSpeed.addItem(listSpeed[i]);
+        }
+        add(cmbSpeed);
+        //3
+        float[] listAcc = new float[]{0.04f,0.06f,0.08f,0.1f,0.12f};
+        cmbAcc=new JComboBox();
+        for(int i=0;i<listAcc.length;i++) {
+        	cmbAcc.addItem(listAcc[i]);
+        }
+        add(cmbAcc);
+       
+        
+        String[] listLevel = new String[]{"Low","Mid","High"};
+        //Level[] listLevel = new Level[]{LevelLow.getInstance(),LevelMid.getInstance(),LevelHigh.getInstance()};
+        cmbLevel=new JComboBox();
+        for(int i=0;i<listLevel.length;i++) {
+        	cmbLevel.addItem(listLevel[i]);
+        }
+        cmbLevel.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	String levelStr=(String) cmbLevel.getSelectedItem();
+                	if(levelStr=="Low")
+                		sideLevel=LevelLow.getInstance();
+                	else if(levelStr=="Mid")
+                		sideLevel=LevelMid.getInstance();
+                	else if(levelStr=="High")
+                		sideLevel=LevelHigh.getInstance();
+                	
+                	tetris.setLevel(sideLevel);
+                	
+                	cmbType.setSelectedItem(sideLevel.getTileCnt());
+                	cmbSpeed.setSelectedItem(sideLevel.getSpeed());
+                	cmbAcc.setSelectedItem(sideLevel.getAccelaration());
+//                	System.out.println("sideLevel"+sideLevel.getTileCnt());
+//                	System.out.println("sideLevel"+sideLevel.getSpeed());
+//                	System.out.println("sideLevel"+sideLevel.getAccelaration());
+                    //gameAcc=(float) cmbAcc.getSelectedItem();
+                    //System.out.println("select: "+gameAcc);
+                    //sideLevel.setAccelaration(gameAcc);
+                    
+                }
+            }
+        });
+        cmbLevel.setSelectedIndex(1);
+        add(cmbLevel);
+ 
+		
         cmbType.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -116,23 +189,11 @@ public class SidePanel extends JPanel implements Panel{
                     gameTileCnt=(int) cmbType.getSelectedItem();
                     System.out.println("select: "+gameTileCnt);
                     sideLevel.setTileCnt(gameTileCnt);
-                    
+         
                 }
             }
         });
-        cmbType.setSelectedIndex(1);
-        add(cmbType);
         
-        //choose level: speed
-		JLabel chooseSpeed = new JLabel("Speed：");
-		chooseSpeed.setForeground(Color.black);
-        add(chooseSpeed);
-        
-        float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
-        JComboBox cmbSpeed=new JComboBox();
-        for(int i=0;i<listSpeed.length;i++) {
-        	cmbSpeed.addItem(listSpeed[i]);
-        }
         cmbSpeed.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -143,19 +204,9 @@ public class SidePanel extends JPanel implements Panel{
                 }
             }
         });
-        cmbSpeed.setSelectedIndex(1);
-        add(cmbSpeed);
         
-        //choose level: acceleration
-		JLabel chooseAcc = new JLabel("Acceleration：");
-		chooseAcc.setForeground(Color.black);
-        add(chooseAcc);
-               
-        float[] listAcc = new float[]{0.04f,0.06f,0.08f,0.1f,0.12f};
-        JComboBox cmbAcc=new JComboBox();
-        for(int i=0;i<listAcc.length;i++) {
-        	cmbAcc.addItem(listAcc[i]);
-        }
+
+        
         cmbAcc.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -167,10 +218,23 @@ public class SidePanel extends JPanel implements Panel{
                 }
             }
         });
-        cmbAcc.setSelectedIndex(1);
-        add(cmbAcc);
+        
+        
              
         //layout for level choices
+        chooseLevel.setBounds(40, 310, 100, 25);//x, y, width, height
+        cmbLevel.setBounds(130, 310, 80, 30);//x, y, width, height
+        
+        JLabel note = new JLabel("Details for each level are shown below.");
+		note.setForeground(Color.black);
+        add(note);
+        note.setBounds(40, 340, 300, 25);
+        JLabel note1 = new JLabel("You can customize the values if you want to.");
+		note1.setForeground(Color.black);
+        add(note1);
+        note1.setBounds(40, 360, 300, 25);
+        
+        
         chooseType.setBounds(40, 390, 100, 25);//x, y, width, height
         cmbType.setBounds(130, 390, 90, 30);//x, y, width, height
         chooseSpeed.setBounds(40, 425, 100, 25);//x, y, width, height
@@ -219,8 +283,7 @@ public class SidePanel extends JPanel implements Panel{
 		 * without needing to change the other strings.
 		 */
 		int offset;
-		
-		
+				
         //Draw the "Status" category.
 		g.setFont(LARGE_FONT);
 		g.drawString("Status", SMALL_INSET, offset = STATS_INSET);
@@ -228,15 +291,6 @@ public class SidePanel extends JPanel implements Panel{
 		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
 		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
 		
-		
-		//Draw the "Controls" category.
-		g.setFont(LARGE_FONT);
-		g.drawString("Controls", SMALL_INSET, offset = CONTROLS_INSET);
-		g.setFont(SMALL_FONT);
-		g.drawString("[A]- Move Left                          [D]- Move Right", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("[J]- Rotate Anticlockwise     [K]- Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("[S]- Drop                                   [P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
-
 		//Draw the next piece preview box
 		g.setFont(LARGE_FONT);
 		g.drawString("Next Piece:", SMALL_INSET, 150);
@@ -247,7 +301,7 @@ public class SidePanel extends JPanel implements Panel{
 		 * identical to the drawing code on the board, just smaller and centered, rather
 		 * than constrained to a grid.
 		 */
-		Tiles type = tetris.getNextPieceType();
+		Tile type = tetris.getNextPieceType();
 		if(!tetris.isGameOver() && type != null) {
 			/*
 			 * Get the size properties of the current piece.

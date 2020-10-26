@@ -2,18 +2,18 @@ package gui;
 
 import java.awt.Color;
 
-public class TileSS extends Tiles {
+public class TileS extends Tile {
 
-	public TileSS(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
+	public TileS(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
 		super(color, dimension, cols, rows, tiles);
 	}
 	
-	private static TileSS instance = null;
+	private static TileS instance = null;
 	
-	public static TileSS getInstance(){
+	public static TileS getInstance(){
 		
 		if (instance == null)
-			instance = new TileSS(new Color(BoardPanel.COLOR_MIN, BoardPanel.COLOR_MAX, BoardPanel.COLOR_MIN), 3, 3, 2, new boolean[][] {
+			instance = new TileS(new Color(BoardPanel.COLOR_MIN, BoardPanel.COLOR_MAX, BoardPanel.COLOR_MIN), 3, 3, 2, new boolean[][] {
 				{
 					false,	true,	true,
 					true,	true,	false,

@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.Color;
 
-public class TileT extends Tiles {
+public class TileT extends Tile {
 
 	public TileT(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
 		super(color, dimension, cols, rows, tiles);

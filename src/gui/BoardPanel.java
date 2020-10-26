@@ -37,18 +37,24 @@ public class BoardPanel extends JPanel implements Panel{
 	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;//total panel width
 	public static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 	
-	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 26);
-	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 12);
+	private static final Font LARGE_FONT = new Font("Arial", Font.BOLD, 38);
+	private static final Font SMALL_FONT = new Font("Arial", Font.BOLD, 12);
+	private static final int SMALL_INSET = 20;//pixel number used on a small insets (generally used for categories
+	private static final int LARGE_INSET = 40;//number of pixels used on a large insets
+	private static final int CONTROLS_INSET = 300;//y coordinate of the controls category
+	private static final int TEXT_STRIDE = 25;//number of pixels to offset between each string
 	
 	private GameController tetris;
 	
-	private Tiles[][] tiles;//tiles that make up the board
+	private Tile[][] tiles;//tiles that make up the board
 	
 	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
+	
+	
 
 	public BoardPanel(GameController tetris) {
 		this.tetris = tetris;
-		this.tiles = new Tiles[ROW_COUNT][COL_COUNT];
+		this.tiles = new Tile[ROW_COUNT][COL_COUNT];
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		setBackground(Color.BLACK);
 	}
@@ -69,7 +75,7 @@ public class BoardPanel extends JPanel implements Panel{
 	 * @param rotation The rotation of the piece.
 	 * @return Whether or not the position is valid.
 	 */
-	public boolean isValidAndEmpty(Tiles type, int x, int y, int rotation) {
+	public boolean isValidAndEmpty(Tile type, int x, int y, int rotation) {
 				
 		//Ensure the piece is in a valid column.
 		if(x < -type.getLeftInset(rotation) || x + type.getDimension() - type.getRightInset(rotation) >= COL_COUNT) {
@@ -105,7 +111,7 @@ public class BoardPanel extends JPanel implements Panel{
 	 * @param y The y coordinate of the piece.
 	 * @param rotation The rotation of the piece.
 	 */
-	public void addPiece(Tiles type, int x, int y, int rotation) {
+	public void addPiece(Tile type, int x, int y, int rotation) {
 		for(int col = 0; col < type.getDimension(); col++) {
 			for(int row = 0; row < type.getDimension(); row++) {
 				if(type.isTile(col, row, rotation)) {
@@ -178,7 +184,7 @@ public class BoardPanel extends JPanel implements Panel{
 	 * @param y The row.
 	 * @param type The value to set to the tile to.
 	 */
-	private void setTile(int  x, int y, Tiles type) {
+	private void setTile(int  x, int y, Tile type) {
 		tiles[y][x] = type;
 	}
 		
@@ -188,7 +194,7 @@ public class BoardPanel extends JPanel implements Panel{
 	 * @param y The row.
 	 * @return The tile.
 	 */
-	private Tiles getTile(int x, int y) {
+	private Tile getTile(int x, int y) {
 		return tiles[y][x];
 	}
 	
@@ -218,10 +224,22 @@ public class BoardPanel extends JPanel implements Panel{
 			 * the messages that are displayed.
 			 */
 			String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
-			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 150);
+			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
 			g.setFont(SMALL_FONT);
 			msg = "Press Enter to Play" + (tetris.isNewGame() ? "" : " Again");
-			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 350);
+			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 180);
+			
+			g.setFont(new Font("Arial", Font.BOLD, 16));
+			g.drawString("[Controls]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
+			int offset= CONTROLS_INSET;
+			g.setFont(SMALL_FONT);
+			g.drawString("[A]- Move Left", LARGE_INSET, offset += TEXT_STRIDE);
+			g.drawString("[D]- Move Right", LARGE_INSET, offset += TEXT_STRIDE);
+			g.drawString("[J]- Rotate Anticlockwise", LARGE_INSET, offset += TEXT_STRIDE);
+			g.drawString("[K]- Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
+			g.drawString("[S]- Drop", LARGE_INSET, offset += TEXT_STRIDE);
+			g.drawString("[P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
+
 			
 			
 		} else {
@@ -231,7 +249,7 @@ public class BoardPanel extends JPanel implements Panel{
 			 */
 			for(int x = 0; x < COL_COUNT; x++) {
 				for(int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
-					Tiles tile = getTile(x, y);
+					Tile tile = getTile(x, y);
 					if(tile != null) {
 						draw.drawTile(tile, x * TILE_SIZE, (y - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
 					}
@@ -244,7 +262,7 @@ public class BoardPanel extends JPanel implements Panel{
 			 * part of the board, it would need to be removed every frame which
 			 * would just be slow and confusing.
 			 */
-			Tiles type = tetris.getPieceType();
+			Tile type = tetris.getPieceType();
 			int pieceCol = tetris.getPieceCol();
 			int pieceRow = tetris.getPieceRow();
 			int rotation = tetris.getPieceRotation();

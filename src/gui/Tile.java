@@ -7,21 +7,11 @@ import java.awt.Color;
  * @author Brendan Jones
  *
  */
-public class Tiles {
+public class Tile {
 
-	/**
-	 * The base color of tiles of this type.
-	 */
 	private Color baseColor;
 	
-	/**
-	 * The light shading color of tiles of this type.
-	 */
-	private Color lightColor;
-	
-	/**
-	 * The dark shading color of tiles of this type.
-	 */
+	private Color lightColor;//light shading color
 	private Color darkColor;
 	
 	/**
@@ -66,7 +56,7 @@ public class Tiles {
 	 * @param rows The number of rows.
 	 * @param tiles The tiles.
 	 */
-	public Tiles(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
+	public Tile(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
 		this.baseColor = color;
 		this.lightColor = color.brighter();
 		this.darkColor = color.darker();

@@ -5,12 +5,12 @@ import java.awt.Color;
 public class PieceGenerator {
 	
 	
-	public static final Tiles[] piecesCollection = {
-			/**
-			 * Piece TypeI.
-			 */
-			TileI.getInstance(), TileJ.getInstance(), TileL.getInstance(), TileO.getInstance(),
-			TileSS.getInstance(), TileT.getInstance(), TileZ.getInstance()	 
+	public static final Tile[] piecesCollection = {
+			
+			TileI.getInstance(), TileO.getInstance(), 
+			TileJ.getInstance(), TileL.getInstance(), 
+			TileT.getInstance(),
+			TileS.getInstance(), TileZ.getInstance()	 
 			  
 	};
 

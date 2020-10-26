@@ -4,12 +4,16 @@ public class Level {
 	
 	private int tile_cnt;
 	private float speed;
-	private float accelaration;
+	private float acceleration;
 	
 	//singleton
-	private static Level theInstance = new Level();
-	public static Level getInstance() {return theInstance;}	 
-	private Level() {}
+	//private static Level theInstance = new Level();
+	//public static Level getInstance() {return theInstance;}	 
+	public Level(int typeCnt, float speed,float acceleration) {
+		this.tile_cnt=typeCnt;
+		this.speed=speed;
+		this.acceleration=acceleration;
+	}
 	
 	int getTileCnt() {
 		return this.tile_cnt;	
@@ -20,7 +24,7 @@ public class Level {
 	}
 
 	float getAccelaration() {
-		return this.accelaration;
+		return this.acceleration;
 	}
 	
 	void setTileCnt(int tile_cnt) {
@@ -33,7 +37,7 @@ public class Level {
 
 	
 	void setAccelaration(float accelaration) {
-		this.accelaration=accelaration;	
+		this.acceleration=accelaration;	
 	}
 
 }

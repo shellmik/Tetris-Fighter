@@ -11,7 +11,7 @@ public class drawer {
 		SHADE_WIDTH = b;
 	}
 	// acdsjncv
-	public void drawTile(Tiles type, int x, int y, Graphics g) {
+	public void drawTile(Tile type, int x, int y, Graphics g) {
 		g.setColor(type.getBaseColor());
 		g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 		
