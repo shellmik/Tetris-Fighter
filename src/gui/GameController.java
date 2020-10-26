@@ -400,25 +400,14 @@ public class GameController extends JFrame {
 		return isNewGame;
 	}
 	
-	/**
-	 * Gets the current score.
-	 * @return The score.
-	 */
 	public int getScore() {
 		return score;
 	}
 	
-	
-	
-
 	public Tile getPieceType() {
 		return pc.currentType;
 	}
-	
-	/**
-	 * Gets the next type of piece we're using.
-	 * @return The next piece.
-	 */
+
 	public Tile getNextPieceType() {
 		return pc.nextType;
 	}
@@ -448,10 +437,7 @@ public class GameController extends JFrame {
 	}
 	
 	public int getTypeCnt() {
-		//System.out.println(this.gameLevel.getTileCnt());
 		return this.gameLevel.getTileCnt();
 	}
-
-	
 
 }

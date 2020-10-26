@@ -243,6 +243,19 @@ public class SidePanel extends JPanel implements Panel{
 				tetris.requestFocus();
 			}
 		});
+		
+        //kill game button
+		JButton endGame = new JButton("End Game");
+		endGame.setBounds(240, 130, 80, 40);//x, y, width, height
+		add(endGame);
+
+		endGame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tetris.isGameOver=true;
+				tetris.logicTimer.setPaused(true);
+			}
+		});
         
         
         //store game record & show rank
