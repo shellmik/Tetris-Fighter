@@ -84,25 +84,12 @@ public class SidePanel extends JPanel implements Panel{
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
 		textField.setBounds(SMALL_INSET, 60, 200, 30);//这个大小为什么改不了
 
-		JButton b1 = new JButton("submit");
-		b1.setBounds(220, 60, 80, 30);//x, y, width, height
-		add(b1);
 
-		b1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				labelUser.setText("Name: " + textField.getText());
-				userName = textField.getText();
-				textField.setVisible(false);
-				//b1.setVisible(false);
-				tetris.requestFocus();
-			}
-		});
 
 		add(labelUser);
 		add(textField);
 		
-		//all 3 labels
+		//all 4 labels
 		JLabel chooseLevel = new JLabel("Level：");
 		chooseLevel.setForeground(Color.black);
         add(chooseLevel);
@@ -127,7 +114,6 @@ public class SidePanel extends JPanel implements Panel{
         	cmbType.addItem(listType[i]);
         }
         add(cmbType);
-        
         //2
         float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
         cmbSpeed=new JComboBox();
@@ -142,10 +128,8 @@ public class SidePanel extends JPanel implements Panel{
         	cmbAcc.addItem(listAcc[i]);
         }
         add(cmbAcc);
-       
         
         String[] listLevel = new String[]{"Low","Mid","High"};
-        //Level[] listLevel = new Level[]{LevelLow.getInstance(),LevelMid.getInstance(),LevelHigh.getInstance()};
         cmbLevel=new JComboBox();
         for(int i=0;i<listLevel.length;i++) {
         	cmbLevel.addItem(listLevel[i]);
@@ -167,12 +151,6 @@ public class SidePanel extends JPanel implements Panel{
                 	cmbType.setSelectedItem(sideLevel.getTileCnt());
                 	cmbSpeed.setSelectedItem(sideLevel.getSpeed());
                 	cmbAcc.setSelectedItem(sideLevel.getAccelaration());
-//                	System.out.println("sideLevel"+sideLevel.getTileCnt());
-//                	System.out.println("sideLevel"+sideLevel.getSpeed());
-//                	System.out.println("sideLevel"+sideLevel.getAccelaration());
-                    //gameAcc=(float) cmbAcc.getSelectedItem();
-                    //System.out.println("select: "+gameAcc);
-                    //sideLevel.setAccelaration(gameAcc);
                     
                 }
             }
@@ -243,6 +221,30 @@ public class SidePanel extends JPanel implements Panel{
         cmbAcc.setBounds(130, 460, 90, 30);//x, y, width, height
         
         
+        //submit button
+		JButton b1 = new JButton("submit");
+		b1.setBounds(240, 430, 80, 40);//x, y, width, height
+		add(b1);
+
+		b1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				labelUser.setText("Name: " + textField.getText());
+				userName = textField.getText();
+				textField.setVisible(false);
+				 
+                //disable level choosing
+				cmbLevel.setEnabled(false);
+				cmbType.setEnabled(false);
+				cmbSpeed.setEnabled(false);
+				cmbAcc.setEnabled(false);
+				
+				//b1.setVisible(false);
+				tetris.requestFocus();
+			}
+		});
+        
+        
         //store game record & show rank
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
@@ -282,11 +284,8 @@ public class SidePanel extends JPanel implements Panel{
 		 * This way we can re-order, add, or remove new strings if necessary
 		 * without needing to change the other strings.
 		 */
-		int offset;
+		int offset= STATS_INSET;
 				
-        //Draw the "Status" category.
-		g.setFont(LARGE_FONT);
-		g.drawString("Status", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
 		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
 		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);

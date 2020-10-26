@@ -36,8 +36,6 @@ public class GameController extends JFrame {
 	
 	public boolean isGameOver;
 	
-	private int level;
-	
 	private int score;
 	
 	public Random random;
@@ -61,9 +59,6 @@ public class GameController extends JFrame {
 		
 	}
 	private GameController() {
-		/*
-		 * Set the basic properties of the window.
-		 */
 		super("Tetris");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -76,9 +71,6 @@ public class GameController extends JFrame {
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
 		
-		/*
-		 * Adds a custom anonymous KeyListener to the frame.
-		 */
 		addKeyListener(new KeyAdapter() {
 			
 			@Override
@@ -157,10 +149,6 @@ public class GameController extends JFrame {
 					}
 					break;
 				
-				/*
-				 * Start Game - When pressed, check to see that we're in either a game over or new
-				 * game state. If so, reset the game.
-				 */
 				case KeyEvent.VK_ENTER:
 					if(isGameOver || isNewGame) {
 						resetGame();
@@ -303,11 +291,7 @@ public class GameController extends JFrame {
 			 */
 			dropCooldown = 25;
 			
-			/*
-			 * Update the difficulty level. This has no effect on the game, and is only
-			 * used in the "Level" string in the SidePanel.
-			 */
-			level = (int)(gameSpeed * 1.70f);
+			
 			
 			/*
 			 * Spawn a new piece to control.
@@ -331,7 +315,7 @@ public class GameController extends JFrame {
 	 */
 	private void resetGame() {
 		
-		this.level = 1;
+		
 		this.score = 0;
 		//this.gameSpeed = 1.0f;
 		this.gameSpeed=this.gameLevel.getSpeed();
@@ -424,18 +408,9 @@ public class GameController extends JFrame {
 		return score;
 	}
 	
-	/**
-	 * Gets the current level.
-	 * @return The level.
-	 */
-	public int getLevel() {
-		return level;
-	}
 	
-	/**
-	 * Gets the current type of piece we're using.
-	 * @return The piece type.
-	 */
+	
+
 	public Tile getPieceType() {
 		return pc.currentType;
 	}
