@@ -261,6 +261,18 @@ public class SidePanel extends JPanel implements Panel{
         //store game record & show rank
 		JButton sb = new JButton("store");
 		JButton show = new JButton("show rank");
+		JButton clear = new JButton("clear storage");
+		clear.setBounds(200, 270, 100, 30);
+		add(clear);
+		
+		clear.addActionListener(new ActionListener() {
+			   @Override
+			   public void actionPerformed(ActionEvent e) {
+			    tetris.clearStorage();
+			    tetris.requestFocus();
+			   }
+			  });
+
 		sb.setBounds(200, 210, 100, 30);//x, y, width, height
 		show.setBounds(200, 250, 100, 30);
 		add(sb);

@@ -10,8 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-
+import java.io.File;
 public class GameSave {
 	
 	private GameController tetris;
@@ -19,46 +20,62 @@ public class GameSave {
 		this.tetris = tetris;
 	}
 	
-	public void save(String name, int score) {
-		User newUser = new User();
-		newUser.setName(name);
-		newUser.setMax(score);
-		saveRankingList(newUser);
-		System.out.println("save");
-	}
-
-
-    /**
-     * 存储游戏排行版信息的方法
-     *
-     * @param user用户信息对象
-     */
+	public void save(String name, int score, String date) {
+		  User newUser = new User();
+		  newUser.setName(name);
+		  newUser.setScore(score);
+		  newUser.setDate(date);
+		  saveRankingList(newUser);
+		  System.out.println("saved as: "+name + " " + score + " " + date);
+		 }
+	
+	public void clean() {
+		  PrintWriter writer;
+		  try {
+		   File file = new File("./rank.txt");  
+		   if(file.exists() && file.length() == 0) {  
+		       System.out.println("文件为空！");  
+		   } 
+		   else {
+		    writer = new PrintWriter(file);
+		    writer.print("");
+		    writer.close();
+		   }
+		  } catch (FileNotFoundException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		 }
+	//write to doc
     public boolean saveRankingList(User user) {
         try {
             ArrayList<User> list = openRankingList();
             if (list != null) {
-                list.add(user);// 将新的用户信息(名字，最高分)添加到数组队列中
+                list.add(user);
+                
+                // sorting to get a list ordered by score
                 for (int i = 0; i < list.size() - 1; i++) {
                     int index = i;
                     for (int j = i + 1; j < list.size(); j++) {
-                        User use_max = (User) list.get(index);
+                        User use_score = (User) list.get(index);
                         User use = (User) list.get(j);
-                        if (use_max.getMax() <= use.getMax()) {
+                        if (use_score.getScore() <= use.getScore()) {
                             index = j;
                         }
                     }
                     if (index != i) {
-                        User use_max = (User) list.get(index);
+                        User use_score = (User) list.get(index);
                         User use = (User) list.get(i);
                         list.set(index, use);
-                        list.set(i, use_max);
+                        list.set(i, use_score);
                     }
                 }
             } else {
                 list = new ArrayList<User>();
                 list.add(user);
             }
-            // 实例化一个输出流对象
+            
             OutputStream os = new FileOutputStream("./rank.txt");
             DataOutputStream dos = new DataOutputStream(os);
 
@@ -67,9 +84,11 @@ public class GameSave {
                 User use = (User) list.get(i);
                 dos.writeByte(use.getName().getBytes().length);
                 dos.write(use.getName().getBytes());
-                dos.writeInt(use.getMax());
-
+                dos.writeInt(use.getScore());
+                dos.writeByte(use.getDate().getBytes().length);
+                dos.write(use.getDate().getBytes());
             }
+            
             dos.close();
             os.close();
             return true;
@@ -81,32 +100,39 @@ public class GameSave {
         return false;
     }
 
+
+    /**
+     * 存储游戏排行版信息的方法
+     *
+     * @param user用户信息对象
+     */
     /**
      * 读取文档中的数据
      *
      * @return 返回读取到存档信息
      */
+  //read from doc
     public ArrayList<User> openRankingList() {
-    	System.out.println("open Ranking list");
+     System.out.println("open Ranking list");
         try {
-            // 实例化一个输入流对象
+            
             InputStream is = new FileInputStream("./rank.txt");
             DataInputStream d = new DataInputStream(is);
 
-            // 读取信息的条数
             int size = d.readInt();
 
-            //System.out.println("===="+size);
-            // 实例化ArrayList的数组队列对象
             ArrayList<User> list = new ArrayList<User>();
             if (size != -1) {
                 for (int i = 0; i < size; i++) {
-                    byte nSize = d.readByte();//这里没太懂
+                    byte nSize = d.readByte();
                     byte[] b = new byte[nSize];
                     is.read(b);
-                    int max = d.readInt();
-
-                    User use = new User(new String(b), max); 
+                    int score = d.readInt();
+                    byte n1Size = d.readByte();
+                    byte[] c = new byte[n1Size];
+                    is.read(c);
+                    
+                    User use = new User(new String(b), score, new String(c)); 
                     list.add(use);
                 }
             }
@@ -119,9 +145,8 @@ public class GameSave {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
-
 }

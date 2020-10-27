@@ -13,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import timer.Clock;
-
+import java.util.Calendar;
+import java.awt.HeadlessException;
 public class GameController extends JFrame {
 	private Level gameLevel;
 	
@@ -353,37 +354,48 @@ public class GameController extends JFrame {
 	}
 	
 	public void saveCurrent() {
-		String name = side.getUserName();
-		gameSave.save(name, score);
-		System.out.println("saveCurrent");
-	}
-	
-	public void showRank() {
-		ArrayList list = gameSave.openRankingList();
-		System.out.println("show rank");
-		
-		JFrame frame = new JFrame();
-        frame.setTitle("Ranking");
-        frame.setSize(300, 700);
-        frame.setDefaultCloseOperation(2);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setResizable(false);
-
-        JLabel lab = new JLabel("User        Max        ");
-        lab.setBounds(30, 60, 400, 50);
-        frame.add(lab);
+		  Calendar now = Calendar.getInstance();
+		  String name = side.getUserName();
+		  String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DAY_OF_MONTH) + ": " + now.get(Calendar.HOUR_OF_DAY) + " h " + now.get(Calendar.MINUTE) + " min";
+		  gameSave.save(name, score, date);
+		 }	
+ public void showRank() {
+  
+  JFrame frame = new JFrame();
+  frame.setTitle("Ranking");
+  frame.setSize(500, 700);
+  frame.setDefaultCloseOperation(2);
+  frame.setLocationRelativeTo(null);
+  frame.setLayout(null);
+  frame.setResizable(false);
+  try {
+   ArrayList list = gameSave.openRankingList();
+   
+   int listSize = list.size();
+   
+   JLabel lab = new JLabel("User        Max        Time");
+   lab.setBounds(30, 20, 400, 50);
+   frame.add(lab);
+   
+   for (int i = 0; i < list.size(); i++) {
+       User user = (User) list.get(i);
+       JLabel label = new JLabel(user.toString());
+       label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
+       frame.add(label);
+   }
+   frame.setVisible(true);
+  } catch (Exception e) {
+   JLabel lab = new JLabel("Sorry, there is no record at all!");
+         lab.setBounds(30, 60, 400, 50);
+         frame.add(lab);
+         frame.setVisible(true);
+  }
         
-        for (int i = 0; i < list.size(); i++) {
-            User user = (User) list.get(i);
-            JLabel label = new JLabel(user.toString());
-            label.setBounds(30, 60 + (i + 1) * 50, 400, 60);
-            frame.add(label);
-        }
-
-        frame.setVisible(true);
-	}
-	
+ }
+ 
+ public void clearStorage() {
+  gameSave.clean();
+ }
 	/**
 	 * Checks to see whether or not the game is over.
 	 * @return Whether or not the game is over.

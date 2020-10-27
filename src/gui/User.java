@@ -2,18 +2,19 @@ package gui;
 
 public class User {
     private String name;
-    private int max;
+    private int score;
+    private String date;
 
 
     public User() {
 
     }
 
-    public User(String name, int max) {
+    public User(String name, int score, String date) {
 
         this.name = name;
-        this.max = max;
-
+        this.score = score;
+        this.date = date;
     }
     
     public String getName() {
@@ -24,17 +25,25 @@ public class User {
         this.name = name;
     }
     
-    public int getMax() {
-
-        return max;
+    public String getDate() {
+        return date;
     }
     
-    public void setMax(int max) {
-        this.max = max;
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
+    public int getScore() {
+
+        return score;
+    }
+    
+    public void setScore(int score) {
+        this.score = score;
     }
     
     public String toString() {
-        return name + "           " + max + "    " ;
+        return name + "           " + score + "         " + date;
     }
 
 }
