@@ -54,11 +54,13 @@ public class SidePanel extends JPanel implements Panel{
 	private String userName;
 	private GameController tetris;
 	
+	public JLabel labelUser;
 	
 	JComboBox cmbLevel;
 	JComboBox<Integer> cmbType;
 	JComboBox cmbSpeed;
 	JComboBox cmbAcc;
+	JTextField textField ;
 	
 	
 	public String getUserName() {
@@ -72,7 +74,7 @@ public class SidePanel extends JPanel implements Panel{
 		setBackground(new Color(255,182,193));
 		
 		//input user name
-		JLabel labelUser = new JLabel("Name: Please Input A User Name  ");
+		labelUser = new JLabel("Name: Please Input A User Name  ");
 		labelUser.setFont(LARGE_FONT);
 		labelUser.setForeground(Color.BLACK);
 		labelUser.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
@@ -80,7 +82,7 @@ public class SidePanel extends JPanel implements Panel{
 		Dimension d = labelUser.getPreferredSize();
 		labelUser.setPreferredSize(new Dimension(d.width + 6, d.height));
 
-		JTextField textField = new JTextField(20);
+		textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
 		textField.setBounds(SMALL_INSET, 60, 200, 30);//这个大小为什么改不了
 
@@ -183,8 +185,6 @@ public class SidePanel extends JPanel implements Panel{
             }
         });
         
-
-        
         cmbAcc.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -196,9 +196,7 @@ public class SidePanel extends JPanel implements Panel{
                 }
             }
         });
-        
-        
-             
+           
         //layout for level choices
         chooseLevel.setBounds(40, 310, 100, 25);//x, y, width, height
         cmbLevel.setBounds(130, 310, 80, 30);//x, y, width, height
@@ -229,6 +227,9 @@ public class SidePanel extends JPanel implements Panel{
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				revalidate();
+				repaint();
+				System.out.println("b1 clicked");
 				labelUser.setText("Name: " + textField.getText());
 				userName = textField.getText();
 				textField.setVisible(false);
@@ -326,6 +327,10 @@ public class SidePanel extends JPanel implements Panel{
 		 * than constrained to a grid.
 		 */
 		Tile type = tetris.getNextPieceType();
+		
+		if(tetris.isGameOver()) {
+			resetPanel();
+		}
 		if(!tetris.isGameOver() && type != null) {
 			/*
 			 * Get the size properties of the current piece.
@@ -358,5 +363,17 @@ public class SidePanel extends JPanel implements Panel{
 				}
 			}
 		}
+		
+		
 	}
+
+    public void resetPanel() {
+    	//labelUser.setText("Name: Please Input A User Name  ");
+    	textField.setVisible(true);
+    	cmbLevel.setEnabled(true);
+    	cmbType.setEnabled(true);
+    	cmbSpeed.setEnabled(true);
+    	cmbAcc.setEnabled(true);
+    	
+    }
 }
