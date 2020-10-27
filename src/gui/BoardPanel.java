@@ -226,11 +226,13 @@ public class BoardPanel extends JPanel implements Panel{
 			String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
 			g.setFont(SMALL_FONT);
-			msg = "Press Enter to Play" + (tetris.isNewGame() ? "" : " Again");
+			msg = "Please SUBMIT your name and level";
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 180);
+			msg = "Then press ENTER to play" + (tetris.isNewGame() ? "" : " Again");
+			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 200);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
-			g.drawString("[Controls]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
+			g.drawString("[CONTROLS]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
 			int offset= CONTROLS_INSET;
 			g.setFont(SMALL_FONT);
 			g.drawString("[A]- Move Left", LARGE_INSET, offset += TEXT_STRIDE);
