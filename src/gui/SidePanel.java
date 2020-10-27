@@ -35,7 +35,7 @@ public class SidePanel extends JPanel implements Panel{
 	private static final int TILE_COUNT = 5;
 	
 	private static final int SQUARE_CENTER_X = 170;//center x y of the next piece preview box.
-	private static final int SQUARE_CENTER_Y = 150;
+	private static final int SQUARE_CENTER_Y = 130;
 	
 	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);//size of the next piece preview box
 	
@@ -70,21 +70,21 @@ public class SidePanel extends JPanel implements Panel{
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
 		setLayout(null);
-		setPreferredSize(new Dimension(340, BoardPanel.PANEL_HEIGHT));
+		setPreferredSize(new Dimension(270, BoardPanel.PANEL_HEIGHT));
 		setBackground(new Color(255,182,193));
 		
 		//input user name
-		labelUser = new JLabel("Name: Please Input A User Name  ");
+		labelUser = new JLabel("Name: Input user name");
 		labelUser.setFont(LARGE_FONT);
 		labelUser.setForeground(Color.BLACK);
-		labelUser.setBounds(SMALL_INSET, 20, 300, 30);//x, y, width, height
+		labelUser.setBounds(SMALL_INSET, 20, 180, 30);//x, y, width, height
 
 		Dimension d = labelUser.getPreferredSize();
 		labelUser.setPreferredSize(new Dimension(d.width + 6, d.height));
 
 		textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
-		textField.setBounds(SMALL_INSET, 60, 200, 30);//这个大小为什么改不了
+		textField.setBounds(SMALL_INSET, 60, 180, 30);//这个大小为什么改不了
 
 
 
@@ -199,30 +199,26 @@ public class SidePanel extends JPanel implements Panel{
         });
            
         //layout for level choices
-        chooseLevel.setBounds(SMALL_INSET, 250, 100, 25);//x, y, width, height
-        cmbLevel.setBounds(130, 250, 80, 30);//x, y, width, height
+        chooseLevel.setBounds(SMALL_INSET, 270, 100, 25);//x, y, width, height
+        cmbLevel.setBounds(100, 270, 80, 30);//x, y, width, height
         
-        JLabel note = new JLabel("Details for each level are shown below.");
-		note.setForeground(Color.black);
-        add(note);
-        note.setBounds(40, 280, 300, 25);
-        JLabel note1 = new JLabel("You can customize the values if you want to.");
+        JLabel note1 = new JLabel("Details for level can be customized");
 		note1.setForeground(Color.black);
         add(note1);
-        note1.setBounds(40, 300, 300, 25);
+        note1.setBounds(SMALL_INSET, 300, 300, 25);
         
         
-        chooseType.setBounds(40, 330, 100, 25);//x, y, width, height
+        chooseType.setBounds(SMALL_INSET, 330, 100, 25);//x, y, width, height
         cmbType.setBounds(130, 330, 90, 30);//x, y, width, height
-        chooseSpeed.setBounds(40, 365, 100, 25);//x, y, width, height
+        chooseSpeed.setBounds(SMALL_INSET, 365, 100, 25);//x, y, width, height
         cmbSpeed.setBounds(130, 365, 90, 30);//x, y, width, height
-        chooseAcc.setBounds(40, 400, 100, 25);//x, y, width, height
+        chooseAcc.setBounds(SMALL_INSET, 400, 100, 25);//x, y, width, height
         cmbAcc.setBounds(130, 400, 90, 30);//x, y, width, height
         
         
         //submit button
 		JButton b1 = new JButton("submit");
-		b1.setBounds(50, 440, 80, 40);//x, y, width, height
+		b1.setBounds(30, 440, 80, 40);//x, y, width, height
 		add(b1);
 
 		b1.addActionListener(new ActionListener() {
@@ -250,7 +246,7 @@ public class SidePanel extends JPanel implements Panel{
 		
         //kill game button
 		JButton endGame = new JButton("End Game");
-		endGame.setBounds(170, 440, 80, 40);//x, y, width, height
+		endGame.setBounds(150, 440, 80, 40);//x, y, width, height
 		add(endGame);
 
 		endGame.addActionListener(new ActionListener() {
@@ -262,15 +258,19 @@ public class SidePanel extends JPanel implements Panel{
 			}
 		});
         
-        
+		JLabel note = new JLabel("(100 points per row eliminated)");
+		note.setForeground(Color.black);
+        add(note);
+        note.setBounds(20, 178, 200, 25);
+		
         //store game record & show rank
 		JButton sb = new JButton("store score");
 		JButton show = new JButton("show rank");
 		JButton clear = new JButton("clear storage");
 		
-		sb.setBounds(10, 210, 100, 30);//x, y, width, height
-		show.setBounds(105, 210, 100, 30);
-		clear.setBounds(200, 210, 130, 30);
+		sb.setBounds(120, 200, 130, 30);//x, y, width, height
+		show.setBounds(10, 230, 100, 30);
+		clear.setBounds(120, 230, 130, 30);
 		add(sb);
 		add(show);
 		add(clear);
@@ -318,11 +318,11 @@ public class SidePanel extends JPanel implements Panel{
 				
 		g.setFont(LARGE_FONT);
 		//g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
-		g.drawString("Score :  " + tetris.getScore(), SMALL_INSET, 170);
+		g.drawString("Score :  " + tetris.getScore(), SMALL_INSET, 220);
 		
 		//Draw the next piece preview box
 		g.setFont(LARGE_FONT);
-		g.drawString("Next Piece :", SMALL_INSET, 140);
+		g.drawString("Next Piece :", SMALL_INSET, 130);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 		
 		/*
