@@ -31,7 +31,7 @@ public class GameController extends JFrame {
 	
 	public GameSave gameSave;
 	
-	private boolean isPaused;
+	boolean isPaused;
 	
 	private boolean isNewGame;
 	
@@ -148,6 +148,7 @@ public class GameController extends JFrame {
 						isPaused = !isPaused;
 						logicTimer.setPaused(isPaused);
 					}
+					
 					break;
 				
 				case KeyEvent.VK_ENTER:
