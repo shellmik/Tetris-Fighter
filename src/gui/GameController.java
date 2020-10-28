@@ -69,8 +69,8 @@ public class GameController extends JFrame {
 		this.side = new SidePanel(this);
 		//this.gameLevel=side.getLevel();
 		this.gameSave = new GameSave(this);
-		add(board, BorderLayout.EAST);
-		add(side, BorderLayout.CENTER);
+		add(board, BorderLayout.CENTER);//CENTER
+		add(side, BorderLayout.EAST);
 		
 		addKeyListener(new KeyAdapter() {
 			

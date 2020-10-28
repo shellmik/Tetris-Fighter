@@ -12,6 +12,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -253,30 +254,36 @@ public class SidePanel extends JPanel implements Panel{
         
         
         //submit button
-		JButton b1 = new JButton("submit");
+		JButton b1 = new JButton("Submit");
 		b1.setBounds(30, 440, 80, 40);//x, y, width, height
 		add(b1);
 
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				isSubmit=true;
-				revalidate();
-				repaint();
-				System.out.println("b1 clicked");
-				labelUser.setText("Name: " + textField.getText());
-				userName = textField.getText();
-				textField.setVisible(false);
-				 
-                //disable level choosing
-				cmbLevel.setEnabled(false);
-				cmbType.setEnabled(false);
-				cmbSpeed.setEnabled(false);
-				cmbAcc.setEnabled(false);
-				
-				//b1.setVisible(false);
-				tetris.requestFocus();
-				repaint();
+				String str=textField.getText();
+				if(str.length()==0)
+					JOptionPane.showMessageDialog(null, "please fill in a user name", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+				else {
+					isSubmit=true;
+					revalidate();
+					repaint();
+					System.out.println("b1 clicked");
+					labelUser.setText("Name: " + textField.getText());
+					userName = textField.getText();
+					textField.setVisible(false);
+					 
+	                //disable level choosing
+					cmbLevel.setEnabled(false);
+					cmbType.setEnabled(false);
+					cmbSpeed.setEnabled(false);
+					cmbAcc.setEnabled(false);
+					
+					//b1.setVisible(false);
+					tetris.requestFocus();
+					repaint();
+				}
+			
 			}
 		});
 		
@@ -431,6 +438,7 @@ public class SidePanel extends JPanel implements Panel{
 			/*
 			 * Loop through the piece and draw it's tiles onto the preview.
 			 */
+			
 			for(int row = 0; row < dimension; row++) {
 				for(int col = 0; col < dimension; col++) {
 					if(type.isTile(col, row, 0)) {

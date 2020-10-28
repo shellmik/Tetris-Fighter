@@ -232,7 +232,8 @@ public class BoardPanel extends JPanel implements Panel{
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 200);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
-			g.drawString("[CONTROLS]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
+			//g.drawString("[CONTROLS]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
+			g.drawString("[CONTROLS]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2-15, 290);//on the centre
 			int offset= CONTROLS_INSET;
 			g.setFont(SMALL_FONT);
 			g.drawString("[A]- Move Left", LARGE_INSET, offset += TEXT_STRIDE);
