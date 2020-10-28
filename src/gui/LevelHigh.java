@@ -8,7 +8,7 @@ public class LevelHigh extends Level{
 
 	public LevelHigh() {
 		
-		super(7,1.0f,0.12f);
+		super(7,5.0f,0.12f);
 		
 	}
 
