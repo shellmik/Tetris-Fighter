@@ -62,7 +62,16 @@ public class SidePanel extends JPanel implements Panel{
 	JComboBox cmbAcc;
 	JTextField textField ;
 	
+	
+	JLabel labelType;
+	JLabel labelSpeed;
+	JLabel labelAcc;
+	
 	public boolean isSubmit=false;
+	public boolean isCustom=false;
+	
+	
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -117,6 +126,14 @@ public class SidePanel extends JPanel implements Panel{
         	cmbType.addItem(listType[i]);
         }
         add(cmbType);
+        
+        labelType=new JLabel("");
+        add(labelType);
+        labelSpeed=new JLabel("");
+        add(labelSpeed);
+        labelAcc=new JLabel("");
+        add(labelAcc);
+        
         //2
         float[] listSpeed = new float[]{1.0f,2.0f,3.0f,4.0f,5.0f};
         cmbSpeed=new JComboBox();
@@ -132,7 +149,7 @@ public class SidePanel extends JPanel implements Panel{
         }
         add(cmbAcc);
         
-        String[] listLevel = new String[]{"Low","Mid","High"};
+        String[] listLevel = new String[]{"Low","Mid","High","Custom"};
         cmbLevel=new JComboBox();
         for(int i=0;i<listLevel.length;i++) {
         	cmbLevel.addItem(listLevel[i]);
@@ -142,12 +159,25 @@ public class SidePanel extends JPanel implements Panel{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                 	String levelStr=(String) cmbLevel.getSelectedItem();
-                	if(levelStr=="Low")
+                	if(levelStr=="Low") {
+                		isCustom=false;
                 		sideLevel=LevelLow.getInstance();
-                	else if(levelStr=="Mid")
+                	}
+                		
+                	else if(levelStr=="Mid") {
+                		isCustom=false;
                 		sideLevel=LevelMid.getInstance();
-                	else if(levelStr=="High")
+                	}
+                		
+                	else if(levelStr=="High") {
+                		isCustom=false;
                 		sideLevel=LevelHigh.getInstance();
+                	}
+                	else if(levelStr=="Custom") {
+                		isCustom=true;
+                		sideLevel=LevelHigh.getInstance();
+                	}
+                		
                 	
                 	tetris.setLevel(sideLevel);
                 	
@@ -210,10 +240,16 @@ public class SidePanel extends JPanel implements Panel{
         
         chooseType.setBounds(SMALL_INSET, 330, 100, 25);//x, y, width, height
         cmbType.setBounds(130, 330, 90, 30);//x, y, width, height
+        labelType.setBounds(130, 330, 90, 30);//x, y, width, height
+        
+        
         chooseSpeed.setBounds(SMALL_INSET, 365, 100, 25);//x, y, width, height
         cmbSpeed.setBounds(130, 365, 90, 30);//x, y, width, height
+        labelSpeed.setBounds(130, 365, 90, 30);//x, y, width, height
+        
         chooseAcc.setBounds(SMALL_INSET, 400, 100, 25);//x, y, width, height
         cmbAcc.setBounds(130, 400, 90, 30);//x, y, width, height
+        labelAcc.setBounds(130, 400, 90, 30);//x, y, width, height
         
         
         //submit button
@@ -331,6 +367,31 @@ public class SidePanel extends JPanel implements Panel{
 		 * than constrained to a grid.
 		 */
 		Tile type = tetris.getNextPieceType();
+		if(isCustom==true) {
+			labelType.setVisible(false);
+			cmbType.setVisible(true);
+			
+			labelSpeed.setVisible(false);
+			cmbSpeed.setVisible(true);
+			
+			labelAcc.setVisible(false);
+			cmbAcc.setVisible(true);
+
+		}
+		if(isCustom==false) {
+			labelType.setVisible(true);
+			labelType.setText(Integer.toString(sideLevel.getTileCnt()));
+			cmbType.setVisible(false);
+			
+			labelSpeed.setVisible(true);
+			labelSpeed.setText(Float.toString(sideLevel.getSpeed()));
+			cmbSpeed.setVisible(false);
+			
+			
+			labelAcc.setVisible(true);
+			labelAcc.setText(Float.toString(sideLevel.getAccelaration()));
+			cmbAcc.setVisible(false);
+		}
 		
 		if(tetris.isGameOver()) {
 			resetPanel();
