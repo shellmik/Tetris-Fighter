@@ -56,6 +56,10 @@ public class SidePanel extends JPanel implements Panel{
 	
 	public JLabel labelUser;
 	
+	JLabel labelType;
+	JLabel labelSpeed;
+	JLabel labelAcc;
+	
 	JComboBox cmbLevel;
 	JComboBox<Integer> cmbType;
 	JComboBox cmbSpeed;

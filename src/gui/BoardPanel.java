@@ -37,8 +37,8 @@ public class BoardPanel extends JPanel implements Panel{
 	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;//total panel width
 	public static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 	
-	private static final Font LARGE_FONT = new Font("Arial", Font.BOLD, 38);
-	private static final Font SMALL_FONT = new Font("Arial", Font.BOLD, 12);
+	private static final Font LARGE_FONT = new Font("Comic", Font.BOLD, 38);
+	private static final Font SMALL_FONT = new Font("Comic", Font.BOLD, 12);
 	private static final int SMALL_INSET = 20;//pixel number used on a small insets (generally used for categories
 	private static final int LARGE_INSET = 40;//number of pixels used on a large insets
 	private static final int CONTROLS_INSET = 300;//y coordinate of the controls category
