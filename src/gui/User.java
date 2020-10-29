@@ -43,8 +43,8 @@ public class User {
     }
     
     public String toString() {
-    	//String info = String.format("%8c%4c%20c", name, score, date);
-        return name + "           " + score + "         " + date;
+    	String info = String.format("%-10s%-6s%-20s", name, score, date);
+        return info;
     }
 
 }

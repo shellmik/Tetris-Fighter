@@ -357,7 +357,7 @@ public class GameController extends JFrame {
 	public void saveCurrent() {
 		  Calendar now = Calendar.getInstance();
 		  String name = side.getUserName();
-		  String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DAY_OF_MONTH) + ": " + now.get(Calendar.HOUR_OF_DAY) + " h " + now.get(Calendar.MINUTE) + " min";
+		  String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DAY_OF_MONTH) + "  " + now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE);
 		  gameSave.save(name, score, date);
 		 }	
  public void showRank() {
@@ -381,6 +381,7 @@ public class GameController extends JFrame {
    for (int i = 0; i < list.size(); i++) {
        User user = (User) list.get(i);
        JLabel label = new JLabel(user.toString());
+       System.out.println(user.toString());
        label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
        frame.add(label);
    }
