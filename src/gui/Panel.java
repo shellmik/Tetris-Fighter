@@ -6,5 +6,5 @@ import javax.swing.JPanel;
 
 public interface Panel {
 	public void paintComponent(Graphics g);
-	
+
 }
