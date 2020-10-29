@@ -79,6 +79,7 @@ public class SidePanel extends JPanel implements Panel{
     //flags
 	public boolean isSubmit=false;
 	public boolean isCustom=false;
+	public boolean isStore=false;
 	
 	//public int storeCount = 0;
 	
@@ -263,7 +264,9 @@ public class SidePanel extends JPanel implements Panel{
 			public void actionPerformed(ActionEvent e) {
 				String str=textField.getText();
 				if(str.length()==0)
-					JOptionPane.showMessageDialog(null, "please fill in a user name", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+					JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+				else if(str.length()>10)
+					JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 				else {
 					isSubmit=true;
 					revalidate();
@@ -311,11 +314,24 @@ public class SidePanel extends JPanel implements Panel{
 		store.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tetris.saveCurrent();
-				System.out.println("sb");
-				tetris.requestFocus();
-				//store.setEnabled(false);
-				//storeCount = 0;
+				
+				if(!tetris.isGameOver) {
+					JOptionPane.showMessageDialog(null, "You can store score only after GAMEOVER", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+				}
+				else if(isStore==true) {
+					JOptionPane.showMessageDialog(null, "Score already stored", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+				}
+				else {//tetris.isGameOver &&!isStore
+					tetris.saveCurrent();
+					System.out.println("store score");
+					tetris.requestFocus();
+					//store.setEnabled(false);
+					//storeCount = 0;
+					isStore=true;
+				}
+				
+				
+				
 			}
 		});
 		
