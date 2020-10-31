@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 
+<<<<<<< HEAD
 /**
  * The {@code PieceType} enum describes the properties of the various pieces
  * that can be used in the game.
@@ -59,10 +60,31 @@ public class Tile {
 	 * @param rows      The number of rows.
 	 * @param tiles     The tiles.
 	 */
+=======
+
+public class Tile {
+
+	private Color baseColor;
+	
+	public static final int COLOR_MIN = 35;
+	public static final int COLOR_MAX = 255 - COLOR_MIN;
+	
+	
+	private int spawnCol;
+	
+	private int spawnRow;
+	
+	private int dimension;
+	
+	private int rows;
+	
+	private int cols;
+	
+	private boolean[][] tiles;
+	
+>>>>>>> 86e9120... refactor
 	public Tile(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
 		this.baseColor = color;
-		this.lightColor = color.brighter();
-		this.darkColor = color.darker();
 		this.dimension = dimension;
 		this.tiles = tiles;
 		this.cols = cols;
@@ -71,6 +93,7 @@ public class Tile {
 		this.spawnCol = 5 - (dimension >> 1);
 		this.spawnRow = getTopInset(0);
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Gets the base color of this type.
@@ -166,6 +189,37 @@ public class Tile {
 	 * @param rotation The rotation.
 	 * @return The left inset.
 	 */
+=======
+	
+	public Color getBaseColor() {
+		return baseColor;
+	}
+	
+	public int getDimension() {
+		return dimension;
+	}
+	
+	public int getSpawnColumn() {
+		return spawnCol;
+	}
+	
+	public int getSpawnRow() {
+		return spawnRow;
+	}
+	
+	public int getRows() {
+		return rows;
+	}
+	
+	public int getCols() {
+		return cols;
+	}
+	
+	public boolean isTile(int x, int y, int rotation) {
+		return tiles[rotation][y * dimension + x];
+	}
+	
+>>>>>>> 86e9120... refactor
 	public int getLeftInset(int rotation) {
 		/*
 		 * Loop through from left to right until we find a tile then return the column.
@@ -179,6 +233,7 @@ public class Tile {
 		}
 		return -1;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * The right inset is represented by the number of empty columns on the left
@@ -187,6 +242,9 @@ public class Tile {
 	 * @param rotation The rotation.
 	 * @return The right inset.
 	 */
+=======
+	
+>>>>>>> 86e9120... refactor
 	public int getRightInset(int rotation) {
 		/*
 		 * Loop through from right to left until we find a tile then return the column.
@@ -200,6 +258,7 @@ public class Tile {
 		}
 		return -1;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * The left inset is represented by the number of empty rows on the top side of
@@ -208,6 +267,9 @@ public class Tile {
 	 * @param rotation The rotation.
 	 * @return The top inset.
 	 */
+=======
+	
+>>>>>>> 86e9120... refactor
 	public int getTopInset(int rotation) {
 		/*
 		 * Loop through from top to bottom until we find a tile then return the row.
@@ -221,6 +283,7 @@ public class Tile {
 		}
 		return -1;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * The botom inset is represented by the number of empty rows on the bottom side
@@ -229,6 +292,9 @@ public class Tile {
 	 * @param rotation The rotation.
 	 * @return The bottom inset.
 	 */
+=======
+	
+>>>>>>> 86e9120... refactor
 	public int getBottomInset(int rotation) {
 		/*
 		 * Loop through from bottom to top until we find a tile then return the row.

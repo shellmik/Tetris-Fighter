@@ -21,4 +21,13 @@ public class PieceGenerator {
 		return instance;
 	}
 
+<<<<<<< HEAD
+=======
+	public Tile getType(int num) {
+		
+		return piecesCollection[num];
+	}
+	
+	
+>>>>>>> 86e9120... refactor
 }

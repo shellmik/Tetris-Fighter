@@ -81,11 +81,22 @@ public class SidePanel extends JPanel implements Panel{
 	public boolean isCustom=false;
 	public boolean isStore=false;
 	
+<<<<<<< HEAD
 	//public int storeCount = 0;
+=======
+	
+	JLabel chooseLevel ;
+	JLabel chooseType ;
+	JLabel chooseSpeed ;
+	JLabel chooseAcc ;
+	
+	
+>>>>>>> 86e9120... refactor
 	
 	public String getUserName() {
 		return userName;
 	}
+<<<<<<< HEAD
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
@@ -93,6 +104,10 @@ public class SidePanel extends JPanel implements Panel{
 		setPreferredSize(new Dimension(SIDE_WIDTH, SIDE_HEIGHT));
 		setBackground(new Color(255,182,193));
 		
+=======
+	
+	public void inputUsername() {
+>>>>>>> 86e9120... refactor
 		//input user name
 		labelUser = new JLabel("Name:");
 		labelUser.setFont(LARGE_FONT);
@@ -102,6 +117,7 @@ public class SidePanel extends JPanel implements Panel{
 
 		textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
+<<<<<<< HEAD
 		
 		add(labelUser);
 		add(textField);
@@ -129,6 +145,47 @@ public class SidePanel extends JPanel implements Panel{
         
 		JLabel chooseAcc = new JLabel("Acceleration：");
 		chooseLevel.setFont(LARGE_FONT);
+=======
+		textField.setBounds(this.RIGHT_START, 185, RIGHT_LEN, 30);
+
+		add(labelUser);
+		add(textField);
+		
+		
+	}
+	
+	public void showLabel() {
+		
+		
+		
+		
+	}
+	
+
+	public SidePanel(GameController tetris) {
+		this.tetris = tetris;
+		setLayout(null);
+		setPreferredSize(new Dimension(250, BoardPanel.PANEL_HEIGHT));
+		setBackground(new Color(255,182,193));
+		
+		inputUsername();
+		
+		//all 4 labels
+		chooseLevel = new JLabel("Level：");
+		//chooseLevel.setFont(LARGE_FONT);
+		chooseLevel.setForeground(Color.black);
+        add(chooseLevel);
+		
+		chooseType = new JLabel("Type count：");
+		chooseType.setForeground(Color.black);
+        add(chooseType);
+        
+		chooseSpeed = new JLabel("Speed：");
+		chooseSpeed.setForeground(Color.black);
+        add(chooseSpeed);
+        
+		chooseAcc = new JLabel("Acceleration：");
+>>>>>>> 86e9120... refactor
 		chooseAcc.setForeground(Color.black);
         add(chooseAcc);
         
@@ -402,7 +459,16 @@ public class SidePanel extends JPanel implements Panel{
 		g.drawString("Next Piece ", 140, UNIT_HEIGHT);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 		
+<<<<<<< HEAD
 		
+=======
+		/*
+		 * Draw a preview of the next piece that will be spawned. The code is pretty much
+		 * identical to the drawing code on the board, just smaller and centered, rather
+		 * than constrained to a grid.
+		 */
+
+>>>>>>> 86e9120... refactor
 		Tile type = tetris.getNextPieceType();
 		if(isCustom==true) {
 			labelType.setVisible(false);

@@ -18,6 +18,7 @@ public class BoardPanel extends JPanel implements Panel {
 	 * Minimum color component values for tiles. This is required if we want to show
 	 * both light and dark shading on our tiles.
 	 */
+<<<<<<< HEAD
 	public static final int COLOR_MIN = 35;
 	public static final int COLOR_MAX = 255 - COLOR_MIN;
 
@@ -32,6 +33,21 @@ public class BoardPanel extends JPanel implements Panel {
 	public static final int SHADE_WIDTH = 4;// tile shading width
 
 	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;// central x coordinate on the game board
+=======
+	
+	
+	private static final int BORDER_WIDTH = 5;//border around the game board width
+	public static final int COL_COUNT = 10;//number of columns on the board
+	private static final int VISIBLE_ROW_COUNT = 20;//number of visible rows on the board
+	private static final int HIDDEN_ROW_COUNT = 2;//number of rows that are hidden from view.
+	public static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;//total row number the board contains
+	
+	public static final int TILE_SIZE = 24;//number of pixels that a tile takes up
+	
+	public static final int SHADE_WIDTH = 4;//tile shading width
+	
+	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;//central x coordinate on the game board
+>>>>>>> 86e9120... refactor
 	private static final int CENTER_Y = VISIBLE_ROW_COUNT * TILE_SIZE / 2;
 
 	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;// total panel width
@@ -288,6 +304,7 @@ public class BoardPanel extends JPanel implements Panel {
 			 * to do for now. We simply take the current position and move down until we hit
 			 * a row that would cause a collision.
 			 */
+<<<<<<< HEAD
 			Color base = type.getBaseColor();
 			base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 20);
 			for (int lowest = pieceRow; lowest < ROW_COUNT; lowest++) {
@@ -312,6 +329,31 @@ public class BoardPanel extends JPanel implements Panel {
 				break;
 			}
 
+=======
+//			Color base = type.getBaseColor();
+//			base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 20);
+//			for(int lowest = pieceRow; lowest < ROW_COUNT; lowest++) {
+//				//If no collision is detected, try the next row.
+//				if(isValidAndEmpty(type, pieceCol, lowest, rotation)) {					
+//					continue;
+//				}
+//				
+//				//Draw the ghost one row higher than the one the collision took place at.
+//				lowest--;
+//				
+//				//Draw the ghost piece.
+//				for(int col = 0; col < type.getDimension(); col++) {
+//					for(int row = 0; row < type.getDimension(); row++) {
+//						if(lowest + row >= 2 && type.isTile(col, row, rotation)) {
+//							draw.drawTile(base, base.brighter(), base.darker(), (pieceCol + col) * TILE_SIZE, (lowest + row - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
+//						}
+//					}
+//				}
+//				
+//				break;
+//			}
+			
+>>>>>>> 86e9120... refactor
 			/*
 			 * Draw the background grid above the pieces (serves as a useful visual for
 			 * players, and makes the pieces look nicer by breaking them up.
