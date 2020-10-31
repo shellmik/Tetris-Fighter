@@ -13,38 +13,12 @@ public class TileJ extends Tile {
 	public static TileJ getInstance() {
 
 		if (instance == null)
-<<<<<<< HEAD
 			instance = new TileJ(new Color(BoardPanel.COLOR_MIN, BoardPanel.COLOR_MIN, BoardPanel.COLOR_MAX), 3, 3, 2,
 					new boolean[][] { { true, false, false, true, true, true, false, false, false, },
 							{ false, true, true, false, true, false, false, true, false, },
 							{ false, false, false, true, true, true, false, false, true, },
 							{ false, true, false, false, true, false, true, true, false, } });
 
-=======
-			instance = new TileJ(new Color(COLOR_MIN, COLOR_MIN, COLOR_MAX), 3, 3, 2, new boolean[][] {
-				{
-					true,	false,	false,
-					true,	true,	true,
-					false,	false,	false,
-				},
-				{
-					false,	true,	true,
-					false,	true,	false,
-					false,	true,	false,
-				},
-				{
-					false,	false,	false,
-					true,	true,	true,
-					false,	false,	true,
-				},
-				{
-					false,	true,	false,
-					false,	true,	false,
-					true,	true,	false,
-				}
-			});
-		
->>>>>>> 86e9120... refactor
 		return instance;
 	}
 

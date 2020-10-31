@@ -6,7 +6,6 @@ import timer.Clock;
 
 public class PieceController {
 	public Tile currentType;
-<<<<<<< HEAD
 
 	public Tile nextType;
 
@@ -80,87 +79,38 @@ public class PieceController {
 		 * Get the insets for each of the sides. These are used to determine how many
 		 * empty rows or columns there are on a given side.
 		 */
-=======
-
-	public Tile nextType;
-
-	private GameController game = GameController.getInstance();
-
-	private PieceGenerator pg = PieceGenerator.getInstance();
-	
-	public int currentCol;
-
-	public int currentRow;
-
-	public int currentRotation;
-
-	public void spawnPiece() {
-
-		this.currentType = nextType;
-
-		this.currentCol = currentType.getSpawnColumn();
-
-		this.currentRow = currentType.getSpawnRow();
-
-		this.currentRotation = 0;
-
-		int num = new Random().nextInt(this.game.getTypeCnt());
-		System.out.println("random:  " + num);
-		this.nextType = pg.getType(num);
-
-		if (!game.check(currentType, currentCol, currentRow, currentRotation)) {
-			game.isGameOver = true;
-			game.pause();
-		}
-	}
-
-	public void rotatePiece(int newRotation) {
-
-		int newColumn = currentCol;
-		int newRow = currentRow;
->>>>>>> 86e9120... refactor
 		int left = currentType.getLeftInset(newRotation);
 		int right = currentType.getRightInset(newRotation);
 		int top = currentType.getTopInset(newRotation);
 		int bottom = currentType.getBottomInset(newRotation);
 
-<<<<<<< HEAD
 		/*
 		 * If the current piece is too far to the left or right, move the piece away
 		 * from the edges so that the piece doesn't clip out of the map and
 		 * automatically become invalid.
 		 */
-=======
->>>>>>> 86e9120... refactor
 		if (currentCol < -left) {
 			newColumn -= currentCol - left;
 		} else if (currentCol + currentType.getDimension() - right >= BoardPanel.COL_COUNT) {
 			newColumn -= (currentCol + currentType.getDimension() - right) - BoardPanel.COL_COUNT + 1;
 		}
 
-<<<<<<< HEAD
 		/*
 		 * If the current piece is too far to the top or bottom, move the piece away
 		 * from the edges so that the piece doesn't clip out of the map and
 		 * automatically become invalid.
 		 */
-=======
->>>>>>> 86e9120... refactor
 		if (currentRow < -top) {
 			newRow -= currentRow - top;
 		} else if (currentRow + currentType.getDimension() - bottom >= BoardPanel.ROW_COUNT) {
 			newRow -= (currentRow + currentType.getDimension() - bottom) - BoardPanel.ROW_COUNT + 1;
 		}
 
-<<<<<<< HEAD
 		/*
 		 * Check to see if the new position is acceptable. If it is, update the rotation
 		 * and position of the piece.
 		 */
 		if (board.isValidAndEmpty(currentType, newColumn, newRow, newRotation)) {
-=======
-		if (game.check(currentType, newColumn, newRow, newRotation)) {
->>>>>>> 86e9120... refactor
 			currentRotation = newRotation;
 			currentRow = newRow;
 			currentCol = newColumn;

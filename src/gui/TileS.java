@@ -13,38 +13,12 @@ public class TileS extends Tile {
 	public static TileS getInstance() {
 
 		if (instance == null)
-<<<<<<< HEAD
 			instance = new TileS(new Color(BoardPanel.COLOR_MIN, BoardPanel.COLOR_MAX, BoardPanel.COLOR_MIN), 3, 3, 2,
 					new boolean[][] { { false, true, true, true, true, false, false, false, false, },
 							{ false, true, false, false, true, true, false, false, true, },
 							{ false, false, false, false, true, true, true, true, false, },
 							{ true, false, false, true, true, false, false, true, false, } });
 
-=======
-			instance = new TileS(new Color(COLOR_MIN, COLOR_MAX, COLOR_MIN), 3, 3, 2, new boolean[][] {
-				{
-					false,	true,	true,
-					true,	true,	false,
-					false,	false,	false,
-				},
-				{
-					false,	true,	false,
-					false,	true,	true,
-					false,	false,	true,
-				},
-				{
-					false,	false,	false,
-					false,	true,	true,
-					true,	true,	false,
-				},
-				{
-					true,	false,	false,
-					true,	true,	false,
-					false,	true,	false,
-				}
-			});
-		
->>>>>>> 86e9120... refactor
 		return instance;
 	}
 

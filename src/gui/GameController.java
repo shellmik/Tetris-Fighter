@@ -205,7 +205,7 @@ public class GameController extends JFrame {
 		System.out.println("gameSpeed=" + gameSpeed);
 
 		this.logicTimer = new Clock(gameSpeed);
-		pc = new PieceController();
+		pc = new PieceController(this);
 		/*
 		 * Setup the timer to keep the game from running before the user presses enter
 		 * to start it.
@@ -323,18 +323,6 @@ public class GameController extends JFrame {
 		logicTimer.setCyclesPerSecond(gameSpeed);
 		pc.spawnPiece();
 	}
-<<<<<<< HEAD
-=======
-	
-	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
-		return board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation);
-	}
-	/**
-	 * Spawns a new piece and resets our piece's variables to their default
-	 * values.
-	 */
-	
->>>>>>> 86e9120... refactor
 
 	// Spawns a new piece and resets our piece's variables to their default values.
 	/**
@@ -352,7 +340,6 @@ public class GameController extends JFrame {
 	}
 
 	public void saveCurrent() {
-<<<<<<< HEAD
 		Calendar now = Calendar.getInstance();
 		String name = side.getUserName();
 		String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-"
@@ -399,50 +386,6 @@ public class GameController extends JFrame {
 		gameSave.clean();
 	}
 
-=======
-		  Calendar now = Calendar.getInstance();
-		  String name = side.getUserName();
-		  String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DAY_OF_MONTH) + ": " + now.get(Calendar.HOUR_OF_DAY) + " h " + now.get(Calendar.MINUTE) + " min";
-		  gameSave.save(name, score, date);
-		 }	
-	 public void showRank() {
-	  
-	  JFrame frame = new JFrame();
-	  frame.setTitle("Ranking");
-	  frame.setSize(500, 700);
-	  frame.setDefaultCloseOperation(2);
-	  frame.setLocationRelativeTo(null);
-	  frame.setLayout(null);
-	  frame.setResizable(false);
-	  try {
-	   ArrayList list = gameSave.openRankingList();
-	   
-	   int listSize = list.size();
-	   
-	   JLabel lab = new JLabel("User        Max        Time");
-	   lab.setBounds(30, 20, 400, 50);
-	   frame.add(lab);
-	   
-	   for (int i = 0; i < list.size(); i++) {
-	       User user = (User) list.get(i);
-	       JLabel label = new JLabel(user.toString());
-	       label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
-	       frame.add(label);
-	   }
-	   frame.setVisible(true);
-	  } catch (Exception e) {
-	   JLabel lab = new JLabel("Sorry, there is no record at all!");
-	         lab.setBounds(30, 60, 400, 50);
-	         frame.add(lab);
-	         frame.setVisible(true);
-	  }
-	        
-	 }
- 
-	 public void clearStorage() {
-	  gameSave.clean();
-	 }
->>>>>>> 86e9120... refactor
 	/**
 	 * Checks to see whether or not the game is over.
 	 * 
@@ -502,12 +445,6 @@ public class GameController extends JFrame {
 
 	public int getTypeCnt() {
 		return this.gameLevel.getTileCnt();
-	}
-
-
-	public void pause() {
-		logicTimer.setPaused(true);
-		
 	}
 
 }
