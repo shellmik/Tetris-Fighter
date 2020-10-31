@@ -315,7 +315,7 @@ public class SidePanel extends JPanel implements Panel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!tetris.isGameOver) {
+				if(!(tetris.isGameOver||tetris.isNewGame())) {
 					JOptionPane.showMessageDialog(null, "You can store score only after GAMEOVER", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 				}
 				else if(isStore==true) {
@@ -362,7 +362,7 @@ public class SidePanel extends JPanel implements Panel{
 		line.setBounds(0, 130, 800, 20);
         
         textField.setBounds(this.RIGHT_START, 155, UNIT_WIDTH, UNIT_HEIGHT);
-		labelUser.setBounds(this.LEFT_START, 155, UNIT_WIDTH, UNIT_HEIGHT);
+		labelUser.setBounds(this.LEFT_START, 155, 200, UNIT_HEIGHT);// need to be longer
 		
         chooseLevel.setBounds(LEFT_START, 200, UNIT_WIDTH, UNIT_HEIGHT);
         cmbLevel.setBounds(this.RIGHT_START, 200, UNIT_WIDTH, UNIT_HEIGHT);
@@ -404,6 +404,10 @@ public class SidePanel extends JPanel implements Panel{
 		
 		
 		Tile type = tetris.getNextPieceType();
+		
+		if(!(tetris.isGameOver||tetris.isNewGame()))
+			isStore=false;
+		
 		if(isCustom==true) {
 			labelType.setVisible(false);
 			cmbType.setVisible(true);
