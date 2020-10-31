@@ -273,6 +273,7 @@ public class GameController extends JFrame {
 	// Resets the game variables to their default values at the start of a new game.
 	private void resetGame() {
 		this.score = 0;
+		// this.gameSpeed = 1.0f;
 		this.gameSpeed = this.gameLevel.getSpeed();
 		
 		this.TYPE_COUNT=this.gameLevel.getTileCnt();

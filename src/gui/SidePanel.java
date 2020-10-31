@@ -75,7 +75,6 @@ public class SidePanel extends JPanel implements Panel{
 	JLabel chooseType ;
 	JLabel chooseSpeed ;
 	JLabel chooseAcc ;
-	
 	JLabel line ;
 	JLabel note1 ;
 	
@@ -147,8 +146,6 @@ public class SidePanel extends JPanel implements Panel{
 		
 		add(labelUser);
 		add(textField);
-		
-		
 	}
 	
 	public void showInfo() {
