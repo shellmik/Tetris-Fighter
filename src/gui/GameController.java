@@ -47,6 +47,7 @@ public class GameController extends JFrame {
 	private float gameSpeed, gameAcceleration;
 
 	private PieceController pc;
+	private PieceGenerator pg;
 
 	private static GameController theInstance = new GameController();
 
@@ -66,6 +67,7 @@ public class GameController extends JFrame {
 		setResizable(false);
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
+		pg=PieceGenerator.getInstance();
 		// this.gameLevel=side.getLevel();
 		this.gameSave = new GameSave();
 		add(board, BorderLayout.CENTER);// CENTER
@@ -271,13 +273,14 @@ public class GameController extends JFrame {
 	// Resets the game variables to their default values at the start of a new game.
 	private void resetGame() {
 		this.score = 0;
-		// this.gameSpeed = 1.0f;
 		this.gameSpeed = this.gameLevel.getSpeed();
-
-		pc.nextType = PieceGenerator.getInstance().piecesCollection[random.nextInt(this.gameLevel.getTileCnt())];
+		
+		this.TYPE_COUNT=this.gameLevel.getTileCnt();
+		int tile_idx=random.nextInt(TYPE_COUNT);
+		pc.nextType = pg.getType(tile_idx);
+		
+		
 		System.out.println(this.gameLevel.getTileCnt());
-		// pc.nextType =
-		// PieceGenerator.getInstance().piecesCollection[random.nextInt(TYPE_COUNT)];
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
 		this.isGameOver = false;

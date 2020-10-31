@@ -136,7 +136,7 @@ public class SidePanel extends JPanel implements Panel{
 	
 	public void inputUsername() {
 		//input user name
-		labelUser = new JLabel("Name:");
+		labelUser = new JLabel("Name");
 		labelUser.setFont(LARGE_FONT);
 		labelUser.setForeground(Color.BLACK);
 		Dimension d = labelUser.getPreferredSize();
@@ -158,22 +158,22 @@ public class SidePanel extends JPanel implements Panel{
         add(line);
 		
 		//all 4 labels
-		chooseLevel = new JLabel("Level：");
+		chooseLevel = new JLabel("Level");
 		chooseLevel.setFont(LARGE_FONT);
 		chooseLevel.setForeground(Color.black);
         add(chooseLevel);
 		
-		chooseType = new JLabel("Type Count：");
+		chooseType = new JLabel("Type Count");
 		chooseLevel.setFont(LARGE_FONT);
 		chooseType.setForeground(Color.black);
         add(chooseType);
         
-		chooseSpeed = new JLabel("Speed：");
+		chooseSpeed = new JLabel("Speed");
 		chooseLevel.setFont(LARGE_FONT);
 		chooseSpeed.setForeground(Color.black);
         add(chooseSpeed);
         
-		chooseAcc = new JLabel("Acceleration：");
+		chooseAcc = new JLabel("Acceleration");
 		chooseLevel.setFont(LARGE_FONT);
 		chooseAcc.setForeground(Color.black);
         add(chooseAcc);        
@@ -316,7 +316,7 @@ public class SidePanel extends JPanel implements Panel{
 					revalidate();
 					repaint();
 					System.out.println("submit clicked");
-					labelUser.setText("Name:" + textField.getText());
+					labelUser.setText("Name" + textField.getText());
 					userName = textField.getText();
 					
 					lockSetting();
@@ -416,7 +416,7 @@ public class SidePanel extends JPanel implements Panel{
 		
 		g.setColor(DRAW_COLOR);	
 		g.setFont(LARGE_FONT);
-		g.drawString("Score :  " + tetris.getScore(), 140, 60);
+		g.drawString("Score   " + tetris.getScore(), 140, 60);
 		
 		//Draw the next piece preview box
 		g.setFont(LARGE_FONT);
@@ -509,7 +509,7 @@ public class SidePanel extends JPanel implements Panel{
 
     public void unlockSetting() {
     	
-    	labelUser.setText("Name:");
+    	labelUser.setText("Name");
     	textField.setVisible(true);
 
     	cmbLevel.setEnabled(true);
@@ -521,7 +521,7 @@ public class SidePanel extends JPanel implements Panel{
     
     public void lockSetting() {
     	
-	 labelUser.setText("Name: " + textField.getText());
+	 labelUser.setText("Name " + textField.getText());
      textField.setVisible(false);
      cmbLevel.setEnabled(false);
      cmbType.setEnabled(false);
