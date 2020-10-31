@@ -21,4 +21,8 @@ public class PieceGenerator {
 		return instance;
 	}
 
+	public Tile getType(int num) {
+		return piecesCollection[num];
+	}
+
 }

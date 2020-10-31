@@ -17,18 +17,16 @@ import java.util.Calendar;
 import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
-	private Level gameLevel;
 
-	private static final long serialVersionUID = -4722429764792514382L;
+	private Level gameLevel;
 
 	private static final long FRAME_TIME = 1000L / 50L;
 
-	private int TYPE_COUNT; // private static final int TYPE_COUNT =
-							// PieceGenerator.getInstance().piecesCollection.length;
+	private int TYPE_COUNT;
 
 	public BoardPanel board;
 
-	public SidePanel side;// Felicia modified for storage
+	public SidePanel side;
 
 	public GameSave gameSave;
 
@@ -66,14 +64,13 @@ public class GameController extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
-
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
 		// this.gameLevel=side.getLevel();
-		this.gameSave = new GameSave(this);
+		this.gameSave = new GameSave();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
-
+		
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -81,22 +78,12 @@ public class GameController extends JFrame {
 
 				switch (e.getKeyCode()) {
 
-				/*
-				 * Drop - When pressed, we check to see that the game is not paused and that
-				 * there is no drop cooldown, then set the logic timer to run at a speed of 25
-				 * cycles per second.
-				 */
 				case KeyEvent.VK_S:
 					if (!isPaused && dropCooldown == 0) {
 						logicTimer.setCyclesPerSecond(25.0f);
 					}
 					break;
 
-				/*
-				 * Move Left - When pressed, we check to see that the game is not paused and
-				 * that the position to the left of the current position is valid. If so, we
-				 * decrement the current column by 1.
-				 */
 				case KeyEvent.VK_A:
 					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol - 1, pc.currentRow,
 							pc.currentRotation)) {
@@ -104,11 +91,6 @@ public class GameController extends JFrame {
 					}
 					break;
 
-				/*
-				 * Move Right - When pressed, we check to see that the game is not paused and
-				 * that the position to the right of the current position is valid. If so, we
-				 * increment the current column by 1.
-				 */
 				case KeyEvent.VK_D:
 					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol + 1, pc.currentRow,
 							pc.currentRotation)) {
@@ -116,37 +98,18 @@ public class GameController extends JFrame {
 					}
 					break;
 
-				/*
-				 * Rotate Anticlockwise - When pressed, check to see that the game is not paused
-				 * and then attempt to rotate the piece anticlockwise. Because of the size and
-				 * complexity of the rotation code, as well as it's similarity to clockwise
-				 * rotation, the code for rotating the piece is handled in another method.
-				 */
 				case KeyEvent.VK_J:
 					if (!isPaused) {
 						pc.rotatePiece((pc.currentRotation == 0) ? 3 : pc.currentRotation - 1);
 					}
 					break;
 
-				/*
-				 * Rotate Clockwise - When pressed, check to see that the game is not paused and
-				 * then attempt to rotate the piece clockwise. Because of the size and
-				 * complexity of the rotation code, as well as it's similarity to anticlockwise
-				 * rotation, the code for rotating the piece is handled in another method.
-				 */
 				case KeyEvent.VK_K:
 					if (!isPaused) {
 						pc.rotatePiece((pc.currentRotation == 3) ? 0 : pc.currentRotation + 1);
 					}
 					break;
 
-				/*
-				 * Pause Game - When pressed, check to see that we're currently playing a game.
-				 * If so, toggle the pause variable and update the logic timer to reflect this
-				 * change, otherwise the game will execute a huge number of updates and
-				 * essentially cause an instant game over when we unpause if we stay paused for
-				 * more than a minute or so.
-				 */
 				case KeyEvent.VK_P:
 					if (!isGameOver && !isNewGame) {
 						isPaused = !isPaused;
@@ -205,7 +168,7 @@ public class GameController extends JFrame {
 		System.out.println("gameSpeed=" + gameSpeed);
 
 		this.logicTimer = new Clock(gameSpeed);
-		pc = new PieceController(this);
+		pc = new PieceController();
 		/*
 		 * Setup the timer to keep the game from running before the user presses enter
 		 * to start it.
@@ -445,6 +408,15 @@ public class GameController extends JFrame {
 
 	public int getTypeCnt() {
 		return this.gameLevel.getTileCnt();
+	}
+
+	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
+		return board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation);
+	}
+
+	public void pauseTime() {
+		logicTimer.setPaused(true);
+
 	}
 
 }

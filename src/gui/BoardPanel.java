@@ -12,15 +12,6 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel implements Panel {
 
-	private static final long serialVersionUID = 5055679736784226108L;
-
-	/**
-	 * Minimum color component values for tiles. This is required if we want to show
-	 * both light and dark shading on our tiles.
-	 */
-	public static final int COLOR_MIN = 35;
-	public static final int COLOR_MAX = 255 - COLOR_MIN;
-
 	private static final int BORDER_WIDTH = 5;// border around the game board width
 	public static final int COL_COUNT = 10;// number of columns on the board
 	private static final int VISIBLE_ROW_COUNT = 20;// number of visible rows on the board
@@ -280,36 +271,6 @@ public class BoardPanel extends JPanel implements Panel {
 								(pieceRow + row - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
 					}
 				}
-			}
-
-			/*
-			 * Draw the ghost (semi-transparent piece that shows where the current piece
-			 * will land). I couldn't think of a better way to implement this so it'll have
-			 * to do for now. We simply take the current position and move down until we hit
-			 * a row that would cause a collision.
-			 */
-			Color base = type.getBaseColor();
-			base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 20);
-			for (int lowest = pieceRow; lowest < ROW_COUNT; lowest++) {
-				// If no collision is detected, try the next row.
-				if (isValidAndEmpty(type, pieceCol, lowest, rotation)) {
-					continue;
-				}
-
-				// Draw the ghost one row higher than the one the collision took place at.
-				lowest--;
-
-				// Draw the ghost piece.
-				for (int col = 0; col < type.getDimension(); col++) {
-					for (int row = 0; row < type.getDimension(); row++) {
-						if (lowest + row >= 2 && type.isTile(col, row, rotation)) {
-							draw.drawTile(base, base.brighter(), base.darker(), (pieceCol + col) * TILE_SIZE,
-									(lowest + row - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
-						}
-					}
-				}
-
-				break;
 			}
 
 			/*

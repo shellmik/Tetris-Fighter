@@ -18,8 +18,8 @@ public class GameSave {
 
 	private GameController tetris;
 
-	public GameSave(GameController tetris) {
-		this.tetris = tetris;
+	public GameSave() {
+		this.tetris = GameController.getInstance();
 	}
 
 	public void save(String name, int score, String date) {

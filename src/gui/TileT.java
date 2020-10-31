@@ -13,7 +13,7 @@ public class TileT extends Tile {
 	public static TileT getInstance() {
 
 		if (instance == null)
-			instance = new TileT(new Color(128, BoardPanel.COLOR_MIN, 128), 3, 3, 2,
+			instance = new TileT(new Color(128, COLOR_MIN, 128), 3, 3, 2,
 					new boolean[][] { { false, true, false, true, true, true, false, false, false, },
 							{ false, true, false, false, true, true, false, true, false, },
 							{ false, false, false, true, true, true, false, true, false, },
