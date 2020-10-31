@@ -242,7 +242,7 @@ public class SidePanel extends JPanel implements Panel{
                 	}
                 	else if(levelStr=="Custom") {
                 		isCustom=true;
-                		sideLevel=LevelLow.getInstance();
+                		sideLevel=LevelCustom.getInstance();
                 	}
                 	tetris.setLevel(sideLevel);
                 	
