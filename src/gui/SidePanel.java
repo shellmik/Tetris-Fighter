@@ -313,8 +313,8 @@ public class SidePanel extends JPanel implements Panel{
 					JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 				else {
 					isSubmit=true;
-					revalidate();
-					repaint();
+					//revalidate();
+					//repaint();
 					System.out.println("submit clicked");
 					labelUser.setText("Name" + textField.getText());
 					userName = textField.getText();
@@ -348,7 +348,8 @@ public class SidePanel extends JPanel implements Panel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!(tetris.isGameOver||tetris.isNewGame())) {
+				
+				if(!tetris.isGameOver) {
 					JOptionPane.showMessageDialog(null, "You can store score only after GAMEOVER", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 				}
 				else if(isStore==true) {
@@ -357,7 +358,7 @@ public class SidePanel extends JPanel implements Panel{
 				else {//tetris.isGameOver &&!isStore
 					tetris.saveCurrent();
 					System.out.println("store score");
-					tetris.requestFocus();
+					//tetris.requestFocus();
 					//store.setEnabled(false);
 					//storeCount = 0;
 					isStore=true;
@@ -412,6 +413,9 @@ public class SidePanel extends JPanel implements Panel{
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		
+		System.out.println("paint once"
+				+ "");
 		super.paintComponent(g);
 		
 		g.setColor(DRAW_COLOR);	
