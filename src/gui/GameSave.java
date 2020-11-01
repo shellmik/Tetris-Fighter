@@ -17,6 +17,8 @@ import java.io.File;
 public class GameSave {
 
 	private GameController tetris;
+	
+	private ArrayList<User> list;
 
 	public GameSave() {
 		this.tetris = GameController.getInstance();
@@ -52,7 +54,7 @@ public class GameSave {
 	// write to doc
 	public boolean saveRankingList(User user) {
 		try {
-			ArrayList<User> list = openRankingList();
+			list = openRankingList();
 			if (list != null) {
 				list.add(user);
 

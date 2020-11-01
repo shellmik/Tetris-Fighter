@@ -125,6 +125,8 @@ public class SidePanel extends JPanel implements Panel{
         labelAcc.setBounds(this.RIGHT_START, 350, UNIT_WIDTH, UNIT_HEIGHT);
         
         submit.setBounds(LEFT_START-5, 400, UNIT_WIDTH, UNIT_HEIGHT);
+        submit.setBackground(Color.green);
+        submit.setForeground(Color.green);
 		endGame.setBounds(RIGHT_START, 400, UNIT_WIDTH, UNIT_HEIGHT);
 		
 		show.setBounds(LEFT_START-5, 440, UNIT_WIDTH, UNIT_HEIGHT);
@@ -188,7 +190,7 @@ public class SidePanel extends JPanel implements Panel{
         add(note1);
 	}
 		
-	public void cmb() {
+	public void showComboBox() {
 	     
         //1
         int[] listType = new int[]{2, 4, 5, 7};
@@ -298,6 +300,7 @@ public class SidePanel extends JPanel implements Panel{
   		show = new JButton("ShowRank");
   		clear = new JButton("ClearRank");
 		submit = new JButton("Submit");
+		
 		endGame = new JButton("EndGame");
 
 		submit.addActionListener(new ActionListener() {
@@ -400,7 +403,7 @@ public class SidePanel extends JPanel implements Panel{
 		
 		showInfo();
 		
-		cmb();
+		showComboBox();
 		
 		showButton();
 		

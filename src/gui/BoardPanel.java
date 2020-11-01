@@ -29,6 +29,7 @@ public class BoardPanel extends JPanel implements Panel {
 	public static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 
 	private static final Font LARGE_FONT = new Font("Impact", Font.BOLD, 46);
+	private static final Font MID_FONT = new Font("Impact", Font.BOLD, 20);
 	private static final Font SMALL_FONT = new Font("Comic", Font.BOLD, 12);
 	private static final int SMALL_INSET = 20;// pixel number used on a small insets (generally used for categories
 	private static final int LARGE_INSET = 40;// number of pixels used on a large insets
@@ -217,17 +218,18 @@ public class BoardPanel extends JPanel implements Panel {
 			 * that are displayed.
 			 */
 			String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
+			
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
-			g.setFont(SMALL_FONT);
-			msg = "Please SUBMIT your name and level";
+			g.setFont(MID_FONT);
+			msg = "SUBMIT";
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 180);
-			msg = "Then press ENTER to play" + (tetris.isNewGame() ? "" : " Again");
+			msg = "and press ENTER" + (tetris.isNewGame() ? "" : " Again");
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 200);
 
 			g.setFont(new Font("Impact", Font.BOLD, 16));
 			// g.drawString("[CONTROLS]", CENTER_X -
 			// g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
-			g.drawString("[CONTROLS]", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2 - 5, 290);// on the
+			g.drawString("<  CONTROLS  >", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2 - 5, 290);// on the
 																												// centre
 			int offset = CONTROLS_INSET;
 			g.setFont(SMALL_FONT);

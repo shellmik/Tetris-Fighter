@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Tile {
 
-	public static final int COLOR_MIN = 35;
+	public static final int COLOR_MIN = 240;
 	public static final int COLOR_MAX = 255 - COLOR_MIN;
 
 	private Color baseColor;
