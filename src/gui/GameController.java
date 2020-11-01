@@ -18,36 +18,37 @@ import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
 
-	private Level gameLevel;
-
-	private static final long FRAME_TIME = 1000L / 50L;
-
-	private int TYPE_COUNT;
-
-	public BoardPanel board;
-
-	public SidePanel side;
-
-	public GameSave gameSave;
-
 	boolean isPaused;
 
 	private boolean isNewGame;
 
 	public boolean isGameOver;
 
+	private static final long FRAME_TIME = 1000L / 50L;
+
+	private int TYPE_COUNT;
+
 	private int score;
-
-	public Random random;
-
-	public Clock logicTimer;
 
 	private int dropCooldown;
 
 	private float gameSpeed, gameAcceleration;
+	
+	public BoardPanel board;
+
+	public SidePanel side;
+	
+	private Level gameLevel;
+
+	public GameSave gameSave;
 
 	private PieceController pc;
+	
 	private PieceGenerator pg;
+	
+	public Random random;
+
+	public Clock logicTimer;
 
 	private static GameController theInstance = new GameController();
 
@@ -55,9 +56,6 @@ public class GameController extends JFrame {
 		return theInstance;
 	}
 
-	public void setLevel(Level level) {
-		this.gameLevel = level;
-	}
 
 	// Constructor
 	private GameController() {
@@ -158,7 +156,7 @@ public class GameController extends JFrame {
 		setVisible(true);
 	}
 
-	// Starts the game running. Initializes everything and enters the game loop.
+	// Key Functions
 	public void startGame() {
 		/*
 		 * Initialize our random number generator, logic timer, and new game variables.
@@ -215,7 +213,6 @@ public class GameController extends JFrame {
 		}
 	}
 
-	// Updates the game and handles the bulk of it's logic.
 	private void updateGame() {
 		// Check to see if the piece's position can move down to the next row.
 		if (board.isValidAndEmpty(pc.currentType, pc.currentCol, pc.currentRow + 1, pc.currentRotation)) {
@@ -263,14 +260,12 @@ public class GameController extends JFrame {
 		}
 	}
 
-	// Forces the BoardPanel and SidePanel to repaint.
 	private void renderGame() {
 		board.repaint();
 		side.repaint();
 		// System.out.println("repaint!");
 	}
 
-	// Resets the game variables to their default values at the start of a new game.
 	private void resetGame() {
 		this.score = 0;
 		// this.gameSpeed = 1.0f;
@@ -290,22 +285,21 @@ public class GameController extends JFrame {
 		logicTimer.setCyclesPerSecond(gameSpeed);
 		pc.spawnPiece();
 	}
-
-	// Spawns a new piece and resets our piece's variables to their default values.
-	/**
-	 * Attempts to set the rotation of the current piece to newRotation.
-	 * 
-	 * @param newRotation The rotation of the new peice.
-	 */
-	/**
-	 * Checks to see whether or not the game is paused.
-	 * 
-	 * @return Whether or not the game is paused.
-	 */
+	
 	public boolean isPaused() {
 		return isPaused;
 	}
 
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public boolean isNewGame() {
+		return isNewGame;
+	}
+
+	
+	// Additional Functions
 	public void saveCurrent() {
 		Calendar now = Calendar.getInstance();
 		String name = side.getUserName();
@@ -353,22 +347,18 @@ public class GameController extends JFrame {
 		gameSave.clean();
 	}
 
-	/**
-	 * Checks to see whether or not the game is over.
-	 * 
-	 * @return Whether or not the game is over.
-	 */
-	public boolean isGameOver() {
-		return isGameOver;
+	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
+		return board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation);
 	}
 
-	/**
-	 * Checks to see whether or not we're on a new game.
-	 * 
-	 * @return Whether or not this is a new game.
-	 */
-	public boolean isNewGame() {
-		return isNewGame;
+	public void pauseTime() {
+		logicTimer.setPaused(true);
+
+	}
+	
+	//getters and setters
+	public void setLevel(Level level) {
+		this.gameLevel = level;
 	}
 
 	public int getScore() {
@@ -383,29 +373,14 @@ public class GameController extends JFrame {
 		return pc.nextType;
 	}
 
-	/**
-	 * Gets the column of the current piece.
-	 * 
-	 * @return The column.
-	 */
 	public int getPieceCol() {
 		return pc.currentCol;
 	}
 
-	/**
-	 * Gets the row of the current piece.
-	 * 
-	 * @return The row.
-	 */
 	public int getPieceRow() {
 		return pc.currentRow;
 	}
 
-	/**
-	 * Gets the rotation of the current piece.
-	 * 
-	 * @return The rotation.
-	 */
 	public int getPieceRotation() {
 		return pc.currentRotation;
 	}
@@ -414,13 +389,5 @@ public class GameController extends JFrame {
 		return this.gameLevel.getTileCnt();
 	}
 
-	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
-		return board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation);
-	}
-
-	public void pauseTime() {
-		logicTimer.setPaused(true);
-
-	}
 
 }
