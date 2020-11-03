@@ -12,16 +12,52 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.io.File;
 
-public class GameSave {
+public class GameSaver {
 
 	private GameController tetris;
 	
 	private ArrayList<User> list;
 
-	public GameSave() {
+	public GameSaver() {
 		this.tetris = GameController.getInstance();
+	}
+	
+	public void display() {
+		JFrame frame = new JFrame();
+		frame.setTitle("Ranking");
+		frame.setSize(500, 700);
+		frame.setDefaultCloseOperation(2);
+		frame.setLocationRelativeTo(null);
+		frame.setLayout(null);
+		frame.setResizable(false);
+		try {
+
+			int listSize = list.size();
+
+			JLabel lab = new JLabel("User        Max        Time");
+			lab.setBounds(30, 20, 400, 50);
+			frame.add(lab);
+
+			for (int i = 0; i < list.size(); i++) {
+				User user = (User) list.get(i);
+				JLabel label = new JLabel(user.toString());
+				System.out.println(user.toString());
+				label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
+				frame.add(label);
+			}
+			frame.setVisible(true);
+		} catch (Exception e) {
+			JLabel lab = new JLabel("Sorry, there is no record at all!");
+			lab.setBounds(30, 60, 400, 50);
+			frame.add(lab);
+			frame.setVisible(true);
+		}
 	}
 
 	public void save(String name, int score, String date) {

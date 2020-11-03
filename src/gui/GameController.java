@@ -40,7 +40,7 @@ public class GameController extends JFrame {
 	
 	private Level gameLevel;
 
-	public GameSave gameSave;
+	public GameSaver gameSave;
 
 	private PieceController pc;
 	
@@ -67,7 +67,7 @@ public class GameController extends JFrame {
 		this.side = new SidePanel(this);
 		pg=PieceGenerator.getInstance();
 		// this.gameLevel=side.getLevel();
-		this.gameSave = new GameSave();
+		this.gameSave = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
 		
@@ -310,36 +310,7 @@ public class GameController extends JFrame {
 	}
 
 	public void showRank() {
-		JFrame frame = new JFrame();
-		frame.setTitle("Ranking");
-		frame.setSize(500, 700);
-		frame.setDefaultCloseOperation(2);
-		frame.setLocationRelativeTo(null);
-		frame.setLayout(null);
-		frame.setResizable(false);
-		try {
-			ArrayList list = gameSave.openRankingList();
-
-			int listSize = list.size();
-
-			JLabel lab = new JLabel("User        Max        Time");
-			lab.setBounds(30, 20, 400, 50);
-			frame.add(lab);
-
-			for (int i = 0; i < list.size(); i++) {
-				User user = (User) list.get(i);
-				JLabel label = new JLabel(user.toString());
-				System.out.println(user.toString());
-				label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
-				frame.add(label);
-			}
-			frame.setVisible(true);
-		} catch (Exception e) {
-			JLabel lab = new JLabel("Sorry, there is no record at all!");
-			lab.setBounds(30, 60, 400, 50);
-			frame.add(lab);
-			frame.setVisible(true);
-		}
+		gameSave.display();
 
 	}
 
