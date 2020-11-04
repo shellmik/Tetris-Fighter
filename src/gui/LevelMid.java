@@ -8,7 +8,7 @@ public class LevelMid extends Level {
 		return theInstance;
 	}
 
-	public LevelMid() {
+	private LevelMid() {
 		super(4, 3.0f, 0.08f);
 
 	}

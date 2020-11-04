@@ -8,7 +8,7 @@ public class LevelCustom extends Level {
 		return theInstance;
 	}
 
-	public LevelCustom() {
+	private LevelCustom() {
 
 		super(2, 1.0f, 0.04f);
 

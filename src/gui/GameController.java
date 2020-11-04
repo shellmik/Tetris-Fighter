@@ -21,7 +21,7 @@ public class GameController extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final long FRAME_TIME = 1000L / 50L;
 	
-	private boolean isPaused;
+	private boolean isPaused;//TODO: this variable is from clock??
 	private boolean isNewGame;
 	private boolean isGameOver;
 

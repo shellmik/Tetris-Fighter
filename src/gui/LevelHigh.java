@@ -8,7 +8,7 @@ public class LevelHigh extends Level {
 		return theInstance;
 	}
 
-	public LevelHigh() {
+	private LevelHigh() {
 
 		super(7, 5.0f, 0.12f);
 
