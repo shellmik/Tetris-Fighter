@@ -18,11 +18,11 @@ import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
 
-	boolean isPaused;
+	private boolean isPaused;
 
 	private boolean isNewGame;
 
-	public boolean isGameOver;
+	private boolean isGameOver;
 
 	private static final long FRAME_TIME = 1000L / 50L;
 
@@ -66,13 +66,10 @@ public class GameController extends JFrame {
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
 		pg=PieceGenerator.getInstance();
-		// this.gameLevel=side.getLevel();
 		this.gameSave = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
-		
-		
-		
+				
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -149,10 +146,8 @@ public class GameController extends JFrame {
 
 		});
 
-		/*
-		 * Here we resize the frame to hold the BoardPanel and SidePanel instances,
-		 * center the window on the screen, and show it to the user.
-		 */
+		//resize frame to hold the Board,SidePanel
+		//centre the window on the screen, and show it
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -160,12 +155,9 @@ public class GameController extends JFrame {
 
 	// Key Functions
 	public void startGame() {
-		/*
-		 * Initialize our random number generator, logic timer, and new game variables.
-		 */
+		
 		this.random = new Random();
 		this.isNewGame = true;
-		// this.gameSpeed = 1.0f;
 		this.gameSpeed = this.gameLevel.getSpeed();
 		System.out.println("gameSpeed=" + gameSpeed);
 
@@ -202,7 +194,7 @@ public class GameController extends JFrame {
 			renderGame();
 
 			/*
-			 * Sleep to cap the framerate.
+			 * Sleep to cap the frame rate.
 			 */
 			long delta = (System.nanoTime() - start) / 1000000L;
 			if (delta < FRAME_TIME) {
@@ -255,9 +247,6 @@ public class GameController extends JFrame {
 			 */
 			dropCooldown = 25;
 
-			/*
-			 * Spawn a new piece to control.
-			 */
 			pc.spawnPiece();
 		}
 	}
@@ -265,18 +254,15 @@ public class GameController extends JFrame {
 	private void renderGame() {
 		board.repaint();
 		side.repaint();
-		// System.out.println("repaint!");
 	}
 
 	private void resetGame() {
 		this.score = 0;
-		// this.gameSpeed = 1.0f;
 		this.gameSpeed = this.gameLevel.getSpeed();
 		
 		this.TYPE_COUNT=this.gameLevel.getTileCnt();
 		int tile_idx=random.nextInt(TYPE_COUNT);
 		pc.nextType = pg.getType(tile_idx);
-		
 		
 		System.out.println(this.gameLevel.getTileCnt());
 		pc.nextType = pc.nextType;
@@ -288,19 +274,7 @@ public class GameController extends JFrame {
 		pc.spawnPiece();
 	}
 	
-	public boolean isPaused() {
-		return isPaused;
-	}
 
-	public boolean isGameOver() {
-		return isGameOver;
-	}
-
-	public boolean isNewGame() {
-		return isNewGame;
-	}
-
-	
 	// Additional Functions
 	public void saveCurrent() {
 		Calendar now = Calendar.getInstance();
@@ -329,7 +303,26 @@ public class GameController extends JFrame {
 
 	}
 	
+	public void setGameOver(boolean b) {
+		this.isGameOver=b;
+	}
+	public void setPause(boolean b) {
+		this.isPaused=b;
+	}
+
 	//getters and setters
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public boolean isNewGame() {
+		return isNewGame;
+	}
+
 	public void setLevel(Level level) {
 		this.gameLevel = level;
 	}

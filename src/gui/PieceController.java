@@ -40,7 +40,7 @@ public class PieceController {
 		this.nextType = pg.getType(num);
 
 		if (!game.check(currentType, currentCol, currentRow, currentRotation)) {
-			game.isGameOver = true;
+			game.setGameOver(true);
 			game.pauseTime();
 		}
 	}
