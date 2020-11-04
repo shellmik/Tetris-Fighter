@@ -148,6 +148,16 @@ public class GameSaver {
 		return false;
 	}
 
+	/**
+	 * å­˜å‚¨æ¸¸æˆ�æŽ’è¡Œç‰ˆä¿¡æ�¯çš„æ–¹æ³•
+	 *
+	 * @param userç”¨æˆ·ä¿¡æ�¯å¯¹è±¡
+	 */
+	/**
+	 * è¯»å�–æ–‡æ¡£ä¸­çš„æ•°æ�®
+	 *
+	 * @return è¿”å›žè¯»å�–åˆ°å­˜æ¡£ä¿¡æ�¯
+	 */
 	// read from doc
 	public ArrayList<User> openRankingList() {
 		System.out.println("open Ranking list");

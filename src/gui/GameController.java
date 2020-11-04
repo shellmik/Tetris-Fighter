@@ -18,20 +18,20 @@ import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
 
-	// default
+	//default
 	private static final long serialVersionUID = 1L;
-
+	
 	private boolean isPaused;
 	private boolean isNewGame;
 	private boolean isGameOver;
-
+	
 	private Level gameLevel;
 	private int gameTypeCnt;
 	private float gameSpeed;
 	private float gameAcceleration;
-
+	
 	private int score;
-
+	
 	private PieceController pc;
 	private PieceGenerator pg;
 
@@ -40,10 +40,10 @@ public class GameController extends JFrame {
 
 	private int dropCooldown;
 	private Random random;
-
+	
 	private BoardPanel board;
 	private SidePanel side;
-
+	
 	private GameSaver gameSave;
 
 	private static GameController theInstance = new GameController();
@@ -51,34 +51,26 @@ public class GameController extends JFrame {
 	public static GameController getInstance() {// singleton
 		return theInstance;
 	}
+	
 
-	
-	
 	// Constructor
 	private GameController() {
 		super("Tetris");
-		//setting board and side
-		this.board = new BoardPanel(this);
-		this.side = new SidePanel(this);
-		this.gameSave = new GameSaver();
-		pg = PieceGenerator.getInstance();
-		
-		//construct UI
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
-		add(board, BorderLayout.CENTER);
+		this.board = new BoardPanel(this);
+		this.side = new SidePanel(this);
+		pg=PieceGenerator.getInstance();
+		this.gameSave = new GameSaver();
+		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
-		
-		//TODO: is it possible to move the addKeyListener function outside? looks kinda messy
+				
 		addKeyListener(new KeyAdapter() {
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				Tile currentType = pc.getCurrentType();
-				int currentCol = pc.getCurrentCol();
-				int currentRow = pc.getCurrentRow();
-				int currentRotation = pc.getCurrentRotation();
-				
+
 				switch (e.getKeyCode()) {
 
 				case KeyEvent.VK_S:
@@ -88,28 +80,28 @@ public class GameController extends JFrame {
 					break;
 
 				case KeyEvent.VK_A:
-					if (!isPaused && board.isValidAndEmpty(currentType, currentCol - 1, currentRow,
-							currentRotation)) {
-						pc.setCurrentCol(currentCol - 1);
+					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol - 1, pc.currentRow,
+							pc.currentRotation)) {
+						pc.currentCol--;
 					}
 					break;
 
 				case KeyEvent.VK_D:
-					if (!isPaused && board.isValidAndEmpty(currentType, currentCol + 1, currentRow,
-							currentRotation)) {
-						pc.setCurrentCol(currentCol + 1);
+					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol + 1, pc.currentRow,
+							pc.currentRotation)) {
+						pc.currentCol++;
 					}
 					break;
 
 				case KeyEvent.VK_J:
 					if (!isPaused) {
-						pc.rotatePiece((currentRotation == 0) ? 3 : currentRotation - 1);
+						pc.rotatePiece((pc.currentRotation == 0) ? 3 : pc.currentRotation - 1);
 					}
 					break;
 
 				case KeyEvent.VK_K:
 					if (!isPaused) {
-						pc.rotatePiece((currentRotation == 3) ? 0 : currentRotation + 1);
+						pc.rotatePiece((pc.currentRotation == 3) ? 0 : pc.currentRotation + 1);
 					}
 					break;
 
@@ -132,15 +124,26 @@ public class GameController extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+
 				switch (e.getKeyCode()) {
+
+				/*
+				 * Drop - When released, we set the speed of the logic timer back to whatever
+				 * the current game speed is and clear out any cycles that might still be
+				 * elapsed.
+				 */
 				case KeyEvent.VK_S:
 					logicTimer.setCyclesPerSecond(gameSpeed);
 					logicTimer.reset();
 					break;
 				}
+
 			}
+
 		});
-		
+
+		//resize frame to hold the Board,SidePanel
+		//centre the window on the screen, and show it
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -148,32 +151,47 @@ public class GameController extends JFrame {
 
 	// Key Functions
 	public void startGame() {
-
+		
 		this.random = new Random();
 		this.isNewGame = true;
-		gameSpeed = this.gameLevel.getSpeed();
+		this.gameSpeed = this.gameLevel.getSpeed();
 		System.out.println("gameSpeed=" + gameSpeed);
 
 		this.logicTimer = new Clock(gameSpeed);
 		pc = new PieceController();
+		/*
+		 * Setup the timer to keep the game from running before the user presses enter
+		 * to start it.
+		 */
+
 		logicTimer.setPaused(true);
 
 		while (true) {
-	
+			// Get the time that the frame started.
 			long start = System.nanoTime();
 
+			// Update the logic timer.
 			logicTimer.update();
 
+			/*
+			 * If a cycle has elapsed on the timer, we can update the game and move our
+			 * current piece down.
+			 */
 			if (logicTimer.hasElapsedCycle()) {
 				updateGame();
+
 			}
-		
+			// Decrement the drop cool down if necessary.
 			if (dropCooldown > 0) {
 				dropCooldown--;
 			}
 
+			// Display the window to the user.
 			renderGame();
 
+			/*
+			 * Sleep to cap the frame rate.
+			 */
 			long delta = (System.nanoTime() - start) / 1000000L;
 			if (delta < FRAME_TIME) {
 				try {
@@ -186,16 +204,16 @@ public class GameController extends JFrame {
 	}
 
 	private void updateGame() {
-	
-		if (board.isValidAndEmpty(pc.getCurrentType(), pc.currentCol, pc.currentRow + 1, pc.currentRotation)) {
-			
+		// Check to see if the piece's position can move down to the next row.
+		if (board.isValidAndEmpty(pc.currentType, pc.currentCol, pc.currentRow + 1, pc.currentRotation)) {
+			// Increment the current row if it's safe to do so.
 			pc.currentRow++;
 		} else {
 			/*
 			 * We've either reached the bottom of the board, or landed on another piece, so
 			 * we need to add the piece to the board.
 			 */
-			board.addPiece(pc.getCurrentType(), pc.currentCol, pc.currentRow, pc.currentRotation);
+			board.addPiece(pc.currentType, pc.currentCol, pc.currentRow, pc.currentRotation);
 
 			/*
 			 * Check to see if adding the new piece resulted in any cleared lines. If so,
@@ -236,12 +254,12 @@ public class GameController extends JFrame {
 
 	private void resetGame() {
 		this.score = 0;
-		gameSpeed = this.gameLevel.getSpeed();
-		gameTypeCnt = this.gameLevel.getTileCnt();
+		this.gameSpeed = this.gameLevel.getSpeed();
 		
-		int tile_idx = random.nextInt(gameTypeCnt);
+		this.gameTypeCnt=this.gameLevel.getTileCnt();
+		int tile_idx=random.nextInt(gameTypeCnt);
 		pc.nextType = pg.getType(tile_idx);
-
+		
 		System.out.println(this.gameLevel.getTileCnt());
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
@@ -251,6 +269,7 @@ public class GameController extends JFrame {
 		logicTimer.setCyclesPerSecond(gameSpeed);
 		pc.spawnPiece();
 	}
+	
 
 	// Additional Functions
 	public void saveCurrent() {
@@ -279,16 +298,15 @@ public class GameController extends JFrame {
 		logicTimer.setPaused(true);
 
 	}
-
+	
 	public void setGameOver(boolean b) {
-		this.isGameOver = b;
+		this.isGameOver=b;
 	}
-
 	public void setPause(boolean b) {
-		this.isPaused = b;
+		this.isPaused=b;
 	}
 
-	// getters and setters
+	//getters and setters
 	public boolean isPaused() {
 		return isPaused;
 	}
@@ -332,5 +350,6 @@ public class GameController extends JFrame {
 	public int getTypeCnt() {
 		return this.gameLevel.getTileCnt();
 	}
+
 
 }
