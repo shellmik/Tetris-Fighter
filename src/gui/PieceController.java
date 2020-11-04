@@ -75,6 +75,26 @@ public class PieceController {
 	}
 
 	//getters and setters
+	public Tile getCurrentType() {
+
+		return currentType;
+	}
+
+	public void setCurrentType(Tile t) {
+
+		currentType = t;
+	}
+
+	public Tile getNextType() {
+
+		return nextType;
+	}
+
+	public void setNextType(Tile t) {
+		System.out.println("???");
+		nextType = t;
+	}
+
 	public int getCurrentCol() {
 
 		return currentCol;
@@ -100,24 +120,5 @@ public class PieceController {
 		return currentRotation;
 	}
 	
-	public Tile getCurrentType() {
-
-		return currentType;
-	}
-
-	public void setCurrentType(Tile t) {
-
-		currentType = t;
-	}
-
-	public Tile getNextType() {
-
-		return nextType;
-	}
-
-	public void setNextType(Tile t) {
-		System.out.println("???");
-		nextType = t;
-	}
 
 }
