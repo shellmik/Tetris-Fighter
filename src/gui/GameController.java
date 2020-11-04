@@ -65,9 +65,7 @@ public class GameController extends JFrame {
 		this.gameSave = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
-				
 		addKeyListener(new KeyAdapter() {
-
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
@@ -123,26 +121,15 @@ public class GameController extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
 				switch (e.getKeyCode()) {
-
-				/*
-				 * Drop - When released, we set the speed of the logic timer back to whatever
-				 * the current game speed is and clear out any cycles that might still be
-				 * elapsed.
-				 */
 				case KeyEvent.VK_S:
 					logicTimer.setCyclesPerSecond(gameSpeed);
 					logicTimer.reset();
 					break;
 				}
-
 			}
-
 		});
-
-		//resize frame to hold the Board,SidePanel
-		//centre the window on the screen, and show it
+		
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -150,19 +137,15 @@ public class GameController extends JFrame {
 
 	// Key Functions
 	public void startGame() {
-		
 		this.random = new Random();
 		this.isNewGame = true;
-		this.gameSpeed = this.gameLevel.getSpeed();
+		
+		//set speed
+		float gameSpeed = this.gameLevel.getSpeed();
 		System.out.println("gameSpeed=" + gameSpeed);
-
 		this.logicTimer = new Clock(gameSpeed);
+		
 		pc = new PieceController();
-		/*
-		 * Setup the timer to keep the game from running before the user presses enter
-		 * to start it.
-		 */
-
 		logicTimer.setPaused(true);
 
 		while (true) {
