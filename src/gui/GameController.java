@@ -17,37 +17,31 @@ import java.util.Calendar;
 import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
-
 	// default
 	private static final long serialVersionUID = 1L;
-
+	private static final long FRAME_TIME = 1000L / 50L;
+	
 	private boolean isPaused;
 	private boolean isNewGame;
 	private boolean isGameOver;
 
+	private int score;
+	private int dropCooldown;
+	private Random random;
 	private Level gameLevel;
 	private int gameTypeCnt;
 	private float gameAcceleration;
-
-	private int score;
-
+	
 	private PieceController pc;
 	private PieceGenerator pg;
-
-	private static final long FRAME_TIME = 1000L / 50L;
-	private Clock logicTimer;
-
-	private int dropCooldown;
-	private Random random;
-
 	private BoardPanel board;
 	private SidePanel side;
-
+	private Clock logicTimer;
 	private GameSaver gameSaver;
 
+	// singleton
 	private static GameController theInstance = new GameController();
-
-	public static GameController getInstance() {// singleton
+	public static GameController getInstance() {
 		return theInstance;
 	}
 
