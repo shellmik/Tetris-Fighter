@@ -27,7 +27,6 @@ public class GameController extends JFrame {
 
 	private Level gameLevel;
 	private int gameTypeCnt;
-	private float gameSpeed;
 	private float gameAcceleration;
 
 	private int score;
@@ -120,6 +119,7 @@ public class GameController extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+				float gameSpeed = gameLevel.getSpeed();
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_S:
 					logicTimer.setCyclesPerSecond(gameSpeed);
@@ -172,7 +172,6 @@ public class GameController extends JFrame {
 	}
 
 	private void updateGame() {
-		// Check to see if the piece's position can move down to the next row.
 		if (board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol(), pc.getCurrentRow() + 1, pc.getCurrentRotation())) {
 			pc.setCurrentRow(pc.getCurrentRow() + 1);
 		} 
@@ -182,8 +181,9 @@ public class GameController extends JFrame {
 			if (cleared > 0) {
 				score += 50 << cleared;
 			}
-			
+			float gameSpeed = this.gameLevel.getSpeed();
 			System.out.println("gbefore change: " + gameSpeed);
+			
 			this.gameAcceleration = this.gameLevel.getAccelaration();
 			gameSpeed += this.gameAcceleration;// 0.035f
 			System.out.println("gameSpeed chaned to" + gameSpeed);
@@ -201,7 +201,7 @@ public class GameController extends JFrame {
 
 	private void resetGame() {
 		this.score = 0;
-		this.gameSpeed = this.gameLevel.getSpeed();
+		float gameSpeed = this.gameLevel.getSpeed();
 
 		this.gameTypeCnt = this.gameLevel.getTileCnt();
 		int tile_idx = random.nextInt(gameTypeCnt);
