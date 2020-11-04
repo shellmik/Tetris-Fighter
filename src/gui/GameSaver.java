@@ -36,6 +36,12 @@ public class GameSaver {
 		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setResizable(false);
+				
+//		if(list!=null)
+//			System.out.println("ok");
+//		else
+//			System.out.println("not ok");
+			
 		try {
 
 			int listSize = list.size();
@@ -70,11 +76,13 @@ public class GameSaver {
 	}
 
 	public void clean() {
+		//this.list.clear();
+		
 		PrintWriter writer;
 		try {
 			File file = new File("./rank.txt");
 			if (file.exists() && file.length() == 0) {
-				System.out.println("文件为空！");
+				System.out.println("file.exists() && file.length() == 0");
 			} else {
 				writer = new PrintWriter(file);
 				writer.print("");
@@ -119,7 +127,7 @@ public class GameSaver {
 			OutputStream os = new FileOutputStream("./rank.txt");
 			DataOutputStream dos = new DataOutputStream(os);
 
-			dos.writeInt(list.size());// 写入信息条数
+			dos.writeInt(list.size());// å†™å…¥ä¿¡æ�¯æ�¡æ•°
 			for (int i = 0; i < list.size(); i++) {
 				User use = (User) list.get(i);
 				dos.writeByte(use.getName().getBytes().length);
@@ -141,14 +149,14 @@ public class GameSaver {
 	}
 
 	/**
-	 * 存储游戏排行版信息的方法
+	 * å­˜å‚¨æ¸¸æˆ�æŽ’è¡Œç‰ˆä¿¡æ�¯çš„æ–¹æ³•
 	 *
-	 * @param user用户信息对象
+	 * @param userç”¨æˆ·ä¿¡æ�¯å¯¹è±¡
 	 */
 	/**
-	 * 读取文档中的数据
+	 * è¯»å�–æ–‡æ¡£ä¸­çš„æ•°æ�®
 	 *
-	 * @return 返回读取到存档信息
+	 * @return è¿”å›žè¯»å�–åˆ°å­˜æ¡£ä¿¡æ�¯
 	 */
 	// read from doc
 	public ArrayList<User> openRankingList() {

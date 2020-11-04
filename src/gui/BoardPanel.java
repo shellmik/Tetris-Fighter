@@ -208,7 +208,8 @@ public class BoardPanel extends JPanel implements Panel {
 			g.setColor(Color.WHITE);
 			String msg = "PAUSED";
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, CENTER_Y);
-		} else if (tetris.isNewGame() || tetris.isGameOver()) {
+		} 
+		else if (tetris.isNewGame() || tetris.isGameOver()) {
 			g.setFont(LARGE_FONT);
 			g.setColor(new Color(255, 182, 193));
 
@@ -217,7 +218,7 @@ public class BoardPanel extends JPanel implements Panel {
 			 * handle them together and just use a ternary operator to change the messages
 			 * that are displayed.
 			 */
-			String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
+			String msg = tetris.isGameOver() ? "GAME OVER" : "TETRIS";
 			
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
 			g.setFont(MID_FONT);

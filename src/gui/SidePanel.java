@@ -294,53 +294,59 @@ public class SidePanel extends JPanel implements Panel{
 		
 	}
 	
+	public void submitOperation() {
+		String str=textField.getText();
+		if(str.length()==0)
+			JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		else if(str.length()>10)
+			JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		else {
+			isSubmit=true;
+			System.out.println("submit clicked");
+			labelUser.setText("Name" + textField.getText());
+			userName = textField.getText();
+			
+			lockSetting();
+			repaint();
+		}
+
+		
+		
+	}
+	
+	public void endOperation() {
+		//change pause page to game over page
+		if(tetris.isPaused) {
+			tetris.isPaused = !tetris.isPaused;
+			tetris.logicTimer.setPaused(tetris.isPaused);
+		}
+		
+		tetris.isGameOver=true;
+		tetris.logicTimer.setPaused(true);
+		isSubmit=false;
+		textField.setText("");
+	}
+	
 	public void showButton() {
 
   		store = new JButton("StoreScore");
   		show = new JButton("ShowRank");
   		clear = new JButton("ClearRank");
 		submit = new JButton("Submit");
-		
 		endGame = new JButton("EndGame");
 
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String str=textField.getText();
-				if(str.length()==0)
-					JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-				else if(str.length()>10)
-					JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-				else {
-					isSubmit=true;
-					//revalidate();
-					//repaint();
-					System.out.println("submit clicked");
-					labelUser.setText("Name" + textField.getText());
-					userName = textField.getText();
-					
-					lockSetting();
-					repaint();
-				}
-			
+				submitOperation();			
 			}
 		});
 
 		endGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				endOperation();
 			
-				//these 2 lines: to change pause page to game over page
-				if(tetris.isPaused) {
-					tetris.isPaused = !tetris.isPaused;
-					tetris.logicTimer.setPaused(tetris.isPaused);
-				}
-				
-				tetris.isGameOver=true;
-				tetris.logicTimer.setPaused(true);
-				isSubmit=false;
-				textField.setText("");
-				
 			}
 		});
 		
@@ -355,7 +361,7 @@ public class SidePanel extends JPanel implements Panel{
 				else if(isStore==true) {
 					JOptionPane.showMessageDialog(null, "Score already stored", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 				}
-				else {//tetris.isGameOver &&!isStore
+				else {
 					tetris.saveCurrent();
 					System.out.println("store score");
 					//tetris.requestFocus();
@@ -414,8 +420,6 @@ public class SidePanel extends JPanel implements Panel{
 	@Override
 	public void paintComponent(Graphics g) {
 		
-		System.out.println("paint once"
-				+ "");
 		super.paintComponent(g);
 		
 		g.setColor(DRAW_COLOR);	

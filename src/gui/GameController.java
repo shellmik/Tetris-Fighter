@@ -55,7 +55,7 @@ public class GameController extends JFrame {
 	public static GameController getInstance() {// singleton
 		return theInstance;
 	}
-
+	
 
 	// Constructor
 	private GameController() {
@@ -70,6 +70,8 @@ public class GameController extends JFrame {
 		this.gameSave = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
+		
+		
 		
 		addKeyListener(new KeyAdapter() {
 
