@@ -74,6 +74,7 @@ public class PieceController {
 		}
 	}
 
+	//getters and setters
 	public int getCurrentCol() {
 
 		return currentCol;

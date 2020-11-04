@@ -27,8 +27,8 @@ public class GameController extends JFrame {
 
 	private int score;
 	private int dropCooldown;
-	private Random random;
-	private Level gameLevel;
+	private Random random; //TODO: this needs to be deleted?
+	private Level gameLevel; //TODO: attributes of Level needs to be deleted?
 	private int gameTypeCnt;
 	private float gameAcceleration;
 	
@@ -55,11 +55,11 @@ public class GameController extends JFrame {
 		this.side = new SidePanel(this);
 		pg = PieceGenerator.getInstance();
 		this.gameSaver = new GameSaver();
-		add(board, BorderLayout.CENTER);// CENTER
+		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
 		addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {//TODO: can we put this function outside?
 				switch (e.getKeyCode()) {
 
 				case KeyEvent.VK_S:
@@ -269,23 +269,23 @@ public class GameController extends JFrame {
 	}
 
 	public Tile getPieceType() {
-		return pc.currentType;
+		return pc.getCurrentType();
 	}
 
 	public Tile getNextPieceType() {
-		return pc.nextType;
+		return pc.getNextType();
 	}
 
 	public int getPieceCol() {
-		return pc.currentCol;
+		return pc.getCurrentCol() ;
 	}
 
 	public int getPieceRow() {
-		return pc.currentRow;
+		return pc.getCurrentRow();
 	}
 
 	public int getPieceRotation() {
-		return pc.currentRotation;
+		return pc.getCurrentRotation();
 	}
 
 	public int getTypeCnt() {
