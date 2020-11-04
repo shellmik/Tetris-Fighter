@@ -43,7 +43,7 @@ public class GameController extends JFrame {
 	private BoardPanel board;
 	private SidePanel side;
 
-	private GameSaver gameSave;
+	private GameSaver gameSaver;
 
 	private static GameController theInstance = new GameController();
 
@@ -60,7 +60,7 @@ public class GameController extends JFrame {
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
 		pg = PieceGenerator.getInstance();
-		this.gameSave = new GameSaver();
+		this.gameSaver = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
 		addKeyListener(new KeyAdapter() {
@@ -224,16 +224,16 @@ public class GameController extends JFrame {
 		String date = now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-"
 				+ now.get(Calendar.DAY_OF_MONTH) + "  " + now.get(Calendar.HOUR_OF_DAY) + ":"
 				+ now.get(Calendar.MINUTE);
-		gameSave.save(name, score, date);
+		gameSaver.save(name, score, date);
 	}
 
 	public void showRank() {
-		gameSave.display();
+		gameSaver.display();
 
 	}
 
 	public void clearStorage() {
-		gameSave.clean();
+		gameSaver.clean();
 	}
 
 	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
