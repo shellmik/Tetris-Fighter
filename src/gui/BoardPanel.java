@@ -40,26 +40,29 @@ public class BoardPanel extends JPanel implements Panel {
 	private Drawer draw = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	//getter and setter
-	
 	public static int getPANEL_HEIGHT() {
 			
 			return PANEL_HEIGHT;
 		}
+	
 	
 	public static int getCOL_COUNT() {
 		
 		return COL_COUNT;
 	}
 	
+	
 	public static int getROW_COUNT() {
 			
 			return ROW_COUNT;
 		}
 	
+	
 	public static int getTILE_SIZE () {
 		
 		return TILE_SIZE ;
 	}
+	
 	
 	public static int getSHADE_WIDTH () {
 			
@@ -73,7 +76,8 @@ public class BoardPanel extends JPanel implements Panel {
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		setBackground(Color.BLACK);
 	}
-
+	
+	
 	public void clear() {// Resets the board and clears away any tiles
 		for (int i = 0; i < ROW_COUNT; i++) {
 			for (int j = 0; j < COL_COUNT; j++) {
@@ -82,15 +86,7 @@ public class BoardPanel extends JPanel implements Panel {
 		}
 	}
 
-	/**
-	 * Determines whether or not a piece can be placed at the coordinates.
-	 * 
-	 * @param type     THe type of piece to use.
-	 * @param x        The x coordinate of the piece.
-	 * @param y        The y coordinate of the piece.
-	 * @param rotation The rotation of the piece.
-	 * @return Whether or not the position is valid.
-	 */
+	
 	public boolean isValidAndEmpty(Tile type, int x, int y, int rotation) {
 
 		// Ensure the piece is in a valid column.
@@ -103,13 +99,7 @@ public class BoardPanel extends JPanel implements Panel {
 			return false;
 		}
 
-		/*
-		 * Loop through every tile in the piece and see if it conflicts with an existing
-		 * tile.
-		 * 
-		 * Note: It's fine to do this even though it allows for wrapping because we've
-		 * already checked to make sure the piece is in a valid location.
-		 */
+	
 		for (int col = 0; col < type.getDimension(); col++) {
 			for (int row = 0; row < type.getDimension(); row++) {
 				if (type.isTile(col, row, rotation) && isOccupied(x + col, y + row)) {
@@ -120,15 +110,7 @@ public class BoardPanel extends JPanel implements Panel {
 		return true;
 	}
 
-	/**
-	 * Adds a piece to the game board. Note: Doesn't check for existing pieces, and
-	 * will overwrite them if they exist.
-	 * 
-	 * @param type     The type of piece to place.
-	 * @param x        The x coordinate of the piece.
-	 * @param y        The y coordinate of the piece.
-	 * @param rotation The rotation of the piece.
-	 */
+	
 	public void addPiece(Tile type, int x, int y, int rotation) {
 		for (int col = 0; col < type.getDimension(); col++) {
 			for (int row = 0; row < type.getDimension(); row++) {
@@ -139,23 +121,9 @@ public class BoardPanel extends JPanel implements Panel {
 		}
 	}
 
-	/**
-	 * Checks the board to see if any lines have been cleared, and removes them from
-	 * the game.
-	 * 
-	 * @return The number of lines that were cleared.
-	 */
+
 	public int checkLines() {
 		int completedLines = 0;
-
-		/*
-		 * Here we loop through every line and check it to see if it's been cleared or
-		 * not. If it has, we increment the number of completed lines and check the next
-		 * row.
-		 * 
-		 * The checkLine function handles clearing the line and shifting the rest of the
-		 * board down for us.
-		 */
 		for (int row = 0; row < ROW_COUNT; row++) {
 			if (checkLine(row)) {
 				completedLines++;
@@ -164,27 +132,15 @@ public class BoardPanel extends JPanel implements Panel {
 		return completedLines;
 	}
 
-	/**
-	 * Checks whether or not {@code row} is full.
-	 * 
-	 * @param line The row to check.
-	 * @return Whether or not this row is full.
-	 */
+	
 	private boolean checkLine(int line) {
-		/*
-		 * Iterate through every column in this row. If any of them are empty, then the
-		 * row is not full.
-		 */
+		
 		for (int col = 0; col < COL_COUNT; col++) {
 			if (!isOccupied(col, line)) {
 				return false;
 			}
 		}
 
-		/*
-		 * Since the line is filled, we need to 'remove' it from the game. To do this,
-		 * we simply shift every row above it down by one.
-		 */
 		for (int row = line - 1; row >= 0; row--) {
 			for (int col = 0; col < COL_COUNT; col++) {
 				setTile(col, row + 1, getTile(col, row));
@@ -193,41 +149,28 @@ public class BoardPanel extends JPanel implements Panel {
 		return true;
 	}
 
+	
 	private boolean isOccupied(int x, int y) {
 		return tiles[y][x] != null;
 	}
 
-	/**
-	 * Sets a tile located at the desired column and row.
-	 * 
-	 * @param x    The column.
-	 * @param y    The row.
-	 * @param type The value to set to the tile to.
-	 */
+	
 	private void setTile(int x, int y, Tile type) {
 		tiles[y][x] = type;
 	}
 
-	/**
-	 * Gets a tile by it's column and row.
-	 * 
-	 * @param x The column.
-	 * @param y The row.
-	 * @return The tile.
-	 */
+	
 	private Tile getTile(int x, int y) {
 		return tiles[y][x];
 	}
 
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// This helps simplify the positioning of things.
+
 		g.translate(BORDER_WIDTH, BORDER_WIDTH);
 
-		/*
-		 * Draw the board differently depending on the current game state.
-		 */
 		if (tetris.isPaused()) {
 			g.setFont(LARGE_FONT);
 			g.setColor(Color.WHITE);
@@ -238,11 +181,6 @@ public class BoardPanel extends JPanel implements Panel {
 			g.setFont(LARGE_FONT);
 			g.setColor(new Color(255, 182, 193));
 
-			/*
-			 * Because both the game over and new game screens are nearly identical, we can
-			 * handle them together and just use a ternary operator to change the messages
-			 * that are displayed.
-			 */
 			String msg = tetris.isGameOver() ? "GAME OVER" : "TETRIS";
 			
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
@@ -253,8 +191,6 @@ public class BoardPanel extends JPanel implements Panel {
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 200);
 
 			g.setFont(new Font("Impact", Font.BOLD, 16));
-			// g.drawString("[CONTROLS]", CENTER_X -
-			// g.getFontMetrics().stringWidth("[Controls]") / 2, 290);
 			g.drawString("<  CONTROLS  >", CENTER_X - g.getFontMetrics().stringWidth("[Controls]") / 2 - 5, 290);// on the
 																												// centre
 			int offset = CONTROLS_INSET;
@@ -268,9 +204,6 @@ public class BoardPanel extends JPanel implements Panel {
 
 		} else {
 
-			/*
-			 * Draw the tiles onto the board.
-			 */
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
 					Tile tile = getTile(x, y);
@@ -280,12 +213,7 @@ public class BoardPanel extends JPanel implements Panel {
 				}
 			}
 
-			/*
-			 * Draw the current piece. This cannot be drawn like the rest of the pieces
-			 * because it's still not part of the game board. If it were part of the board,
-			 * it would need to be removed every frame which would just be slow and
-			 * confusing.
-			 */
+	
 			Tile type = tetris.getPieceType();
 			int pieceCol = tetris.getPieceCol();
 			int pieceRow = tetris.getPieceRow();
@@ -301,10 +229,7 @@ public class BoardPanel extends JPanel implements Panel {
 				}
 			}
 
-			/*
-			 * Draw the background grid above the pieces (serves as a useful visual for
-			 * players, and makes the pieces look nicer by breaking them up.
-			 */
+		
 			g.setColor(Color.DARK_GRAY);
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = 0; y < VISIBLE_ROW_COUNT; y++) {
@@ -314,9 +239,7 @@ public class BoardPanel extends JPanel implements Panel {
 			}
 		}
 
-		/*
-		 * Draw the outline.
-		 */
+
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 	}
