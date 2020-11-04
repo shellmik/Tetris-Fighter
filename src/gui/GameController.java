@@ -70,7 +70,6 @@ public class GameController extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
 				switch (e.getKeyCode()) {
 
 				case KeyEvent.VK_S:
@@ -80,28 +79,28 @@ public class GameController extends JFrame {
 					break;
 
 				case KeyEvent.VK_A:
-					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol - 1, pc.currentRow,
-							pc.currentRotation)) {
-						pc.currentCol--;
+					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1, pc.getCurrentRow(),
+							pc.getCurrentRotation())) {
+						pc.setCurrentCol(pc.getCurrentCol() - 1);
 					}
 					break;
 
 				case KeyEvent.VK_D:
-					if (!isPaused && board.isValidAndEmpty(pc.currentType, pc.currentCol + 1, pc.currentRow,
-							pc.currentRotation)) {
-						pc.currentCol++;
+					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1, pc.getCurrentRow(),
+							pc.getCurrentRotation())) {
+						pc.setCurrentCol(pc.getCurrentCol() + 1);
 					}
 					break;
 
 				case KeyEvent.VK_J:
 					if (!isPaused) {
-						pc.rotatePiece((pc.currentRotation == 0) ? 3 : pc.currentRotation - 1);
+						pc.rotatePiece((pc.getCurrentRotation() == 0) ? 3 : pc.getCurrentRotation() - 1);
 					}
 					break;
 
 				case KeyEvent.VK_K:
 					if (!isPaused) {
-						pc.rotatePiece((pc.currentRotation == 3) ? 0 : pc.currentRotation + 1);
+						pc.rotatePiece((pc.getCurrentRotation() == 3) ? 0 : pc.getCurrentRotation() + 1);
 					}
 					break;
 

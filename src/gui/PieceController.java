@@ -74,6 +74,26 @@ public class PieceController {
 		}
 	}
 
+	public int getCurrentCol() {
+
+		return currentCol;
+	}
+	
+	public void setCurrentCol(int col) {
+
+		currentCol = col;
+	}
+	
+	public int getCurrentRow() {
+
+		return currentRow;
+	}
+	
+	public int getCurrentRotation() {
+
+		return currentRotation;
+	}
+	
 	public Tile getCurrentType() {
 
 		return currentType;
