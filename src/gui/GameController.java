@@ -33,7 +33,7 @@ public class GameController extends JFrame {
 	private float gameAcceleration;
 	
 	private PieceController pc;
-	private PieceGenerator pg;
+	private PieceGenerator pg;//TODO: not here
 	private BoardPanel board;
 	private SidePanel side;
 	private Clock logicTimer;
@@ -239,6 +239,7 @@ public class GameController extends JFrame {
 
 	}
 
+	// getters and setters
 	public void setGameOver(boolean b) {
 		this.isGameOver = b;
 	}
@@ -247,7 +248,6 @@ public class GameController extends JFrame {
 		this.isPaused = b;
 	}
 
-	// getters and setters
 	public boolean isPaused() {
 		return isPaused;
 	}
