@@ -5,13 +5,14 @@ import java.util.Random;
 import timer.Clock;
 
 public class PieceController {
-	public Tile currentType;
-
-	public Tile nextType;
-
+	
 	private GameController game = GameController.getInstance();
 
 	private PieceGenerator pg = PieceGenerator.getInstance();
+	
+	public Tile currentType;
+
+	public Tile nextType;
 	
 	public int currentCol;
 
@@ -19,26 +20,22 @@ public class PieceController {
 
 	public int currentRotation;
 
+	//Constructor
 	public PieceController() {
 
 	}
 
 	@SuppressWarnings("static-access")
 	public void spawnPiece() {
-
 		this.currentType = nextType;
-
 		this.currentCol = currentType.getSpawnColumn();
-
 		this.currentRow = currentType.getSpawnRow();
-
 		this.currentRotation = 0;
-
+		
 		int num = new Random().nextInt(this.game.getTypeCnt());
 		System.out.println("random:  " + num);
 		
 		this.nextType = pg.getType(num);
-
 		if (!game.check(currentType, currentCol, currentRow, currentRotation)) {
 			game.setGameOver(true);
 			game.pauseTime();
@@ -46,10 +43,9 @@ public class PieceController {
 	}
 
 	public void rotatePiece(int newRotation) {
-
 		int newColumn = currentCol;
 		int newRow = currentRow;
-
+		
 		int left = currentType.getLeftInset(newRotation);
 		int right = currentType.getRightInset(newRotation);
 		int top = currentType.getTopInset(newRotation);
@@ -75,7 +71,6 @@ public class PieceController {
 	}
 
 	public Tile getCurrentType() {
-
 		return currentType;
 	}
 
@@ -85,7 +80,6 @@ public class PieceController {
 	}
 
 	public Tile getNextType() {
-
 		return nextType;
 	}
 
@@ -93,5 +87,21 @@ public class PieceController {
 		System.out.println("???");
 		nextType = t;
 	}
-
+	
+	public int getCurrentCol() {
+		return currentCol;
+	}
+	
+	public void setCurrentCol(int col) {
+		this.currentCol = col;
+	}
+	
+	public int getCurrentRow() {
+		return currentRow;
+	}
+	
+	public int getCurrentRotation() {
+		return currentRotation;
+	}
+	
 }
