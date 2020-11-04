@@ -13,20 +13,15 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel implements Panel {
 
 	private static final int BORDER_WIDTH = 5;// border around the game board width
-	public static final int COL_COUNT = 10;// number of columns on the board
+	private static final int COL_COUNT = 10;// number of columns on the board
 	private static final int VISIBLE_ROW_COUNT = 20;// number of visible rows on the board
 	private static final int HIDDEN_ROW_COUNT = 2;// number of rows that are hidden from view.
-	public static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;// total row number the board contains
-
-	public static final int TILE_SIZE = 24;// number of pixels that a tile takes up
-
-	public static final int SHADE_WIDTH = 4;// tile shading width
-
+	private static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;// total row number the board contains
+	private static final int TILE_SIZE = 24;// number of pixels that a tile takes up
+	private static final int SHADE_WIDTH = 4;// tile shading width
+	
 	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;// central x coordinate on the game board
 	private static final int CENTER_Y = VISIBLE_ROW_COUNT * TILE_SIZE / 2;
-
-	public static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;// total panel width
-	public static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 
 	private static final Font LARGE_FONT = new Font("Impact", Font.BOLD, 46);
 	private static final Font MID_FONT = new Font("Impact", Font.BOLD, 20);
@@ -36,11 +31,41 @@ public class BoardPanel extends JPanel implements Panel {
 	private static final int CONTROLS_INSET = 300;// y coordinate of the controls category
 	private static final int TEXT_STRIDE = 25;// number of pixels to offset between each string
 
+	private static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;// total panel width
+	private static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
+	
 	private GameController tetris;
 
 	private Tile[][] tiles;// tiles that make up the board
-
 	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
+	
+	//getter and setter
+	
+	public static int getPANEL_HEIGHT() {
+			
+			return PANEL_HEIGHT;
+		}
+	
+	public static int getCOL_COUNT() {
+		
+		return COL_COUNT;
+	}
+	
+	public static int getROW_COUNT() {
+			
+			return ROW_COUNT;
+		}
+	
+	public static int getTILE_SIZE () {
+		
+		return TILE_SIZE ;
+	}
+	
+	public static int getSHADE_WIDTH () {
+			
+			return SHADE_WIDTH ;
+		}
+
 
 	public BoardPanel(GameController tetris) {
 		this.tetris = tetris;

@@ -27,8 +27,8 @@ public class SidePanel extends JPanel implements Panel{
 	private float levelAcc;
 	
     //preview window
-	private static final int TILE_SIZE = BoardPanel.TILE_SIZE -5;//set tile size smaller than in board//used to be >> 1
-	private static final int SHADE_WIDTH = BoardPanel.SHADE_WIDTH >> 1;
+	private static final int TILE_SIZE = BoardPanel.getTILE_SIZE() -5;//set tile size smaller than in board//used to be >> 1
+	private static final int SHADE_WIDTH = BoardPanel.getSHADE_WIDTH() >> 1;
 	
 	private static final int TILE_COUNT = 5;//preview window square total col/row num
 	private static final int SQUARE_CENTER_X = 65;//center x y of the next piece preview box.
@@ -38,7 +38,7 @@ public class SidePanel extends JPanel implements Panel{
 	
 	//side panel
 	private static final int SIDE_WIDTH = 250;
-	private static final int SIDE_HEIGHT = BoardPanel.PANEL_HEIGHT;
+	private static final int SIDE_HEIGHT = BoardPanel.getPANEL_HEIGHT();
 	
 	//left, right part layout
 	private static final int LEFT_START = 20;
@@ -71,28 +71,54 @@ public class SidePanel extends JPanel implements Panel{
 	private JComboBox cmbSpeed;
 	private JComboBox cmbAcc;
 	
-	JLabel chooseLevel ;
-	JLabel chooseType ;
-	JLabel chooseSpeed ;
-	JLabel chooseAcc ;
-	JLabel line ;
-	JLabel note1 ;
+	private JLabel chooseLevel ;
+	private JLabel chooseType ;
+	private JLabel chooseSpeed ;
+	private JLabel chooseAcc ;
+	private JLabel line ;
+	private JLabel note1 ;
 	
     //store game record & show rank
-	JButton store;
-	JButton show;
-	JButton clear;
-	JButton submit;
-	JButton endGame;
+	private JButton store;
+	private JButton show;
+	private JButton clear;
+	private JButton submit;
+	private JButton endGame;
 	
-    //flags
-	public boolean isSubmit=false;
-	public boolean isCustom=false;
-	public boolean isStore=false;
+    //boolean
+	private boolean isSubmit=false;
+	private boolean isCustom=false;
+	private boolean isStore=false;
 	
-	
+	//getter and setter
 	public String getUserName() {
 		return userName;
+	}
+	
+	//other functions
+	
+	public void submitOperation() {
+		String str=textField.getText();
+		if(str.length()==0)
+			JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		else if(str.length()>10)
+			JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		else {
+			isSubmit=true;
+			labelUser.setText("Name" + textField.getText());
+			userName = textField.getText();
+			lockSetting();
+			repaint();
+		}
+	}
+	
+	public void endOperation() {
+		
+		tetris.setPause(false);
+		tetris.setGameOver(true);
+		tetris.pauseTime();
+		isSubmit=false;
+		textField.setText("");
 	}
 	
 	public void showLayout() {
@@ -294,30 +320,6 @@ public class SidePanel extends JPanel implements Panel{
 		
 	}
 	
-	public void submitOperation() {
-		String str=textField.getText();
-		if(str.length()==0)
-			JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-		else if(str.length()>10)
-			JOptionPane.showMessageDialog(null, "Username must not exceed 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-		else {
-			isSubmit=true;
-			labelUser.setText("Name" + textField.getText());
-			userName = textField.getText();
-			lockSetting();
-			repaint();
-		}
-	}
-	
-	public void endOperation() {
-		
-		tetris.setPause(false);
-		tetris.setGameOver(true);
-		tetris.pauseTime();
-		isSubmit=false;
-		textField.setText("");
-	}
-	
 	public void showButton() {
 
   		store = new JButton("StoreScore");
@@ -453,16 +455,8 @@ public class SidePanel extends JPanel implements Panel{
 			labelAcc.setText(Float.toString(sideLevel.getAccelaration()));
 			cmbAcc.setVisible(false);
 		}
-		
-//		if(tetris.isGameOver()) {
-//			showGameOverPanel();
-//		}
-		
+				
 		if(tetris.isGameOver() || tetris.isNewGame()) {
-//				storeCount--;
-//				if(storeCount >= 0) {
-//					store.setEnabled(true);
-//				}
 			    unlockSetting();
 			    if(isSubmit==true) {
 			    	lockSetting();

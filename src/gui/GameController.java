@@ -18,37 +18,33 @@ import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
 
-	private boolean isPaused;
-
-	private boolean isNewGame;
-
-	private boolean isGameOver;
-
-	private static final long FRAME_TIME = 1000L / 50L;
-
-	private int TYPE_COUNT;
-
-	private int score;
-
-	private int dropCooldown;
-
-	private float gameSpeed, gameAcceleration;
+	//default
+	private static final long serialVersionUID = 1L;
 	
-	public BoardPanel board;
-
-	public SidePanel side;
+	private boolean isPaused;
+	private boolean isNewGame;
+	private boolean isGameOver;
 	
 	private Level gameLevel;
-
-	public GameSaver gameSave;
-
+	private int gameTypeCnt;
+	private float gameSpeed;
+	private float gameAcceleration;
+	
+	private int score;
+	
 	private PieceController pc;
-	
 	private PieceGenerator pg;
-	
-	public Random random;
 
-	public Clock logicTimer;
+	private static final long FRAME_TIME = 1000L / 50L;
+	private Clock logicTimer;
+
+	private int dropCooldown;
+	private Random random;
+	
+	private BoardPanel board;
+	private SidePanel side;
+	
+	private GameSaver gameSave;
 
 	private static GameController theInstance = new GameController();
 
@@ -260,8 +256,8 @@ public class GameController extends JFrame {
 		this.score = 0;
 		this.gameSpeed = this.gameLevel.getSpeed();
 		
-		this.TYPE_COUNT=this.gameLevel.getTileCnt();
-		int tile_idx=random.nextInt(TYPE_COUNT);
+		this.gameTypeCnt=this.gameLevel.getTileCnt();
+		int tile_idx=random.nextInt(gameTypeCnt);
 		pc.nextType = pg.getType(tile_idx);
 		
 		System.out.println(this.gameLevel.getTileCnt());

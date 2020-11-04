@@ -57,14 +57,14 @@ public class PieceController {
 
 		if (currentCol < -left) {
 			newColumn -= currentCol - left;
-		} else if (currentCol + currentType.getDimension() - right >= BoardPanel.COL_COUNT) {
-			newColumn -= (currentCol + currentType.getDimension() - right) - BoardPanel.COL_COUNT + 1;
+		} else if (currentCol + currentType.getDimension() - right >= BoardPanel.getCOL_COUNT()) {
+			newColumn -= (currentCol + currentType.getDimension() - right) - BoardPanel.getCOL_COUNT() + 1;
 		}
 
 		if (currentRow < -top) {
 			newRow -= currentRow - top;
-		} else if (currentRow + currentType.getDimension() - bottom >= BoardPanel.ROW_COUNT) {
-			newRow -= (currentRow + currentType.getDimension() - bottom) - BoardPanel.ROW_COUNT + 1;
+		} else if (currentRow + currentType.getDimension() - bottom >= BoardPanel.getROW_COUNT()) {
+			newRow -= (currentRow + currentType.getDimension() - bottom) - BoardPanel.getROW_COUNT() + 1;
 		}
 
 		if (game.check(currentType, newColumn, newRow, newRotation)) {
