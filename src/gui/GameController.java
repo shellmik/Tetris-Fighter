@@ -18,20 +18,20 @@ import java.awt.HeadlessException;
 
 public class GameController extends JFrame {
 
-	//default
+	// default
 	private static final long serialVersionUID = 1L;
-	
+
 	private boolean isPaused;
 	private boolean isNewGame;
 	private boolean isGameOver;
-	
+
 	private Level gameLevel;
 	private int gameTypeCnt;
 	private float gameSpeed;
 	private float gameAcceleration;
-	
+
 	private int score;
-	
+
 	private PieceController pc;
 	private PieceGenerator pg;
 
@@ -40,10 +40,10 @@ public class GameController extends JFrame {
 
 	private int dropCooldown;
 	private Random random;
-	
+
 	private BoardPanel board;
 	private SidePanel side;
-	
+
 	private GameSaver gameSave;
 
 	private static GameController theInstance = new GameController();
@@ -51,7 +51,6 @@ public class GameController extends JFrame {
 	public static GameController getInstance() {// singleton
 		return theInstance;
 	}
-	
 
 	// Constructor
 	private GameController() {
@@ -61,7 +60,7 @@ public class GameController extends JFrame {
 		setResizable(false);
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
-		pg=PieceGenerator.getInstance();
+		pg = PieceGenerator.getInstance();
 		this.gameSave = new GameSaver();
 		add(board, BorderLayout.CENTER);// CENTER
 		add(side, BorderLayout.EAST);
@@ -77,15 +76,15 @@ public class GameController extends JFrame {
 					break;
 
 				case KeyEvent.VK_A:
-					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1, pc.getCurrentRow(),
-							pc.getCurrentRotation())) {
+					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1,
+							pc.getCurrentRow(), pc.getCurrentRotation())) {
 						pc.setCurrentCol(pc.getCurrentCol() - 1);
 					}
 					break;
 
 				case KeyEvent.VK_D:
-					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1, pc.getCurrentRow(),
-							pc.getCurrentRotation())) {
+					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1,
+							pc.getCurrentRow(), pc.getCurrentRotation())) {
 						pc.setCurrentCol(pc.getCurrentCol() + 1);
 					}
 					break;
@@ -129,7 +128,7 @@ public class GameController extends JFrame {
 				}
 			}
 		});
-		
+
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -139,41 +138,28 @@ public class GameController extends JFrame {
 	public void startGame() {
 		this.random = new Random();
 		this.isNewGame = true;
-		
-		//set speed
+
+		// set speed
 		float gameSpeed = this.gameLevel.getSpeed();
 		System.out.println("gameSpeed=" + gameSpeed);
 		this.logicTimer = new Clock(gameSpeed);
-		
+
 		pc = new PieceController();
 		logicTimer.setPaused(true);
 
 		while (true) {
-			// Get the time that the frame started.
 			long start = System.nanoTime();
-
-			// Update the logic timer.
 			logicTimer.update();
 
-			/*
-			 * If a cycle has elapsed on the timer, we can update the game and move our
-			 * current piece down.
-			 */
 			if (logicTimer.hasElapsedCycle()) {
 				updateGame();
-
 			}
-			// Decrement the drop cool down if necessary.
+
 			if (dropCooldown > 0) {
 				dropCooldown--;
 			}
 
-			// Display the window to the user.
 			renderGame();
-
-			/*
-			 * Sleep to cap the frame rate.
-			 */
 			long delta = (System.nanoTime() - start) / 1000000L;
 			if (delta < FRAME_TIME) {
 				try {
@@ -187,44 +173,23 @@ public class GameController extends JFrame {
 
 	private void updateGame() {
 		// Check to see if the piece's position can move down to the next row.
-		if (board.isValidAndEmpty(pc.currentType, pc.currentCol, pc.currentRow + 1, pc.currentRotation)) {
-			// Increment the current row if it's safe to do so.
-			pc.currentRow++;
-		} else {
-			/*
-			 * We've either reached the bottom of the board, or landed on another piece, so
-			 * we need to add the piece to the board.
-			 */
-			board.addPiece(pc.currentType, pc.currentCol, pc.currentRow, pc.currentRotation);
-
-			/*
-			 * Check to see if adding the new piece resulted in any cleared lines. If so,
-			 * increase the player's score. (Up to 4 lines can be cleared in a single go; [1
-			 * = 100pts, 2 = 200pts, 3 = 400pts, 4 = 800pts]).
-			 */
+		if (board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol(), pc.getCurrentRow() + 1, pc.getCurrentRotation())) {
+			pc.setCurrentRow(pc.getCurrentRow() + 1);
+		} 
+		else {
+			board.addPiece(pc.getCurrentType(), pc.getCurrentCol(), pc.getCurrentRow(), pc.getCurrentRotation());
 			int cleared = board.checkLines();
 			if (cleared > 0) {
 				score += 50 << cleared;
 			}
-
-			/*
-			 * Increase the speed slightly for the next piece and update the game's timer to
-			 * reflect the increase.
-			 */
+			
 			System.out.println("gbefore change: " + gameSpeed);
 			this.gameAcceleration = this.gameLevel.getAccelaration();
 			gameSpeed += this.gameAcceleration;// 0.035f
 			System.out.println("gameSpeed chaned to" + gameSpeed);
 			logicTimer.setCyclesPerSecond(gameSpeed);
 			logicTimer.reset();
-
-			/*
-			 * Set the drop cooldown so the next piece doesn't automatically come flying in
-			 * from the heavens immediately after this piece hits if we've not reacted yet.
-			 * (~0.5 second buffer).
-			 */
 			dropCooldown = 25;
-
 			pc.spawnPiece();
 		}
 	}
@@ -237,11 +202,11 @@ public class GameController extends JFrame {
 	private void resetGame() {
 		this.score = 0;
 		this.gameSpeed = this.gameLevel.getSpeed();
-		
-		this.gameTypeCnt=this.gameLevel.getTileCnt();
-		int tile_idx=random.nextInt(gameTypeCnt);
+
+		this.gameTypeCnt = this.gameLevel.getTileCnt();
+		int tile_idx = random.nextInt(gameTypeCnt);
 		pc.nextType = pg.getType(tile_idx);
-		
+
 		System.out.println(this.gameLevel.getTileCnt());
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
@@ -251,7 +216,6 @@ public class GameController extends JFrame {
 		logicTimer.setCyclesPerSecond(gameSpeed);
 		pc.spawnPiece();
 	}
-	
 
 	// Additional Functions
 	public void saveCurrent() {
@@ -280,15 +244,16 @@ public class GameController extends JFrame {
 		logicTimer.setPaused(true);
 
 	}
-	
+
 	public void setGameOver(boolean b) {
-		this.isGameOver=b;
-	}
-	public void setPause(boolean b) {
-		this.isPaused=b;
+		this.isGameOver = b;
 	}
 
-	//getters and setters
+	public void setPause(boolean b) {
+		this.isPaused = b;
+	}
+
+	// getters and setters
 	public boolean isPaused() {
 		return isPaused;
 	}
@@ -332,6 +297,5 @@ public class GameController extends JFrame {
 	public int getTypeCnt() {
 		return this.gameLevel.getTileCnt();
 	}
-
 
 }

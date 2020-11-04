@@ -89,6 +89,11 @@ public class PieceController {
 		return currentRow;
 	}
 	
+	public void setCurrentRow(int row) {
+
+		currentRow = row;
+	}
+	
 	public int getCurrentRotation() {
 
 		return currentRotation;
