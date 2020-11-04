@@ -37,7 +37,7 @@ public class BoardPanel extends JPanel implements Panel {
 	private GameController tetris;
 
 	private Tile[][] tiles;// tiles that make up the board
-	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
+	private Drawer draw = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	//getter and setter
 	

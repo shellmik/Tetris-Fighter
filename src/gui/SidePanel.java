@@ -52,7 +52,7 @@ public class SidePanel extends JPanel implements Panel{
 	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
 	
 	private static final Color DRAW_COLOR = Color.BLACK;
-	private drawer draw = new drawer(TILE_SIZE, SHADE_WIDTH);
+	private Drawer draw = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	
 	private String userName;

@@ -3,11 +3,11 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class drawer {
+public class Drawer {
 	private int TILE_SIZE;
 	private int SHADE_WIDTH;
 
-	public drawer(int a, int b) {
+	public Drawer(int a, int b) {
 		TILE_SIZE = a;
 		SHADE_WIDTH = b;
 	}
