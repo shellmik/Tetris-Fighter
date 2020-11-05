@@ -119,6 +119,10 @@ public class PieceController {
 
 		return currentRotation;
 	}
+
+	public Tile getTileType(int tile_idx) {
+		return pg.getType(tile_idx);
+	}
 	
 
 }

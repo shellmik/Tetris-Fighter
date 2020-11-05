@@ -27,13 +27,12 @@ public class GameController extends JFrame {
 
 	private int score;
 	private int dropCooldown;
-	private Random random; //TODO: this needs to be deleted?
+	private Random random;
 	private Level gameLevel; //TODO: attributes of Level needs to be deleted?
 	private int gameTypeCnt;
 	private float gameAcceleration;
 	
 	private PieceController pc;
-	private PieceGenerator pg;//TODO: not here
 	private BoardPanel board;
 	private SidePanel side;
 	private Clock logicTimer;
@@ -53,7 +52,6 @@ public class GameController extends JFrame {
 		setResizable(false);
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
-		pg = PieceGenerator.getInstance();
 		this.gameSaver = new GameSaver();
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
@@ -199,7 +197,7 @@ public class GameController extends JFrame {
 
 		this.gameTypeCnt = this.gameLevel.getTileCnt();
 		int tile_idx = random.nextInt(gameTypeCnt);
-		pc.nextType = pg.getType(tile_idx);
+		pc.nextType = pc.getTileType(tile_idx);
 
 		System.out.println(this.gameLevel.getTileCnt());
 		pc.nextType = pc.nextType;
