@@ -47,19 +47,26 @@ public class GameSaver {
 		try {
 
 			int listSize = list.size();
+			if(list == null || list.size() == 0) {
+				JLabel lab = new JLabel("Sorry, there is no record at all!");
+				lab.setBounds(30, 60, 400, 50);
+				frame.add(lab);
+				frame.setVisible(true);
+			}else {
+				JLabel lab = new JLabel("User        Max        Time");
+				lab.setBounds(30, 20, 400, 50);
+				frame.add(lab);
 
-			JLabel lab = new JLabel("User        Max        Time");
-			lab.setBounds(30, 20, 400, 50);
-			frame.add(lab);
-
-			for (int i = 0; i < list.size(); i++) {
-				User user = (User) list.get(i);
-				JLabel label = new JLabel(user.toString());
-				System.out.println(user.toString());
-				label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
-				frame.add(label);
+				for (int i = 0; i < list.size(); i++) {
+					User user = (User) list.get(i);
+					JLabel label = new JLabel(user.toString());
+					System.out.println(user.toString());
+					label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
+					frame.add(label);
+				}
+				frame.setVisible(true);
 			}
-			frame.setVisible(true);
+			
 		} catch (Exception e) {
 			JLabel lab = new JLabel("Sorry, there is no record at all!");
 			lab.setBounds(30, 60, 400, 50);
@@ -90,6 +97,7 @@ public class GameSaver {
 				writer.print("");
 				writer.close();
 			}
+			list.clear();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -98,9 +106,9 @@ public class GameSaver {
 	}
 
 	// write to doc
-	public boolean saveRankingList(User user) {
+	public void saveRankingList(User user) {
 		try {
-			list = openRankingList();
+			openRankingList();
 			if (list != null) {
 				list.add(user);
 
@@ -141,17 +149,15 @@ public class GameSaver {
 
 			dos.close();
 			os.close();
-			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return false;
 	}
 
 	// read from doc
-	public ArrayList<User> openRankingList() {
+	public void openRankingList() {
 		System.out.println("open Ranking list");
 		try {
 
@@ -160,7 +166,7 @@ public class GameSaver {
 
 			int size = d.readInt();
 
-			ArrayList<User> list = new ArrayList<User>();
+			ArrayList<User> listTmp = new ArrayList<User>();
 			if (size != -1) {
 				for (int i = 0; i < size; i++) {
 					byte nSize = d.readByte();
@@ -172,20 +178,18 @@ public class GameSaver {
 					is.read(c);
 
 					User use = new User(new String(b), score, new String(c));
-					list.add(use);
+					listTmp.add(use);
 				}
 			}
 
 			d.close();
 			is.close();
-
-			return list;
+			list = listTmp;
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// e.printStackTrace();
 		}
-		return null;
 	}
 }
