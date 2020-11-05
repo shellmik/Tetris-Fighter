@@ -16,6 +16,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import game.GameController;
+import game.Level;
+import game.LevelCustom;
+import game.LevelHigh;
+import game.LevelLow;
+import game.LevelMid;
+
 public class SidePanel extends JPanel implements Panel{
 	
 	private static final long serialVersionUID = 2181495598854992747L;

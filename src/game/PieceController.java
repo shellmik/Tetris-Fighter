@@ -1,7 +1,9 @@
-package gui;
+package game;
 
 import java.util.Random;
 
+import gui.BoardPanel;
+import gui.Tile;
 import timer.Clock;
 
 public class PieceController {

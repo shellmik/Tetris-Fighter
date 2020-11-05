@@ -1,4 +1,4 @@
-package gui;
+package game;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,9 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import gui.BoardPanel;
+import gui.SidePanel;
+import gui.Tile;
 import timer.Clock;
 import java.util.Calendar;
 import java.awt.HeadlessException;
+
 
 public class GameController extends JFrame {
 	// default

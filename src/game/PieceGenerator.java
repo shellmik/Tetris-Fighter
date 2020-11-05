@@ -1,6 +1,15 @@
-package gui;
+package game;
 
 import java.awt.Color;
+
+import gui.Tile;
+import gui.TileI;
+import gui.TileJ;
+import gui.TileL;
+import gui.TileO;
+import gui.TileS;
+import gui.TileT;
+import gui.TileZ;
 
 public class PieceGenerator {
 

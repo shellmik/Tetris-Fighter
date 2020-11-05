@@ -1,4 +1,4 @@
-package gui;
+package game;
 
 public class Level {
 
@@ -15,27 +15,27 @@ public class Level {
 		this.acceleration = acceleration;
 	}
 
-	int getTileCnt() {
+	public int getTileCnt() {
 		return this.tile_cnt;
 	}
 
-	float getSpeed() {
+	public float getSpeed() {
 		return this.speed;
 	}
 
-	float getAccelaration() {
+	public float getAccelaration() {
 		return this.acceleration;
 	}
 
-	void setTileCnt(int tile_cnt) {
+	public void setTileCnt(int tile_cnt) {
 		this.tile_cnt = tile_cnt;
 	}
 
-	void setSpeed(float speed) {
+	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
 
-	void setAccelaration(float accelaration) {
+	public void setAccelaration(float accelaration) {
 		this.acceleration = accelaration;
 	}
 

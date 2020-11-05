@@ -1,4 +1,4 @@
-package gui;
+package game;
 
 public class LevelLow extends Level {
 

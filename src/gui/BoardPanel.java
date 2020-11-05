@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import game.GameController;
+
 public class BoardPanel extends JPanel implements Panel {
 
 	private static final int BORDER_WIDTH = 5;// border around the game board width

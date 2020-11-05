@@ -1,4 +1,4 @@
-package gui;
+package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import gui.User;
 
 import java.io.File;
 
