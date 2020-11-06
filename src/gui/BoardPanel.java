@@ -41,37 +41,7 @@ public class BoardPanel extends JPanel implements Panel {
 	private Tile[][] tiles;// tiles that make up the board
 	private Drawer drawer = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
-	//getter and setter
-	public static int getPANEL_HEIGHT() {
-			
-			return PANEL_HEIGHT;
-		}
-	
-	
-	public static int getCOL_COUNT() {
-		
-		return COL_COUNT;
-	}
-	
-	
-	public static int getROW_COUNT() {
-			
-			return ROW_COUNT;
-		}
-	
-	
-	public static int getTILE_SIZE () {
-		
-		return TILE_SIZE ;
-	}
-	
-	
-	public static int getSHADE_WIDTH () {
-			
-			return SHADE_WIDTH ;
-		}
-
-
+	//constructor
 	public BoardPanel(GameController tetris) {
 		this.tetris = tetris;
 		this.tiles = new Tile[ROW_COUNT][COL_COUNT];
@@ -79,7 +49,7 @@ public class BoardPanel extends JPanel implements Panel {
 		setBackground(Color.BLACK);
 	}
 	
-	
+	//key functions
 	public void clear() {// Resets the board and clears away any tiles
 		for (int i = 0; i < ROW_COUNT; i++) {
 			for (int j = 0; j < COL_COUNT; j++) {
@@ -245,5 +215,36 @@ public class BoardPanel extends JPanel implements Panel {
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 	}
+	
+	//getter and setter
+	public static int getPANEL_HEIGHT() {
+			
+			return PANEL_HEIGHT;
+		}
+	
+	
+	public static int getCOL_COUNT() {
+		
+		return COL_COUNT;
+	}
+	
+	
+	public static int getROW_COUNT() {
+			
+			return ROW_COUNT;
+		}
+	
+	
+	public static int getTILE_SIZE () {
+		
+		return TILE_SIZE ;
+	}
+	
+	
+	public static int getSHADE_WIDTH () {
+			
+			return SHADE_WIDTH ;
+		}
+
 
 }
