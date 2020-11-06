@@ -32,10 +32,10 @@ public class GameController extends JFrame {
 	private int score;
 	private int dropCooldown;
 	private Random random;
-	private Level gameLevel; //TODO: attributes of Level needs to be deleted?
-	private int gameTypeCnt;
-	private float gameSpeed;
-	private float gameAcceleration;
+	private Level gameLevel; 
+	
+	//important: this speed must not be deleted
+	private float gameSpeed;//this is not a attribute of level, but a attribute of the game itself
 	
 	private PieceController pc;
 	private BoardPanel board;
@@ -181,8 +181,7 @@ public class GameController extends JFrame {
 			//float gameSpeed = this.gameLevel.getSpeed();
 			System.out.println("gbefore change: " + gameSpeed);
 			
-			this.gameAcceleration = this.gameLevel.getAccelaration();
-			gameSpeed += this.gameAcceleration;// 0.035f
+			gameSpeed += this.gameLevel.getAccelaration();
 			System.out.println("gameSpeed chaned to" + gameSpeed);
 			logicTimer.setCyclesPerSecond(gameSpeed);
 			logicTimer.reset();
@@ -201,8 +200,8 @@ public class GameController extends JFrame {
 		this.gameSpeed=this.gameLevel.getSpeed();
 		//float gameSpeed = this.gameLevel.getSpeed();
 
-		this.gameTypeCnt = this.gameLevel.getTileCnt();
-		int tile_idx = random.nextInt(gameTypeCnt);
+		
+		int tile_idx = random.nextInt(this.gameLevel.getTileCnt());
 		pc.nextType = pc.getTileType(tile_idx);
 
 		System.out.println(this.gameLevel.getTileCnt());
