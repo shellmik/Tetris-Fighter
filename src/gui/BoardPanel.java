@@ -39,7 +39,7 @@ public class BoardPanel extends JPanel implements Panel {
 	private GameController tetris;
 
 	private Tile[][] tiles;// tiles that make up the board
-	private Drawer draw = new Drawer(TILE_SIZE, SHADE_WIDTH);
+	private Drawer drawer = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	//getter and setter
 	public static int getPANEL_HEIGHT() {
@@ -210,7 +210,7 @@ public class BoardPanel extends JPanel implements Panel {
 				for (int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
 					Tile tile = getTile(x, y);
 					if (tile != null) {
-						draw.drawTile(tile, x * TILE_SIZE, (y - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
+						drawer.drawTile(tile, x * TILE_SIZE, (y - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
 					}
 				}
 			}
@@ -225,7 +225,7 @@ public class BoardPanel extends JPanel implements Panel {
 			for (int col = 0; col < type.getDimension(); col++) {
 				for (int row = 0; row < type.getDimension(); row++) {
 					if (pieceRow + row >= 2 && type.isTile(col, row, rotation)) {
-						draw.drawTile(type, (pieceCol + col) * TILE_SIZE,
+						drawer.drawTile(type, (pieceCol + col) * TILE_SIZE,
 								(pieceRow + row - HIDDEN_ROW_COUNT) * TILE_SIZE, g);
 					}
 				}
