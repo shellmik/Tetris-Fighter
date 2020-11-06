@@ -25,7 +25,7 @@ public class GameController extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final long FRAME_TIME = 1000L / 50L;
 	
-	private boolean isPaused;//TODO: this variable is from clock??
+	private boolean isGamePaused;//this is not from clock, is Pause from clock is private
 	private boolean isNewGame;
 	private boolean isGameOver;
 
@@ -60,70 +60,70 @@ public class GameController extends JFrame {
 		this.gameSaver = new GameSaver();
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {//TODO: can we put this function outside?
-				switch (e.getKeyCode()) {
-
-				case KeyEvent.VK_S:
-					if (!isPaused && dropCooldown == 0) {
-						logicTimer.setCyclesPerSecond(25.0f);
-					}
-					break;
-
-				case KeyEvent.VK_A:
-					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1,
-							pc.getCurrentRow(), pc.getCurrentRotation())) {
-						pc.setCurrentCol(pc.getCurrentCol() - 1);
-					}
-					break;
-
-				case KeyEvent.VK_D:
-					if (!isPaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1,
-							pc.getCurrentRow(), pc.getCurrentRotation())) {
-						pc.setCurrentCol(pc.getCurrentCol() + 1);
-					}
-					break;
-
-				case KeyEvent.VK_J:
-					if (!isPaused) {
-						pc.rotatePiece((pc.getCurrentRotation() == 0) ? 3 : pc.getCurrentRotation() - 1);
-					}
-					break;
-
-				case KeyEvent.VK_K:
-					if (!isPaused) {
-						pc.rotatePiece((pc.getCurrentRotation() == 3) ? 0 : pc.getCurrentRotation() + 1);
-					}
-					break;
-
-				case KeyEvent.VK_P:
-					if (!isGameOver && !isNewGame) {
-						isPaused = !isPaused;
-						logicTimer.setPaused(isPaused);
-					}
-
-					break;
-
-				case KeyEvent.VK_ENTER:
-					if (isGameOver || isNewGame) {
-						resetGame();
-					}
-					break;
-
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				//float gameSpeed = gameLevel.getSpeed();
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_S:
-					logicTimer.setCyclesPerSecond(gameSpeed);
-					logicTimer.reset();
-					break;
-				}
-			}
+		addKeyListener(new KeyHandler() {
+//			@Override
+//			public void keyPressed(KeyEvent e) {//TODO: can we put this function outside?
+//				switch (e.getKeyCode()) {
+//
+//				case KeyEvent.VK_S:
+//					if (!isGamePaused && dropCooldown == 0) {
+//						logicTimer.setCyclesPerSecond(25.0f);
+//					}
+//					break;
+//
+//				case KeyEvent.VK_A:
+//					if (!isGamePaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1,
+//							pc.getCurrentRow(), pc.getCurrentRotation())) {
+//						pc.setCurrentCol(pc.getCurrentCol() - 1);
+//					}
+//					break;
+//
+//				case KeyEvent.VK_D:
+//					if (!isGamePaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1,
+//							pc.getCurrentRow(), pc.getCurrentRotation())) {
+//						pc.setCurrentCol(pc.getCurrentCol() + 1);
+//					}
+//					break;
+//
+//				case KeyEvent.VK_J:
+//					if (!isGamePaused) {
+//						pc.rotatePiece((pc.getCurrentRotation() == 0) ? 3 : pc.getCurrentRotation() - 1);
+//					}
+//					break;
+//
+//				case KeyEvent.VK_K:
+//					if (!isGamePaused) {
+//						pc.rotatePiece((pc.getCurrentRotation() == 3) ? 0 : pc.getCurrentRotation() + 1);
+//					}
+//					break;
+//
+//				case KeyEvent.VK_P:
+//					if (!isGameOver && !isNewGame) {
+//						isGamePaused = !isGamePaused;
+//						logicTimer.setPaused(isGamePaused);
+//					}
+//
+//					break;
+//
+//				case KeyEvent.VK_ENTER:
+//					if (isGameOver || isNewGame) {
+//						resetGame();
+//					}
+//					break;
+//
+//				}
+//			}
+//
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				//float gameSpeed = gameLevel.getSpeed();
+//				switch (e.getKeyCode()) {
+//				case KeyEvent.VK_S:
+//					logicTimer.setCyclesPerSecond(gameSpeed);
+//					logicTimer.reset();
+//					break;
+//				}
+//			}
 		});
 
 		pack();
@@ -195,7 +195,7 @@ public class GameController extends JFrame {
 		side.repaint();
 	}
 
-	private void resetGame() {
+	public void resetGame() {
 		this.score = 0;
 		this.gameSpeed=this.gameLevel.getSpeed();
 		//float gameSpeed = this.gameLevel.getSpeed();
@@ -265,11 +265,11 @@ public class GameController extends JFrame {
 	}
 
 	public void setPause(boolean b) {
-		this.isPaused = b;
+		this.isGamePaused = b;
 	}
 
 	public boolean isPaused() {
-		return isPaused;
+		return isGamePaused;
 	}
 
 	public boolean isGameOver() {
