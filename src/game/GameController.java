@@ -37,7 +37,7 @@ public class GameController extends JFrame {
 	//important: this speed must not be deleted
 	private float gameSpeed;//this is not a attribute of level, but a attribute of the game itself
 	
-	private PieceController pc;
+	private PieceController pc = PieceController.getInstance();
 	private BoardPanel board;
 	private SidePanel side;
 	private Clock logicTimer;

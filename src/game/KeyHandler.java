@@ -59,6 +59,7 @@ public class KeyHandler implements KeyListener{
 			case KeyEvent.VK_P:
 				if (!isGameOver && !isNewGame) {
 					isGamePaused = !isGamePaused;
+					tetris.setPause(!tetris.isPaused());
 					logicTimer.setPaused(isGamePaused);
 				}
 

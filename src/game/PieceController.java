@@ -21,8 +21,10 @@ public class PieceController {
 
 	public int currentRotation;
 
-	public PieceController() {
+	private static PieceController instance = new PieceController();
 
+	public static PieceController getInstance() {
+		return instance;
 	}
 
 	@SuppressWarnings("static-access")
