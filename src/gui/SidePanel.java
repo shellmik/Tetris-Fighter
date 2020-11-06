@@ -27,11 +27,6 @@ public class SidePanel extends JPanel implements Panel{
 	
 	private static final long serialVersionUID = 2181495598854992747L;
 	
-	//level
-	private Level sideLevel;
-	private int levelTileCnt;
-	private float levelSpeed;
-	private float levelAcc;
 	
     //preview window
 	private static final int TILE_SIZE = BoardPanel.getTILE_SIZE() -5;//set tile size smaller than in board//used to be >> 1
@@ -260,27 +255,31 @@ public class SidePanel extends JPanel implements Panel{
                 	String levelStr=(String) cmbLevel.getSelectedItem();
                 	if(levelStr=="Low") {
                 		isCustom=false;
-                		sideLevel=LevelLow.getInstance();
+            
+                		tetris.setLevel(LevelLow.getInstance());
                 	}
                 		
                 	else if(levelStr=="Mid") {
                 		isCustom=false;
-                		sideLevel=LevelMid.getInstance();
+                		tetris.setLevel(LevelMid.getInstance());
+                		
                 	}
                 		
                 	else if(levelStr=="High") {
                 		isCustom=false;
-                		sideLevel=LevelHigh.getInstance();
+                		tetris.setLevel(LevelHigh.getInstance());
+                		
                 	}
                 	else if(levelStr=="Custom") {
                 		isCustom=true;
-                		sideLevel=LevelCustom.getInstance();
+                		tetris.setLevel(LevelCustom.getInstance());
+                		
                 	}
-                	tetris.setLevel(sideLevel);
                 	
-                	cmbType.setSelectedItem(sideLevel.getTileCnt());
-                	cmbSpeed.setSelectedItem(sideLevel.getSpeed());
-                	cmbAcc.setSelectedItem(sideLevel.getAccelaration());
+                	
+                	cmbType.setSelectedItem(tetris.getLevel().getTileCnt());
+                	cmbSpeed.setSelectedItem(tetris.getLevel().getSpeed());
+                	cmbAcc.setSelectedItem(tetris.getLevel().getAccelaration());
                     
                 }
             }
@@ -294,9 +293,10 @@ public class SidePanel extends JPanel implements Panel{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                 	
-                    levelTileCnt=(int) cmbType.getSelectedItem();
-                    System.out.println("select: "+levelTileCnt);
-                    sideLevel.setTileCnt(levelTileCnt);
+//                    levelTileCnt=(int) cmbType.getSelectedItem();
+//                    System.out.println("select: "+levelTileCnt);
+//                    sideLevel.setTileCnt(levelTileCnt);
+                    tetris.getLevel().setTileCnt((int) cmbType.getSelectedItem());
          
                 }
             }
@@ -306,9 +306,11 @@ public class SidePanel extends JPanel implements Panel{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    levelSpeed=(float) cmbSpeed.getSelectedItem();
-                    System.out.println("select: "+levelSpeed);
-                    sideLevel.setSpeed(levelSpeed);
+//                    levelSpeed=(float) cmbSpeed.getSelectedItem();
+//                    System.out.println("select: "+levelSpeed);
+//                    sideLevel.setSpeed(levelSpeed);
+                    tetris.getLevel().setSpeed((float) cmbSpeed.getSelectedItem());
+                    
                 }
             }
         });
@@ -317,9 +319,11 @@ public class SidePanel extends JPanel implements Panel{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    levelAcc=(float) cmbAcc.getSelectedItem();
-                    System.out.println("select: "+levelAcc);
-                    sideLevel.setAccelaration(levelAcc);
+//                    levelAcc=(float) cmbAcc.getSelectedItem();
+//                    System.out.println("select: "+levelAcc);
+//                    sideLevel.setAccelaration(levelAcc);
+                     tetris.getLevel().setAccelaration((float) cmbAcc.getSelectedItem());
+                    
                     
                 }
             }
@@ -450,16 +454,16 @@ public class SidePanel extends JPanel implements Panel{
 		}
 		if(isCustom==false) {
 			labelType.setVisible(true);
-			labelType.setText(Integer.toString(sideLevel.getTileCnt()));
+			labelType.setText(Integer.toString(tetris.getLevel().getTileCnt()));
 			cmbType.setVisible(false);
 			
 			labelSpeed.setVisible(true);
-			labelSpeed.setText(Float.toString(sideLevel.getSpeed()));
+			labelSpeed.setText(Float.toString(tetris.getLevel().getSpeed()));
 			cmbSpeed.setVisible(false);
 			
 			
 			labelAcc.setVisible(true);
-			labelAcc.setText(Float.toString(sideLevel.getAccelaration()));
+			labelAcc.setText(Float.toString(tetris.getLevel().getAccelaration()));
 			cmbAcc.setVisible(false);
 		}
 				

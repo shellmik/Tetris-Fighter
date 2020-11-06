@@ -244,6 +244,23 @@ public class GameController extends JFrame {
 	}
 
 	// getters and setters
+	
+	public Level getLevel() {
+		
+		return this.gameLevel;
+	}
+	
+	public void setLevelTileCnt(int tile_cnt) {
+		this.gameLevel.setTileCnt(tile_cnt);
+	}
+
+	public void setLevelSpeed(float speed) {
+		this.gameLevel.setSpeed(speed);
+	}
+
+	public void setLevelAccelaration(float accelaration) {
+		this.gameLevel.setAccelaration(accelaration);
+	}
 	public void setGameOver(boolean b) {
 		this.isGameOver = b;
 	}
