@@ -4,10 +4,6 @@ import java.awt.Color;
 
 public class TileL extends Tile {
 
-	public TileL(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
-		super(color, dimension, cols, rows, tiles);
-	}
-
 	private static TileL instance = null;
 
 	public static TileL getInstance() {
@@ -20,6 +16,10 @@ public class TileL extends Tile {
 							{ true, true, false, false, true, false, false, true, false, } });
 
 		return instance;
+	}
+
+	private TileL(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
+		super(color, dimension, cols, rows, tiles);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.awt.Color;
 public class Tile {
 
 	public static final int COLOR_MIN = 240;
+	
 	public static final int COLOR_MAX = 255 - COLOR_MIN;
 
 	private Color baseColor;
@@ -27,38 +28,16 @@ public class Tile {
 		this.tiles = tiles;
 		this.cols = cols;
 		this.rows = rows;
-
 		this.spawnX = 5 - (dimension >> 1);
 		this.spawnY = getTopInset(0);
 	}
-
-	public Color getBaseColor() {
-		return baseColor;
-	}
-
-	public int getDimension() {
-		return dimension;
-	}
-
-	public int getSpawnColumn() {
-		return spawnX;
-	}
-
-	public int getSpawnRow() {
-		return spawnY;
-	}
-
-	public int getRows() {
-		return rows;
-	}
-
-	public int getCols() {
-		return cols;
-	}
-
+	
+	
+	//Functions
 	public boolean isTile(int x, int y, int rotation) {
 		return tiles[rotation][y * dimension + x];
 	}
+	
 
 	public int getLeftInset(int rotation) {
 
@@ -108,4 +87,28 @@ public class Tile {
 		return -1;
 	}
 
+	//getters and setters
+	public Color getBaseColor() {
+		return baseColor;
+	}
+
+	public int getDimension() {
+		return dimension;
+	}
+
+	public int getSpawnColumn() {
+		return spawnX;
+	}
+
+	public int getSpawnRow() {
+		return spawnY;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public int getCols() {
+		return cols;
+	}
 }

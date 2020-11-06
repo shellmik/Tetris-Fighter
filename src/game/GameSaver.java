@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import gui.User;
-
 import java.io.File;
 
 public class GameSaver {

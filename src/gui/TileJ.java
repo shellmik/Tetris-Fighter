@@ -3,11 +3,7 @@ package gui;
 import java.awt.Color;
 
 public class TileJ extends Tile {
-
-	public TileJ(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
-		super(color, dimension, cols, rows, tiles);
-	}
-
+	
 	private static TileJ instance = null;
 
 	public static TileJ getInstance() {
@@ -21,5 +17,10 @@ public class TileJ extends Tile {
 
 		return instance;
 	}
+	
+	private TileJ(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
+		super(color, dimension, cols, rows, tiles);
+	}
+
 
 }
