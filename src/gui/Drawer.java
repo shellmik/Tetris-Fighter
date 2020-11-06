@@ -4,27 +4,27 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Drawer {
-	private int TILE_SIZE;
-	private int SHADE_WIDTH;
+	private int tile_size;
+	private int shade_width;
 
 	public Drawer(int a, int b) {
-		TILE_SIZE = a;
-		SHADE_WIDTH = b;
+		tile_size = a;
+		shade_width = b;
 	}
 
 	public void drawTile(Tile type, int x, int y, Graphics g) {
 		Color baseColor = type.getBaseColor();
 		g.setColor(baseColor);
-		g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		g.fillRect(x, y, tile_size, tile_size);
 
 		g.setColor(baseColor.darker());
-		g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
-		g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
+		g.fillRect(x, y + tile_size - shade_width, tile_size, shade_width);
+		g.fillRect(x + tile_size - shade_width, y, shade_width, tile_size);
 
 		g.setColor(baseColor.brighter());
-		for (int i = 0; i < SHADE_WIDTH; i++) {
-			g.drawLine(x, y + i, x + TILE_SIZE - i - 1, y + i);
-			g.drawLine(x + i, y, x + i, y + TILE_SIZE - i - 1);
+		for (int i = 0; i < shade_width; i++) {
+			g.drawLine(x, y + i, x + tile_size - i - 1, y + i);
+			g.drawLine(x + i, y, x + i, y + tile_size - i - 1);
 		}
 	}
 
