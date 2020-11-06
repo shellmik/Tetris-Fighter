@@ -19,8 +19,8 @@ public class KeyHandler implements KeyListener{
 		Clock logicTimer = tetris.getClock();
 		BoardPanel board = tetris.getBoard();
 		PieceController pc = tetris.getPC();
-		boolean isNewGame = tetris.get
-		boolean isGameOver
+		boolean isNewGame = tetris.getIsNewGame();
+		boolean isGameOver = tetris.getIsGameOver();
 		//TODO: can we put this function outside?
 		switch (e.getKeyCode()) {
 
@@ -66,7 +66,7 @@ public class KeyHandler implements KeyListener{
 
 			case KeyEvent.VK_ENTER:
 				if (isGameOver || isNewGame) {
-					resetGame();
+					tetris.resetGame();
 				}
 				break;
 
@@ -76,9 +76,17 @@ public class KeyHandler implements KeyListener{
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+		//float gameSpeed = gameLevel.getSpeed();
+		GameController tetris = GameController.getInstance();
+		Clock logicTimer = tetris.getClock();
+		float gameSpeed = tetris.getGameSpeed();
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_S:
+			logicTimer.setCyclesPerSecond(gameSpeed);
+			logicTimer.reset();
+			break;
+		}
 	}
 
 	@Override

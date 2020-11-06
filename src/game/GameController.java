@@ -312,4 +312,39 @@ public class GameController extends JFrame {
 		return this.gameLevel.getTileCnt();
 	}
 
+	public int getCooldown() {
+		// TODO Auto-generated method stub
+		return this.dropCooldown;
+	}
+
+	public Clock getClock() {
+		// TODO Auto-generated method stub
+		return this.logicTimer;
+	}
+
+	public BoardPanel getBoard() {
+		// TODO Auto-generated method stub
+		return this.board;
+	}
+
+	public PieceController getPC() {
+		// TODO Auto-generated method stub
+		return this.pc;
+	}
+
+	public boolean getIsNewGame() {
+		// TODO Auto-generated method stub
+		return this.isNewGame;
+	}
+
+	public boolean getIsGameOver() {
+		// TODO Auto-generated method stub
+		return this.isGameOver;
+	}
+
+	public float getGameSpeed() {
+		// TODO Auto-generated method stub
+		return this.gameSpeed;
+	}
+
 }
