@@ -50,7 +50,7 @@ public class BoardPanel extends JPanel implements Panel {
 	}
 	
 	//key functions
-	public void clear() {// Resets the board and clears away any tiles
+	public void clearBoard() {// Resets the board and clears away any tiles
 		for (int i = 0; i < ROW_COUNT; i++) {
 			for (int j = 0; j < COL_COUNT; j++) {
 				tiles[i][j] = null;
@@ -215,6 +215,7 @@ public class BoardPanel extends JPanel implements Panel {
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 	}
+	
 	
 	//getter and setter
 	public static int getPANEL_HEIGHT() {

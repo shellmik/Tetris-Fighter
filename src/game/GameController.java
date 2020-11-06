@@ -207,7 +207,7 @@ public class GameController extends JFrame {
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
 		this.isGameOver = false;
-		board.clear();
+		board.clearBoard();
 		logicTimer.reset();
 		logicTimer.setCyclesPerSecond(gameSpeed);
 		pc.spawnPiece();
