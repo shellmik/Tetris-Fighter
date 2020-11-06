@@ -34,6 +34,7 @@ public class GameController extends JFrame {
 	private Random random;
 	private Level gameLevel; //TODO: attributes of Level needs to be deleted?
 	private int gameTypeCnt;
+	private float gameSpeed;
 	private float gameAcceleration;
 	
 	private PieceController pc;
@@ -115,7 +116,7 @@ public class GameController extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				float gameSpeed = gameLevel.getSpeed();
+				//float gameSpeed = gameLevel.getSpeed();
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_S:
 					logicTimer.setCyclesPerSecond(gameSpeed);
@@ -177,7 +178,7 @@ public class GameController extends JFrame {
 			if (cleared > 0) {
 				score += 50 << cleared;
 			}
-			float gameSpeed = this.gameLevel.getSpeed();
+			//float gameSpeed = this.gameLevel.getSpeed();
 			System.out.println("gbefore change: " + gameSpeed);
 			
 			this.gameAcceleration = this.gameLevel.getAccelaration();
@@ -197,7 +198,8 @@ public class GameController extends JFrame {
 
 	private void resetGame() {
 		this.score = 0;
-		float gameSpeed = this.gameLevel.getSpeed();
+		this.gameSpeed=this.gameLevel.getSpeed();
+		//float gameSpeed = this.gameLevel.getSpeed();
 
 		this.gameTypeCnt = this.gameLevel.getTileCnt();
 		int tile_idx = random.nextInt(gameTypeCnt);
