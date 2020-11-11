@@ -60,7 +60,7 @@ public class GameController extends JFrame {
 
 	// Key Functions
 	public void startGame() {
-		this.random = new Random();
+
 		this.isNewGame = true;
 
 		// set speed
@@ -105,7 +105,6 @@ public class GameController extends JFrame {
 			if (cleared > 0) {
 				score += 50 << cleared;
 			}
-			//float gameSpeed = this.gameLevel.getSpeed();
 			System.out.println("gbefore change: " + gameSpeed);
 			
 			gameSpeed += this.gameLevel.getAccelaration();
@@ -125,9 +124,8 @@ public class GameController extends JFrame {
 	public void resetGame() {
 		this.score = 0;
 		this.gameSpeed=this.gameLevel.getSpeed();
-		//float gameSpeed = this.gameLevel.getSpeed();
 
-		
+		this.random = new Random();
 		int tile_idx = random.nextInt(this.gameLevel.getTileCnt());
 		pc.nextType = pc.getTileType(tile_idx);
 

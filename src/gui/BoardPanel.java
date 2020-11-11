@@ -172,7 +172,10 @@ public class BoardPanel extends JPanel implements Panel {
 			g.drawString("[P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
 
 		} else {
+			
+			
 
+			//draw tiles that have fallen
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
 					Tile tile = getTile(x, y);
@@ -188,7 +191,7 @@ public class BoardPanel extends JPanel implements Panel {
 			int pieceRow = tetris.getPieceRow();
 			int rotation = tetris.getPieceRotation();
 
-			// Draw the piece onto the board.
+			// draw tiles that are falling
 			for (int col = 0; col < type.getDimension(); col++) {
 				for (int row = 0; row < type.getDimension(); row++) {
 					if (pieceRow + row >= 2 && type.isTile(col, row, rotation)) {
@@ -199,6 +202,7 @@ public class BoardPanel extends JPanel implements Panel {
 			}
 
 		
+			//draw grid
 			g.setColor(Color.DARK_GRAY);
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = 0; y < VISIBLE_ROW_COUNT; y++) {
@@ -206,6 +210,7 @@ public class BoardPanel extends JPanel implements Panel {
 					g.drawLine(x * TILE_SIZE, 0, x * TILE_SIZE, VISIBLE_ROW_COUNT * TILE_SIZE);
 				}
 			}
+		
 		}
 
 

@@ -122,6 +122,20 @@ public class SidePanel extends JPanel implements Panel{
 		textField.setText("");
 	}
 	
+	public void storeOperation() {
+		if(!tetris.isGameOver()) {
+			JOptionPane.showMessageDialog(null, "You can store score only after GAMEOVER", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		}
+		else if(isStore==true) {
+			JOptionPane.showMessageDialog(null, "Score already stored", "alert", JOptionPane.ERROR_MESSAGE);//msg title
+		}
+		else {
+			tetris.saveCurrent();
+			isStore=true;
+		}
+	}
+
+	
 	public void showLayout() {
 		//layout 
         //setBounds x, y, width, height
@@ -152,14 +166,15 @@ public class SidePanel extends JPanel implements Panel{
         labelAcc.setBounds(this.RIGHT_START, 350, UNIT_WIDTH, UNIT_HEIGHT);
         
         submit.setBounds(LEFT_START-5, 400, UNIT_WIDTH, UNIT_HEIGHT);
-        submit.setBackground(Color.green);
-        submit.setForeground(Color.green);
 		endGame.setBounds(RIGHT_START, 400, UNIT_WIDTH, UNIT_HEIGHT);
 		
 		show.setBounds(LEFT_START-5, 440, UNIT_WIDTH, UNIT_HEIGHT);
 		clear.setBounds(RIGHT_START, 440, UNIT_WIDTH, UNIT_HEIGHT);
 		
-		
+		Font FONT = new Font("Impact", Font.PLAIN, 19);
+		submit.setFont(FONT);
+		submit.setForeground(new Color(255, 182, 193));
+		submit.setBackground(Color.black);
 	}
 	
 	public void inputUsername() {
@@ -325,7 +340,8 @@ public class SidePanel extends JPanel implements Panel{
   		store = new JButton("StoreScore");
   		show = new JButton("ShowRank");
   		clear = new JButton("ClearRank");
-		submit = new JButton("Submit");
+		submit = new JButton("SUBMIT");
+		
 		endGame = new JButton("EndGame");
 
 		submit.addActionListener(new ActionListener() {
@@ -346,18 +362,7 @@ public class SidePanel extends JPanel implements Panel{
 		store.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(!tetris.isGameOver()) {
-					JOptionPane.showMessageDialog(null, "You can store score only after GAMEOVER", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-				}
-				else if(isStore==true) {
-					JOptionPane.showMessageDialog(null, "Score already stored", "alert", JOptionPane.ERROR_MESSAGE);//msg title
-				}
-				else {
-					tetris.saveCurrent();
-					isStore=true;
-				}
+				storeOperation();
 			}
 		});
 		
