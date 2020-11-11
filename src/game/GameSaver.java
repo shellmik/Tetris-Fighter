@@ -97,8 +97,8 @@ public class GameSaver {
 				writer.print("");
 				writer.close();
 			}
-
-			list.clear();
+			if(list!=null)
+				list.clear();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
