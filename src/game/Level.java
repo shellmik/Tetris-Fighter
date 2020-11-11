@@ -6,9 +6,6 @@ public class Level {
 	private float speed;
 	private float acceleration;
 
-	// singleton
-	// private static Level theInstance = new Level();
-	// public static Level getInstance() {return theInstance;}
 	public Level(int typeCnt, float speed, float acceleration) {
 		this.tile_cnt = typeCnt;
 		this.speed = speed;

@@ -8,8 +8,6 @@ import timer.Clock;
 
 
 public class KeyHandler implements KeyListener{
-	//private GameController gc;
-	
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -21,7 +19,7 @@ public class KeyHandler implements KeyListener{
 		PieceController pc = tetris.getPC();
 		boolean isNewGame = tetris.getIsNewGame();
 		boolean isGameOver = tetris.getIsGameOver();
-		//TODO: can we put this function outside?
+		
 		switch (e.getKeyCode()) {
 
 			case KeyEvent.VK_S:
@@ -78,7 +76,6 @@ public class KeyHandler implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//float gameSpeed = gameLevel.getSpeed();
 		GameController tetris = GameController.getInstance();
 		Clock logicTimer = tetris.getClock();
 		float gameSpeed = tetris.getGameSpeed();

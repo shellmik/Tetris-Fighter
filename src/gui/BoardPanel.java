@@ -4,16 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import game.GameController;
 
 public class BoardPanel extends JPanel implements Panel {
 
+	private static final long serialVersionUID = 1L;//default
 	private static final int BORDER_WIDTH = 5;// border around the game board width
 	private static final int COL_COUNT = 10;// number of columns on the board
 	private static final int VISIBLE_ROW_COUNT = 20;// number of visible rows on the board

@@ -1,7 +1,5 @@
 package game;
 
-import java.awt.Color;
-
 import gui.Tile;
 import gui.TileI;
 import gui.TileJ;

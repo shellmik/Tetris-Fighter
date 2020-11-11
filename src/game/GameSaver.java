@@ -1,7 +1,5 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -20,12 +18,10 @@ import java.io.File;
 
 public class GameSaver {
 
-	private GameController tetris;
-	
 	private ArrayList<User> list;
 
 	public GameSaver() {
-		this.tetris = GameController.getInstance();
+		GameController.getInstance();
 	}
 	
 	public void display() {
@@ -44,7 +40,7 @@ public class GameSaver {
 			
 		try {
 
-			int listSize = list.size();
+			list.size();
 			if(list == null || list.size() == 0) {
 				JLabel lab = new JLabel("Sorry, there is no record at all!");
 				lab.setBounds(30, 60, 400, 50);
@@ -82,8 +78,8 @@ public class GameSaver {
 		System.out.println("saved as: " + name + " " + score + " " + date);
 	}
 
+	@SuppressWarnings("hiding")
 	public void clean() {
-		//this.list.clear();
 		
 		PrintWriter writer;
 		try {
@@ -187,7 +183,7 @@ public class GameSaver {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }

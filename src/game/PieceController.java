@@ -4,7 +4,6 @@ import java.util.Random;
 
 import gui.BoardPanel;
 import gui.Tile;
-import timer.Clock;
 
 public class PieceController {
 	public Tile currentType;
@@ -27,7 +26,6 @@ public class PieceController {
 		return instance;
 	}
 
-	@SuppressWarnings("static-access")
 	public void spawnPiece() {
 
 		this.currentType = nextType;

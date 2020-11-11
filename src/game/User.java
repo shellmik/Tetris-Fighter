@@ -5,9 +5,7 @@ public class User {
 	private int score;
 	private String date;
 
-	public User() {
-
-	}
+	public User() {}
 
 	public User(String name, int score, String date) {
 

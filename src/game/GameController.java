@@ -1,23 +1,14 @@
 package game;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import gui.BoardPanel;
 import gui.SidePanel;
 import gui.Tile;
 import timer.Clock;
 import java.util.Calendar;
-import java.awt.HeadlessException;
 
 
 public class GameController extends JFrame {

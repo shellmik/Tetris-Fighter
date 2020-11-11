@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import game.GameController;
-import game.Level;
 import game.LevelCustom;
 import game.LevelHigh;
 import game.LevelLow;
