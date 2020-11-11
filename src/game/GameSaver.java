@@ -39,13 +39,7 @@ public class GameSaver {
 		frame.setLayout(null);
 		frame.setResizable(false);
 				
-//		if(list!=null)
-//			System.out.println("ok");
-//		else
-//			System.out.println("not ok");
-			
 		try {
-
 			list.size();
 			if(list == null || list.size() == 0) {
 				JLabel lab = new JLabel("Sorry, there is no record at all!");
@@ -76,10 +70,7 @@ public class GameSaver {
 	}
 
 	public void save(String name, int score, String date) {
-		User newUser = new User();
-		newUser.setName(name);
-		newUser.setScore(score);
-		newUser.setDate(date);
+		User newUser = new User(name,score,date);
 		saveRankingList(newUser);
 		System.out.println("saved as: " + name + " " + score + " " + date);
 	}
@@ -139,7 +130,7 @@ public class GameSaver {
 			OutputStream os = new FileOutputStream("./rank.txt");
 			DataOutputStream dos = new DataOutputStream(os);
 
-			dos.writeInt(list.size());// å†™å…¥ä¿¡æ�¯æ�¡æ•°
+			dos.writeInt(list.size());
 			for (int i = 0; i < list.size(); i++) {
 				User use = (User) list.get(i);
 				dos.writeByte(use.getName().getBytes().length);

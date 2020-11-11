@@ -291,10 +291,6 @@ public class SidePanel extends JPanel implements Panel{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                	
-//                    levelTileCnt=(int) cmbType.getSelectedItem();
-//                    System.out.println("select: "+levelTileCnt);
-//                    sideLevel.setTileCnt(levelTileCnt);
                     tetris.getLevel().setTileCnt((int) cmbType.getSelectedItem());
          
                 }
@@ -305,9 +301,6 @@ public class SidePanel extends JPanel implements Panel{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-//                    levelSpeed=(float) cmbSpeed.getSelectedItem();
-//                    System.out.println("select: "+levelSpeed);
-//                    sideLevel.setSpeed(levelSpeed);
                     tetris.getLevel().setSpeed((float) cmbSpeed.getSelectedItem());
                     
                 }
@@ -318,9 +311,6 @@ public class SidePanel extends JPanel implements Panel{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-//                    levelAcc=(float) cmbAcc.getSelectedItem();
-//                    System.out.println("select: "+levelAcc);
-//                    sideLevel.setAccelaration(levelAcc);
                      tetris.getLevel().setAccelaration((float) cmbAcc.getSelectedItem());
                     
                     
@@ -374,9 +364,7 @@ public class SidePanel extends JPanel implements Panel{
 		show.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tetris.showRank();
-				
-				
+				tetris.showRank();		
 			}
 		});
 		
