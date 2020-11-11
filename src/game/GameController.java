@@ -48,7 +48,7 @@ public class GameController extends JFrame {
 		setResizable(false);
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
-		this.gameSaver = new GameSaver();
+		this.gameSaver = GameSaver.getInstance();
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
 		addKeyListener(new KeyHandler() {});

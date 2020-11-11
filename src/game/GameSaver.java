@@ -19,8 +19,14 @@ import java.io.File;
 public class GameSaver {
 
 	private ArrayList<User> list;
+	
+	private static GameSaver instance = new GameSaver();
 
-	public GameSaver() {
+	public static GameSaver getInstance() {
+		return instance;
+	}
+
+	private GameSaver() {
 		GameController.getInstance();
 	}
 	
@@ -91,7 +97,9 @@ public class GameSaver {
 				writer.print("");
 				writer.close();
 			}
+
 			list.clear();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -183,7 +191,7 @@ public class GameSaver {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 }
