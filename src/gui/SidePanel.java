@@ -367,15 +367,8 @@ public class SidePanel extends JPanel implements Panel{
 				}
 				else {
 					tetris.saveCurrent();
-					System.out.println("store score");
-					//tetris.requestFocus();
-					//store.setEnabled(false);
-					//storeCount = 0;
 					isStore=true;
 				}
-				
-				
-				
 			}
 		});
 		
@@ -383,8 +376,8 @@ public class SidePanel extends JPanel implements Panel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tetris.showRank();
-				System.out.println("show");
-				tetris.requestFocus();
+				
+				
 			}
 		});
 		
@@ -392,7 +385,7 @@ public class SidePanel extends JPanel implements Panel{
 		   @Override
 		   public void actionPerformed(ActionEvent e) {
 		    tetris.clearStorage();
-		    tetris.requestFocus();
+		   
 		   }
 		});
 	
@@ -475,30 +468,19 @@ public class SidePanel extends JPanel implements Panel{
 		}
 		
 		if(!tetris.isGameOver() && type != null) {
-			/*
-			 * Get the size properties of the current piece.
-			 */
+			//Get the size properties of the current piece
 			int cols = type.getCols();
 			int rows = type.getRows();
 			int dimension = type.getDimension();
 		
-			/*
-			 * Calculate the top left corner (origin) of the piece.
-			 */
+			//Calculate the top left corner (origin) of the piece.
 			int startX = (SQUARE_CENTER_X - (cols * TILE_SIZE / 2));
 			int startY = (SQUARE_CENTER_Y - (rows * TILE_SIZE / 2));
 		
-			/*
-			 * Get the insets for the preview. The default
-			 * rotation is used for the preview, so we just use 0.
-			 */
+			//default rotation 0
 			int top = type.getTopInset(0);
 			int left = type.getLeftInset(0);
-		
-			/*
-			 * Loop through the piece and draw it's tiles onto the preview.
-			 */
-			
+					
 			for(int row = 0; row < dimension; row++) {
 				for(int col = 0; col < dimension; col++) {
 					if(type.isTile(col, row, 0)) {

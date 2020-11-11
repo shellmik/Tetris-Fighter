@@ -60,71 +60,7 @@ public class GameController extends JFrame {
 		this.gameSaver = new GameSaver();
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
-		addKeyListener(new KeyHandler() {
-//			@Override
-//			public void keyPressed(KeyEvent e) {//TODO: can we put this function outside?
-//				switch (e.getKeyCode()) {
-//
-//				case KeyEvent.VK_S:
-//					if (!isGamePaused && dropCooldown == 0) {
-//						logicTimer.setCyclesPerSecond(25.0f);
-//					}
-//					break;
-//
-//				case KeyEvent.VK_A:
-//					if (!isGamePaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() - 1,
-//							pc.getCurrentRow(), pc.getCurrentRotation())) {
-//						pc.setCurrentCol(pc.getCurrentCol() - 1);
-//					}
-//					break;
-//
-//				case KeyEvent.VK_D:
-//					if (!isGamePaused && board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol() + 1,
-//							pc.getCurrentRow(), pc.getCurrentRotation())) {
-//						pc.setCurrentCol(pc.getCurrentCol() + 1);
-//					}
-//					break;
-//
-//				case KeyEvent.VK_J:
-//					if (!isGamePaused) {
-//						pc.rotatePiece((pc.getCurrentRotation() == 0) ? 3 : pc.getCurrentRotation() - 1);
-//					}
-//					break;
-//
-//				case KeyEvent.VK_K:
-//					if (!isGamePaused) {
-//						pc.rotatePiece((pc.getCurrentRotation() == 3) ? 0 : pc.getCurrentRotation() + 1);
-//					}
-//					break;
-//
-//				case KeyEvent.VK_P:
-//					if (!isGameOver && !isNewGame) {
-//						isGamePaused = !isGamePaused;
-//						logicTimer.setPaused(isGamePaused);
-//					}
-//
-//					break;
-//
-//				case KeyEvent.VK_ENTER:
-//					if (isGameOver || isNewGame) {
-//						resetGame();
-//					}
-//					break;
-//
-//				}
-//			}
-//
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				//float gameSpeed = gameLevel.getSpeed();
-//				switch (e.getKeyCode()) {
-//				case KeyEvent.VK_S:
-//					logicTimer.setCyclesPerSecond(gameSpeed);
-//					logicTimer.reset();
-//					break;
-//				}
-//			}
-		});
+		addKeyListener(new KeyHandler() {});
 
 		pack();
 		setLocationRelativeTo(null);
