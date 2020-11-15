@@ -99,7 +99,7 @@ public class SidePanel extends JPanel implements Panel{
 	//other functions
 	
 	public void submitOperation() {
-		String str=textField.getText();
+		String str = textField.getText();
 		if(str.length()==0)
 			JOptionPane.showMessageDialog(null, "Please input a username within 10 characters!", "alert", JOptionPane.ERROR_MESSAGE);//msg title
 		else if(str.length()>10)
@@ -112,7 +112,7 @@ public class SidePanel extends JPanel implements Panel{
 			repaint();
 		}
 	}
-	
+
 	public void endOperation() {
 		
 		tetris.setPause(false);
@@ -437,6 +437,7 @@ public class SidePanel extends JPanel implements Panel{
 			cmbAcc.setVisible(true);
 
 		}
+		
 		if(isCustom==false) {
 			labelType.setVisible(true);
 			labelType.setText(Integer.toString(tetris.getLevel().getTileCnt()));
@@ -509,4 +510,12 @@ public class SidePanel extends JPanel implements Panel{
      tetris.requestFocus();
     	
     }
+    
+    public void setIsCustom(boolean b) {
+    	this.isCustom = b;
+    }
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
 }

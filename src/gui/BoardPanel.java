@@ -149,7 +149,6 @@ public class BoardPanel extends JPanel implements Panel {
 		else if (tetris.isNewGame() || tetris.isGameOver()) {
 			g.setFont(LARGE_FONT);
 			g.setColor(new Color(255, 182, 193));
-
 			String msg = tetris.isGameOver() ? "GAME OVER" : "TETRIS";
 			
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, 130);
@@ -172,12 +171,12 @@ public class BoardPanel extends JPanel implements Panel {
 			g.drawString("[P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
 
 		} else {
-			
-			
+		
 
 			//draw tiles that have fallen
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
+					
 					Tile tile = getTile(x, y);
 					if (tile != null) {
 						drawer.drawTile(tile, x * TILE_SIZE, (y - HIDDEN_ROW_COUNT) * TILE_SIZE, g);

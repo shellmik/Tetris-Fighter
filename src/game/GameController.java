@@ -108,7 +108,7 @@ public class GameController extends JFrame {
 			System.out.println("gbefore change: " + gameSpeed);
 			
 			gameSpeed += this.gameLevel.getAccelaration();
-			System.out.println("gameSpeed chaned to" + gameSpeed);
+			System.out.println("gameSpeed changed to" + gameSpeed);
 			logicTimer.setCyclesPerSecond(gameSpeed);
 			logicTimer.reset();
 			dropCooldown = 25;
@@ -116,7 +116,7 @@ public class GameController extends JFrame {
 		}
 	}
 
-	private void renderGame() {
+	public void renderGame() {
 		board.repaint();
 		side.repaint();
 	}
@@ -185,6 +185,11 @@ public class GameController extends JFrame {
 	public void setLevelAccelaration(float accelaration) {
 		this.gameLevel.setAccelaration(accelaration);
 	}
+	
+	public void setNewGame(boolean b) {
+		this.isNewGame = b;
+	}
+	
 	public void setGameOver(boolean b) {
 		this.isGameOver = b;
 	}
