@@ -38,35 +38,28 @@ public class GameSaver {
 		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setResizable(false);
-				
-		try {
-			list.size();
-			if(list == null || list.size() == 0) {
-				JLabel lab = new JLabel("Sorry, there is no record at all!");
-				lab.setBounds(30, 60, 400, 50);
-				frame.add(lab);
-				frame.setVisible(true);
-			}else {
-				JLabel lab = new JLabel("User        Max        Time");
-				lab.setBounds(30, 20, 400, 50);
-				frame.add(lab);
-
-				for (int i = 0; i < list.size(); i++) {
-					User user = (User) list.get(i);
-					JLabel label = new JLabel(user.toString());
-					System.out.println(user.toString());
-					label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
-					frame.add(label);
-				}
-				frame.setVisible(true);
-			}
-			
-		} catch (Exception e) {
+		
+		list.size();
+		if(list.size() == 0) {
 			JLabel lab = new JLabel("Sorry, there is no record at all!");
 			lab.setBounds(30, 60, 400, 50);
 			frame.add(lab);
 			frame.setVisible(true);
+		}else {
+			JLabel lab = new JLabel("User        Max        Time");
+			lab.setBounds(30, 20, 400, 50);
+			frame.add(lab);
+
+			for (int i = 0; i < list.size(); i++) {
+				User user = (User) list.get(i);
+				JLabel label = new JLabel(user.toString());
+				System.out.println(user.toString());
+				label.setBounds(30, 20 + (i + 1) * 50, 400, 60);
+				frame.add(label);
+			}
+			frame.setVisible(true);
 		}
+		
 	}
 
 	public void save(String name, int score, String date) {
@@ -81,21 +74,15 @@ public class GameSaver {
 		PrintWriter writer;
 		try {
 			File file = new File("./rank.txt");
-			if (file.exists() && file.length() == 0) {
-				System.out.println("file.exists() && file.length() == 0");
-			} else {
-				writer = new PrintWriter(file);
-				writer.print("");
-				writer.close();
-			}
-			if(list!=null)
-				list.clear();
+			writer = new PrintWriter(file);
+			writer.print("");
+			writer.close();
 			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			list.clear();
+			
+		} catch (Exception e) {
+			
+		} 
 	}
 
 	// write to doc
@@ -142,10 +129,8 @@ public class GameSaver {
 
 			dos.close();
 			os.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -160,7 +145,7 @@ public class GameSaver {
 			int size = d.readInt();
 
 			ArrayList<User> listTmp = new ArrayList<User>();
-			if (size != -1) {
+			if (size > 0) {
 				for (int i = 0; i < size; i++) {
 					byte nSize = d.readByte();
 					byte[] b = new byte[nSize];
@@ -179,8 +164,6 @@ public class GameSaver {
 			is.close();
 			list = listTmp;
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			//e.printStackTrace();
 		}

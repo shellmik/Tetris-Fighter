@@ -19,6 +19,7 @@ public class GameController extends JFrame {
 	private boolean isGamePaused;//this is not from clock, is Pause from clock is private
 	private boolean isNewGame;
 	private boolean isGameOver;
+	private boolean isExit=false;
 
 	private int score;
 	private int dropCooldown;
@@ -39,6 +40,7 @@ public class GameController extends JFrame {
 	public static GameController getInstance() {
 		return theInstance;
 	}
+	
 
 	// Constructor
 	private GameController() {
@@ -56,6 +58,7 @@ public class GameController extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		this.isExit=false;
 	}
 
 	// Key Functions
@@ -71,7 +74,8 @@ public class GameController extends JFrame {
 		pc = new PieceController();
 		logicTimer.setPaused(true);
 
-		while (true) {
+		while (!isExit) {
+				
 			long start = System.nanoTime();
 			logicTimer.update();
 
@@ -93,6 +97,8 @@ public class GameController extends JFrame {
 				}
 			}
 		}
+		System.out.print("out!");
+		//System.exit(0);
 	}
 
 	private void updateGame() {
@@ -275,6 +281,10 @@ public class GameController extends JFrame {
 	public float getGameSpeed() {
 		// TODO Auto-generated method stub
 		return this.gameSpeed;
+	}
+	
+	public void setExit() {
+		this.isExit=true;
 	}
 
 }

@@ -1,7 +1,10 @@
-package TestGame;
+package test;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.awt.Color;
+
 import game.*;
 import gui.Tile;
 import gui.TileI;
@@ -15,7 +18,7 @@ public class TestPieceController {
 	private PieceGenerator pg = PieceGenerator.getInstance();
 	
 	@Test
-	public void testSpawnPiece() {
+	public void testSpawnPiece_1() {
 		
 		PieceController pc = new PieceController();
 		pc.currentCol = 3;
@@ -27,12 +30,77 @@ public class TestPieceController {
 	}
 	
 	@Test
-	public void testRotatePiece() {
+	public void testSpawnPiece_2() {
+		
+		PieceController pc = new PieceController();
+		pc.currentCol = -10000;
+		pc.currentRotation = 1000;
+		pc.currentRow = -10000;
+		pc.currentType = new Tile(new Color(111, 111, 111), 10000, 10000, 10000,
+				new boolean[][] { { true, true, false, false, true, true, false, false, false, },
+			{ false, false, true, false, true, true, false, true, false, },
+			{ false, false, false, true, true, false, false, true, true, },
+			{ false, true, false, true, true, false, true, false, false, } });
+		pc.nextType = TileI.getInstance();
+
+		pc.spawnPiece();
+	}
+	
+	@Test
+	public void testRotatePiece_1() {
 		
 		PieceController pc = new PieceController();
 		pc.currentCol = 3;
 		pc.currentRotation = 1;
 		pc.currentRow = 4;
+		pc.currentType = TileJ.getInstance();
+		pc.nextType = TileI.getInstance();
+		pc.rotatePiece(2);
+	}
+	
+	@Test
+	public void testRotatePiece_2() {
+		
+		PieceController pc = new PieceController();
+		pc.currentCol = -3;
+		pc.currentRotation = 1;
+		pc.currentRow = 4;
+		pc.currentType = TileJ.getInstance();
+		pc.nextType = TileI.getInstance();
+		pc.rotatePiece(2);
+	}
+	
+	@Test
+	public void testRotatePiece_3() {
+		
+		PieceController pc = new PieceController();
+		pc.currentCol = 10;
+		pc.currentRotation = 1;
+		pc.currentRow = 4;
+		pc.currentType = TileJ.getInstance();
+		pc.nextType = TileI.getInstance();
+		pc.rotatePiece(2);
+	}
+	
+	@Test
+	public void testRotatePiece_4() {
+		
+		PieceController pc = new PieceController();
+		pc.currentCol = 3;
+		pc.currentRotation = 1;
+		pc.currentRow = -2;
+		pc.currentType = TileJ.getInstance();
+		pc.nextType = TileI.getInstance();
+		pc.rotatePiece(2);
+	}
+	
+	@Test
+	public void testRotatePiece_5() {
+		
+		PieceController pc = new PieceController();
+		pc.currentCol = 3;
+		pc.currentRotation = 1;
+		pc.currentRow = 30;
 		pc.currentType = TileJ.getInstance();
 		pc.nextType = TileI.getInstance();
 		pc.rotatePiece(2);

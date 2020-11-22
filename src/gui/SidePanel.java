@@ -85,6 +85,7 @@ public class SidePanel extends JPanel implements Panel{
 	private JButton clear;
 	private JButton submit;
 	private JButton endGame;
+	private JButton exit;
 	
     //boolean
 	private boolean isSubmit=false;
@@ -170,6 +171,7 @@ public class SidePanel extends JPanel implements Panel{
 		
 		show.setBounds(LEFT_START-5, 440, UNIT_WIDTH, UNIT_HEIGHT);
 		clear.setBounds(RIGHT_START, 440, UNIT_WIDTH, UNIT_HEIGHT);
+		exit.setBounds(230, 1, 16, 16);
 		
 		Font FONT = new Font("Impact", Font.PLAIN, 19);
 		submit.setFont(FONT);
@@ -341,8 +343,18 @@ public class SidePanel extends JPanel implements Panel{
   		show = new JButton("ShowRank");
   		clear = new JButton("ClearRank");
 		submit = new JButton("SUBMIT");
+		exit=new JButton("X");
 		
 		endGame = new JButton("EndGame");
+		
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tetris.setExit();
+				//System.exit(0);		
+			}
+		});
+
 
 		submit.addActionListener(new ActionListener() {
 			@Override
@@ -386,6 +398,7 @@ public class SidePanel extends JPanel implements Panel{
 		add(store);
 		add(show);
 		add(clear);
+		add(exit);
 	
 	}
 
@@ -515,7 +528,4 @@ public class SidePanel extends JPanel implements Panel{
     	this.isCustom = b;
     }
 
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
-	}
 }

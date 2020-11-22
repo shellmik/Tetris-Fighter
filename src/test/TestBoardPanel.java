@@ -1,4 +1,4 @@
-package testGUI;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -125,51 +125,5 @@ public class TestBoardPanel {
 		int col = bp.getROW_COUNT();
 		assertEquals(22, col);
 	}
-	
-	@Test
-	public void testPaintComponent01() {
 		
-		GameController tetris = GameController.getInstance();
-		BoardPanel bp = new BoardPanel(tetris);
-		
-		class Test extends JFrame {
-			private static final long serialVersionUID = 1L;
-			public Test(BoardPanel bp) {
-				super("T");
-				add(bp, BorderLayout.CENTER);
-				setVisible(true);
-			}
-		}
-		
-		Test test = new Test(bp);
-		test.repaint();
-		tetris.setPause(true);
-	}
-	
-	@Test
-	public void testPaintComponent02() {
-		
-		GameController tetris = GameController.getInstance();
-		
-		BoardPanel bp = new BoardPanel(tetris);
-		
-		class Test2 extends JFrame {
-			private static final long serialVersionUID = 1L;
-			public Test2(BoardPanel bp) {
-				super("T");
-				add(bp, BorderLayout.CENTER);
-				setVisible(true);
-			}
-		}
-		Test2 test = new Test2(bp);
-		test.repaint();
-		tetris.setPause(false);
-		tetris.setNewGame(true);
-		tetris.setGameOver(false);
-	}
-	
-	
-	
-	
-	
 }
