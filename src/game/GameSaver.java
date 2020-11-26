@@ -145,27 +145,27 @@ public class GameSaver {
 			int size = d.readInt();
 
 			ArrayList<User> listTmp = new ArrayList<User>();
-			if (size > 0) {
-				for (int i = 0; i < size; i++) {
-					byte nSize = d.readByte();
-					byte[] b = new byte[nSize];
-					is.read(b);
-					int score = d.readInt();
-					byte n1Size = d.readByte();
-					byte[] c = new byte[n1Size];
-					is.read(c);
+			
+			for (int i = 0; i < size; i++) {
+				byte nSize = d.readByte();
+				byte[] b = new byte[nSize];
+				is.read(b);
+				int score = d.readInt();
+				byte n1Size = d.readByte();
+				byte[] c = new byte[n1Size];
+				is.read(c);
 
-					User use = new User(new String(b), score, new String(c));
-					listTmp.add(use);
-				}
+				User use = new User(new String(b), score, new String(c));
+				listTmp.add(use);
 			}
+			
 
 			d.close();
 			is.close();
 			list = listTmp;
 
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }
