@@ -15,6 +15,7 @@ Yim Yau Wai, Andy: Software Engineer (Test & Debug)<br />
 2.  Choose a level among ‘Low’,’Medium’, ‘High’ and ‘Custom’; Different levels have different piece acceleration, initial game speed, and piece types. The player can select the ‘Custom’ level to self-define the three attributes mentioned earlier.<br />
 3.  Click the ‘Submit’ button and submit the information inputs.<br />
 4.  Press ‘Enter’ to start a new game.<br />
+![game start](https://github.com/shellmik/CS3343-project/blob/master/doc/README1.png =250x)
 
 #### During the game
 1.  Pieces with randomly generated colors and shapes descend from the top of the screen onto the playing field. During the descent, the player can move the pieces laterally and rotate them until they reach the field bottom or land on a piece that had been placed before it.<br /> 
@@ -30,7 +31,7 @@ Press ‘P’ to pause and continue the game<br />
 5.  The piece falling speed increases as time eclipses, leaving the player with less time to think about the placement.<br />
 6.  If the user wants to manually end a game, click the ‘End Game’ to end a game whenever the game is running or paused。<br />
 7.  If the player cannot make the pieces disappear quickly enough, the field will start to fill. The game ends when the pieces reach the top of the playing field and prevent the arrival of new pieces.<br />
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![during game](https://github.com/shellmik/CS3343-project/blob/master/doc/README2.png? =250x)
 
 #### After a game is over
 1.  The game over page would be shown.<br />
@@ -39,7 +40,7 @@ Press ‘P’ to pause and continue the game<br />
 4.  Click the ‘Clear Rank’ button to clear the ranking list.<br />
 5.  Fill in the required information, click ‘Submit’, and press ‘Enter’ can start a new game again.<br />
 6.  If the player needs to quit the program, click the ‘x’ button on the top-right corner.<br />
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![game over](https://github.com/shellmik/CS3343-project/blob/master/doc/README3.png? =250x)
 
 ### Installation Guide
 #### Method 1
