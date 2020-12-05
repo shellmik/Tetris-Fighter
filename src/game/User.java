@@ -1,6 +1,7 @@
 package game;
 
 public class User {
+	// this is the user class
 	private String name;
 	private int score;
 	private String date;
@@ -8,7 +9,6 @@ public class User {
 	public User() {}
 
 	public User(String name, int score, String date) {
-
 		this.name = name;
 		this.score = score;
 		this.date = date;

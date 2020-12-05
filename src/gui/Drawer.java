@@ -16,7 +16,6 @@ public class Drawer {
 		Color baseColor = type.getBaseColor();
 		g.setColor(baseColor);
 		g.fillRect(x, y, tile_size, tile_size);
-
 		g.setColor(baseColor.darker());
 		g.fillRect(x, y + tile_size - shade_width, tile_size, shade_width);
 		g.fillRect(x + tile_size - shade_width, y, shade_width, tile_size);

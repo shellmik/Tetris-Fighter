@@ -10,32 +10,32 @@ import game.GameController;
 
 public class BoardPanel extends JPanel implements Panel {
 
-	private static final long serialVersionUID = 1L;//default
-	private static final int BORDER_WIDTH = 5;// border around the game board width
-	private static final int COL_COUNT = 10;// number of columns on the board
-	private static final int VISIBLE_ROW_COUNT = 20;// number of visible rows on the board
-	private static final int HIDDEN_ROW_COUNT = 2;// number of rows that are hidden from view.
-	private static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;// total row number the board contains
-	private static final int TILE_SIZE = 24;// number of pixels that a tile takes up
-	private static final int SHADE_WIDTH = 4;// tile shading width
+	private static final long serialVersionUID = 1L;
+	private static final int BORDER_WIDTH = 5;
+	private static final int COL_COUNT = 10;
+	private static final int VISIBLE_ROW_COUNT = 20;
+	private static final int HIDDEN_ROW_COUNT = 2;
+	private static final int ROW_COUNT = VISIBLE_ROW_COUNT + HIDDEN_ROW_COUNT;
+	private static final int TILE_SIZE = 24;
+	private static final int SHADE_WIDTH = 4;
 	
-	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;// central x coordinate on the game board
+	private static final int CENTER_X = COL_COUNT * TILE_SIZE / 2;
 	private static final int CENTER_Y = VISIBLE_ROW_COUNT * TILE_SIZE / 2;
 
 	private static final Font LARGE_FONT = new Font("Impact", Font.BOLD, 46);
 	private static final Font MID_FONT = new Font("Impact", Font.BOLD, 20);
 	private static final Font SMALL_FONT = new Font("Comic", Font.BOLD, 12);
-	private static final int SMALL_INSET = 20;// pixel number used on a small insets (generally used for categories
-	private static final int LARGE_INSET = 40;// number of pixels used on a large insets
-	private static final int CONTROLS_INSET = 300;// y coordinate of the controls category
-	private static final int TEXT_STRIDE = 25;// number of pixels to offset between each string
+	private static final int SMALL_INSET = 20;
+	private static final int LARGE_INSET = 40;
+	private static final int CONTROLS_INSET = 300;
+	private static final int TEXT_STRIDE = 25;
 
-	private static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;// total panel width
+	private static final int PANEL_WIDTH = COL_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 	private static final int PANEL_HEIGHT = VISIBLE_ROW_COUNT * TILE_SIZE + BORDER_WIDTH * 2;
 	
 	private GameController tetris;
 
-	private Tile[][] tiles;// tiles that make up the board
+	private Tile[][] tiles;
 	private Drawer drawer = new Drawer(TILE_SIZE, SHADE_WIDTH);
 	
 	//constructor
@@ -46,8 +46,9 @@ public class BoardPanel extends JPanel implements Panel {
 		setBackground(Color.BLACK);
 	}
 	
-	//key functions
-	public void clearBoard() {// Resets the board and clears away any tiles
+	// key functions
+	// Resets the board and clears away any tiles
+	public void clearBoard() {
 		for (int i = 0; i < ROW_COUNT; i++) {
 			for (int j = 0; j < COL_COUNT; j++) {
 				tiles[i][j] = null;
@@ -68,7 +69,6 @@ public class BoardPanel extends JPanel implements Panel {
 			return false;
 		}
 
-	
 		for (int col = 0; col < type.getDimension(); col++) {
 			for (int row = 0; row < type.getDimension(); row++) {
 				if (type.isTile(col, row, rotation) && isOccupied(x + col, y + row)) {
@@ -79,7 +79,6 @@ public class BoardPanel extends JPanel implements Panel {
 		return true;
 	}
 
-	
 	public void addPiece(Tile type, int x, int y, int rotation) {
 		for (int col = 0; col < type.getDimension(); col++) {
 			for (int row = 0; row < type.getDimension(); row++) {
@@ -89,7 +88,6 @@ public class BoardPanel extends JPanel implements Panel {
 			}
 		}
 	}
-
 
 	public int checkLines() {
 		int completedLines = 0;
@@ -101,9 +99,7 @@ public class BoardPanel extends JPanel implements Panel {
 		return completedLines;
 	}
 
-	
 	private boolean checkLine(int line) {
-		
 		for (int col = 0; col < COL_COUNT; col++) {
 			if (!isOccupied(col, line)) {
 				return false;
@@ -123,23 +119,18 @@ public class BoardPanel extends JPanel implements Panel {
 		return tiles[y][x] != null;
 	}
 
-	
 	private void setTile(int x, int y, Tile type) {
 		tiles[y][x] = type;
 	}
 
-	
 	private Tile getTile(int x, int y) {
 		return tiles[y][x];
 	}
 
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		g.translate(BORDER_WIDTH, BORDER_WIDTH);
-
 		if (tetris.isPaused()) {
 			g.setFont(LARGE_FONT);
 			g.setColor(Color.WHITE);
@@ -171,8 +162,6 @@ public class BoardPanel extends JPanel implements Panel {
 			g.drawString("[P]- Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
 
 		} else {
-		
-
 			//draw tiles that have fallen
 			for (int x = 0; x < COL_COUNT; x++) {
 				for (int y = HIDDEN_ROW_COUNT; y < ROW_COUNT; y++) {
@@ -184,7 +173,6 @@ public class BoardPanel extends JPanel implements Panel {
 				}
 			}
 
-	
 			Tile type = tetris.getPieceType();
 			int pieceCol = tetris.getPieceCol();
 			int pieceRow = tetris.getPieceRow();
@@ -199,7 +187,6 @@ public class BoardPanel extends JPanel implements Panel {
 					}
 				}
 			}
-
 		
 			//draw grid
 			g.setColor(Color.DARK_GRAY);
@@ -212,41 +199,30 @@ public class BoardPanel extends JPanel implements Panel {
 		
 		}
 
-
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 	}
 	
 	
 	//getter and setter
-	public static int getPANEL_HEIGHT() {
-			
-			return PANEL_HEIGHT;
-		}
-	
+	public static int getPANEL_HEIGHT() {	
+		return PANEL_HEIGHT;
+	}
 	
 	public static int getCOL_COUNT() {
-		
 		return COL_COUNT;
 	}
 	
-	
 	public static int getROW_COUNT() {
-			
-			return ROW_COUNT;
-		}
-	
+		return ROW_COUNT;
+	}
 	
 	public static int getTILE_SIZE () {
-		
 		return TILE_SIZE ;
 	}
 	
-	
-	public static int getSHADE_WIDTH () {
-			
-			return SHADE_WIDTH ;
-		}
-
+	public static int getSHADE_WIDTH () {	
+		return SHADE_WIDTH ;
+	}
 
 }

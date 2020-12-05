@@ -10,21 +10,18 @@ import gui.TileT;
 import gui.TileZ;
 
 public class PieceGenerator {
-
+	// this class generate tile
 	public static final Tile[] piecesCollection = {
-
 			TileI.getInstance(), TileO.getInstance(), TileJ.getInstance(), TileL.getInstance(), TileT.getInstance(),
 			TileS.getInstance(), TileZ.getInstance()
-
 	};
 
 	private static PieceGenerator instance = null;
 
 	public static PieceGenerator getInstance() {
-
-		if (instance == null)
+		if (instance == null) {
 			instance = new PieceGenerator();
-
+		}
 		return instance;
 	}
 

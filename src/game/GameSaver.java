@@ -17,7 +17,8 @@ import javax.swing.JLabel;
 import java.io.File;
 
 public class GameSaver {
-
+	
+	// this class is used for store the score of  users
 	private ArrayList<User> list;
 	
 	private static GameSaver instance = new GameSaver();
@@ -29,8 +30,9 @@ public class GameSaver {
 	private GameSaver() {
 		GameController.getInstance();
 	}
-	
+	// display the txt file
 	public void display() {
+		
 		JFrame frame = new JFrame();
 		frame.setTitle("Ranking");
 		frame.setSize(500, 700);
@@ -38,8 +40,8 @@ public class GameSaver {
 		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setResizable(false);
-		
 		list.size();
+		
 		if(list.size() == 0) {
 			JLabel lab = new JLabel("Sorry, there is no record at all!");
 			lab.setBounds(30, 60, 400, 50);
@@ -70,16 +72,13 @@ public class GameSaver {
 
 	@SuppressWarnings("hiding")
 	public void clean() {
-		
 		PrintWriter writer;
 		try {
 			File file = new File("./rank.txt");
 			writer = new PrintWriter(file);
 			writer.print("");
 			writer.close();
-			
 			list.clear();
-			
 		} catch (Exception e) {
 			
 		} 
@@ -159,7 +158,6 @@ public class GameSaver {
 				listTmp.add(use);
 			}
 			
-
 			d.close();
 			is.close();
 			list = listTmp;

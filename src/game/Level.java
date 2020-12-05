@@ -1,7 +1,7 @@
 package game;
 
 public class Level {
-
+	// this class is the difficulty level
 	private int tile_cnt;
 	private float speed;
 	private float acceleration;

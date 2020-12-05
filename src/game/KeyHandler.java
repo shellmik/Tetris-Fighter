@@ -8,7 +8,7 @@ import timer.Clock;
 
 
 public class KeyHandler implements KeyListener{
-	
+	// this class is used to handle the keyboard input 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		GameController tetris = GameController.getInstance();
@@ -60,7 +60,6 @@ public class KeyHandler implements KeyListener{
 					tetris.setPause(!tetris.isPaused());
 					logicTimer.setPaused(isGamePaused);
 				}
-
 				break;
 
 			case KeyEvent.VK_ENTER:
@@ -68,12 +67,9 @@ public class KeyHandler implements KeyListener{
 					tetris.resetGame();
 				}
 				break;
-
 		}
-	
-		
 	}
-
+	// check if the key is released
 	@Override
 	public void keyReleased(KeyEvent e) {
 		GameController tetris = GameController.getInstance();
@@ -92,5 +88,4 @@ public class KeyHandler implements KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

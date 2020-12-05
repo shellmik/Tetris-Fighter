@@ -1,7 +1,8 @@
 package game;
 
 public class LevelMid extends Level {
-
+	// mid level
+	
 	private static LevelMid theInstance = new LevelMid();
 
 	public static LevelMid getInstance() {

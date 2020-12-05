@@ -12,22 +12,21 @@ import java.util.Calendar;
 
 
 public class GameController extends JFrame {
-	// default
+	
 	private static final long serialVersionUID = 1L;
 	private static final long FRAME_TIME = 1000L / 50L;
 	
-	private boolean isGamePaused;//this is not from clock, is Pause from clock is private
+	private boolean isGamePaused;
 	private boolean isNewGame;
 	private boolean isGameOver;
 	private boolean isExit=false;
 
 	private int score;
-	private int dropCooldown;
+	private int cooltime;
+	
 	private Random random;
 	private Level gameLevel; 
-	
-	//important: this speed must not be deleted
-	private float gameSpeed;//this is not a attribute of level, but a attribute of the game itself
+	private float gameSpeed;
 	
 	private PieceController pc = PieceController.getInstance();
 	private BoardPanel board;
@@ -35,33 +34,32 @@ public class GameController extends JFrame {
 	private Clock logicTimer;
 	private GameSaver gameSaver;
 
-	// singleton
 	private static GameController theInstance = new GameController();
 	public static GameController getInstance() {
 		return theInstance;
 	}
 	
-
 	// Constructor
 	private GameController() {
 		super("Tetris");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
+		
 		this.board = new BoardPanel(this);
 		this.side = new SidePanel(this);
 		this.gameSaver = GameSaver.getInstance();
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.EAST);
 		addKeyListener(new KeyHandler() {});
-
+		
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 		this.isExit=false;
 	}
 
-	// Key Functions
+	// Key Functions this function will start the game
 	public void startGame() {
 
 		this.isNewGame = true;
@@ -73,18 +71,17 @@ public class GameController extends JFrame {
 
 		pc = new PieceController();
 		logicTimer.setPaused(true);
-
+		// this while will run all the time 
 		while (!isExit) {
-				
 			long start = System.nanoTime();
 			logicTimer.update();
 
 			if (logicTimer.hasElapsedCycle()) {
 				updateGame();
 			}
-
-			if (dropCooldown > 0) {
-				dropCooldown--;
+			// this is the cool down time
+			if ( cooltime > 0) {
+				 cooltime--;
 			}
 
 			renderGame();
@@ -100,7 +97,7 @@ public class GameController extends JFrame {
 		System.out.print("out!");
 		//System.exit(0);
 	}
-
+    // this function will move the tile and add the speed 
 	private void updateGame() {
 		if (board.isValidAndEmpty(pc.getCurrentType(), pc.getCurrentCol(), pc.getCurrentRow() + 1, pc.getCurrentRotation())) {
 			pc.setCurrentRow(pc.getCurrentRow() + 1);
@@ -111,30 +108,26 @@ public class GameController extends JFrame {
 			if (cleared > 0) {
 				score += 50 << cleared;
 			}
-			System.out.println("gbefore change: " + gameSpeed);
-			
 			gameSpeed += this.gameLevel.getAccelaration();
 			System.out.println("gameSpeed changed to" + gameSpeed);
 			logicTimer.setCyclesPerSecond(gameSpeed);
 			logicTimer.reset();
-			dropCooldown = 25;
+			 cooltime = 25;
 			pc.spawnPiece();
 		}
 	}
-
+	//	this function is used to render the panel
 	public void renderGame() {
 		board.repaint();
 		side.repaint();
 	}
-
+	//	this function will reset all the attributes
 	public void resetGame() {
 		this.score = 0;
 		this.gameSpeed=this.gameLevel.getSpeed();
-
 		this.random = new Random();
 		int tile_idx = random.nextInt(this.gameLevel.getTileCnt());
 		pc.nextType = pc.getTileType(tile_idx);
-
 		System.out.println(this.gameLevel.getTileCnt());
 		pc.nextType = pc.nextType;
 		this.isNewGame = false;
@@ -145,7 +138,7 @@ public class GameController extends JFrame {
 		pc.spawnPiece();
 	}
 
-	// Additional Functions
+	// this function is used to get the store time
 	public void saveCurrent() {
 		Calendar now = Calendar.getInstance();
 		String name = side.getUserName();
@@ -154,29 +147,26 @@ public class GameController extends JFrame {
 				+ now.get(Calendar.MINUTE);
 		gameSaver.save(name, score, date);
 	}
-
+	//  this function open the rank.txt file
 	public void showRank() {
 		gameSaver.display();
-
 	}
-
+	//  this function clear the rank
 	public void clearStorage() {
 		gameSaver.clean();
 	}
-
+	//  median function used to check the board
 	public boolean check(Tile currentType, int currentCol, int currentRow, int currentRotation) {
 		return board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation);
 	}
-
+	// pause the time
 	public void pauseTime() {
 		logicTimer.setPaused(true);
 
 	}
 
 	// getters and setters
-	
 	public Level getLevel() {
-		
 		return this.gameLevel;
 	}
 	
@@ -249,37 +239,30 @@ public class GameController extends JFrame {
 	}
 
 	public int getCooldown() {
-		// TODO Auto-generated method stub
-		return this.dropCooldown;
+		return this. cooltime;
 	}
 
 	public Clock getClock() {
-		// TODO Auto-generated method stub
 		return this.logicTimer;
 	}
 
 	public BoardPanel getBoard() {
-		// TODO Auto-generated method stub
 		return this.board;
 	}
 
 	public PieceController getPC() {
-		// TODO Auto-generated method stub
 		return this.pc;
 	}
 
 	public boolean getIsNewGame() {
-		// TODO Auto-generated method stub
 		return this.isNewGame;
 	}
 
 	public boolean getIsGameOver() {
-		// TODO Auto-generated method stub
 		return this.isGameOver;
 	}
 
 	public float getGameSpeed() {
-		// TODO Auto-generated method stub
 		return this.gameSpeed;
 	}
 	

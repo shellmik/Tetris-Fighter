@@ -6,34 +6,27 @@ import gui.BoardPanel;
 import gui.Tile;
 
 public class PieceController {
-	public Tile currentType;
-
-	public Tile nextType;
-
-	private GameController game = GameController.getInstance();
-
-	private PieceGenerator pg = PieceGenerator.getInstance();
 	
+	// this class is to control tiles
+	public Tile currentType;
+	public Tile nextType;
+	private GameController game = GameController.getInstance();
+	private PieceGenerator pg = PieceGenerator.getInstance();
 	public int currentCol;
-
 	public int currentRow;
-
 	public int currentRotation;
-
 	private static PieceController instance = new PieceController();
 
 	public static PieceController getInstance() {
 		return instance;
 	}
-
+	
+	// spwan a new tile everytime is called
 	public void spawnPiece() {
 
 		this.currentType = nextType;
-
 		this.currentCol = currentType.getSpawnColumn();
-
 		this.currentRow = currentType.getSpawnRow();
-
 		this.currentRotation = 0;
 
 		int num = new Random().nextInt(this.game.getTypeCnt());
@@ -46,12 +39,11 @@ public class PieceController {
 			game.pauseTime();
 		}
 	}
-
+	// used to control the rotation of tile
 	public void rotatePiece(int newRotation) {
 
 		int newColumn = currentCol;
 		int newRow = currentRow;
-
 		int left = currentType.getLeftInset(newRotation);
 		int right = currentType.getRightInset(newRotation);
 		int top = currentType.getTopInset(newRotation);
@@ -78,47 +70,38 @@ public class PieceController {
 
 	//getters and setters
 	public Tile getCurrentType() {
-
 		return currentType;
 	}
 
 	public void setCurrentType(Tile t) {
-
 		currentType = t;
 	}
 
 	public Tile getNextType() {
-
 		return nextType;
 	}
 
 	public void setNextType(Tile t) {
-		System.out.println("???");
 		nextType = t;
 	}
 
 	public int getCurrentCol() {
-
 		return currentCol;
 	}
 	
 	public void setCurrentCol(int col) {
-
 		currentCol = col;
 	}
 	
 	public int getCurrentRow() {
-
 		return currentRow;
 	}
 	
 	public void setCurrentRow(int row) {
-
 		currentRow = row;
 	}
 	
 	public int getCurrentRotation() {
-
 		return currentRotation;
 	}
 
@@ -126,5 +109,4 @@ public class PieceController {
 		return pg.getType(tile_idx);
 	}
 	
-
 }

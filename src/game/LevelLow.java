@@ -1,7 +1,7 @@
 package game;
 
 public class LevelLow extends Level {
-
+	// low level
 	private static LevelLow theInstance = new LevelLow();
 
 	public static LevelLow getInstance() {
