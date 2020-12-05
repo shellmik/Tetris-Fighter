@@ -6,7 +6,7 @@ Cao Yuan, Ashley: Software Engineer (Develop & Debug)<br />
 Feng Li, Felicia: Software Engineer (Develop & Debug)<br />
 Gong Zifan, Cisco: Software Engineer (Design & Refactor)<br />
 Qu Yang, Young: Software Engineer (Design & Test)<br />
-Wu Qianyi, Michelle: Project Manager (Manage & Refactor)<br />
+Wu Qianyi, Michelle @shellmik: Project Manager (Manage & Refactor)<br />
 Yim Yau Wai, Andy: Software Engineer (Test & Debug)<br />
 
 ### User Manual
