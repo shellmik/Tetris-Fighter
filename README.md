@@ -2,12 +2,12 @@
 This project aims at developing a better version of Tetris entitled Tetris Fighter, supporting an unrestricted level choosing and customizing feature, a complete score management system, and a clean and modern GUI.
 
 ### Group Members
-Cao Yuan, Ashley: Software Engineer (Develop & Debug)<br />
-Feng Li, Felicia: Software Engineer (Develop & Debug)<br />
-Gong Zifan, Cisco: Software Engineer (Design & Refactor)<br />
-Qu Yang, Young: Software Engineer (Design & Test)<br />
-Wu Qianyi, Michelle @shellmik: Project Manager (Manage & Refactor)<br />
-Yim Yau Wai, Andy: Software Engineer (Test & Debug)<br />
+Cao Yuan, Ashley [@yuanc0000](https://github.com/yuanc0000): Software Engineer (Develop & Debug)<br />
+Feng Li, Felicia [@Felicia35](https://github.com/Felicia35): Software Engineer (Develop & Debug)<br />
+Gong Zifan, Cisco [@ZIFANGONG](https://github.com/ZIFANGONG): Software Engineer (Design & Refactor)<br />
+Qu Yang, Young [@Inter-Knight](https://github.com/Inter-Knight): Software Engineer (Design & Test)<br />
+Wu Qianyi, Michelle [@shellmik](https://github.com/shellmik): Project Manager (Manage & Refactor)<br />
+Yim Yau Wai, Andy [@workHardIn2020](https://github.com/workHardIn2020): Software Engineer (Test & Debug)<br />
 
 ### User Manual
 #### Before starting a new game
