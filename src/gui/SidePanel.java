@@ -28,18 +28,18 @@ public class SidePanel extends JPanel implements Panel{
 	
 	
     //preview window
-	private static final int TILE_SIZE = BoardPanel.getTILE_SIZE() -5;//set tile size smaller than in board//used to be >> 1
-	private static final int SHADE_WIDTH = BoardPanel.getSHADE_WIDTH() >> 1;
+	private static final int tile_size = BoardPanel.getTILE_SIZE() -5;//set tile size smaller than in board//used to be >> 1
+	private static final int shade_width = BoardPanel.getSHADE_WIDTH() >> 1;
 	
 	private static final int TILE_COUNT = 5;//preview window square total col/row num
-	private static final int SQUARE_CENTER_X = 65;//center x y of the next piece preview box.
-	private static final int SQUARE_CENTER_Y = 65;
+	private static final int centerX = 65;//center x y of the next piece preview box.
+	private static final int centerY = 65;
 	
-	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);//size of the next piece preview box
+	private static final int square_size = (tile_size * TILE_COUNT >> 1);//size of the next piece preview box
 	
 	//side panel
-	private static final int SIDE_WIDTH = 250;
-	private static final int SIDE_HEIGHT = BoardPanel.getPANEL_HEIGHT();
+	private static final int side_width = 250;
+	private static final int side_height = BoardPanel.getPANEL_HEIGHT();
 	
 	//left, right part layout
 	private static final int LEFT_START = 20;
@@ -51,11 +51,8 @@ public class SidePanel extends JPanel implements Panel{
 	//font
 	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 11);
 	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
-	
 	private static final Color DRAW_COLOR = Color.BLACK;
-	private Drawer draw = new Drawer(TILE_SIZE, SHADE_WIDTH);
-	
-	
+	private Drawer draw = new Drawer(tile_size, shade_width);
 	private String userName;
 	private GameController tetris;
 	
@@ -66,7 +63,6 @@ public class SidePanel extends JPanel implements Panel{
 	private JLabel labelAcc;
 	
 	private JTextField textField ;
-	
 	private JComboBox cmbLevel;
 	private JComboBox<Integer> cmbType;
 	private JComboBox cmbSpeed;
@@ -98,7 +94,6 @@ public class SidePanel extends JPanel implements Panel{
 	}
 	
 	//other functions
-	
 	public void submitOperation() {
 		String str = textField.getText();
 		if(str.length()==0)
@@ -115,7 +110,6 @@ public class SidePanel extends JPanel implements Panel{
 	}
 
 	public void endOperation() {
-		
 		tetris.setPause(false);
 		tetris.setGameOver(true);
 		tetris.pauseTime();
@@ -143,9 +137,7 @@ public class SidePanel extends JPanel implements Panel{
         int offset= 185;
         
 		store.setBounds(RIGHT_START, 80, UNIT_WIDTH, UNIT_HEIGHT);
-		
 		line.setBounds(0, 130, 800, 20);
-        
         textField.setBounds(this.RIGHT_START, 155, UNIT_WIDTH, UNIT_HEIGHT);
 		labelUser.setBounds(this.LEFT_START, 155, 200, UNIT_HEIGHT);// need to be longer
 		
@@ -186,10 +178,8 @@ public class SidePanel extends JPanel implements Panel{
 		labelUser.setForeground(Color.BLACK);
 		Dimension d = labelUser.getPreferredSize();
 		labelUser.setPreferredSize(new Dimension(d.width + 6, d.height));
-
 		textField = new JTextField(20);
 		textField.setFont(new Font("acefont-family", Font.BOLD, 10));
-		
 		add(labelUser);
 		add(textField);
 	}
@@ -271,32 +261,20 @@ public class SidePanel extends JPanel implements Panel{
                 	String levelStr=(String) cmbLevel.getSelectedItem();
                 	if(levelStr=="Low") {
                 		isCustom=false;
-            
                 		tetris.setLevel(LevelLow.getInstance());
-                	}
-                		
-                	else if(levelStr=="Mid") {
+                	} else if(levelStr=="Mid") {
                 		isCustom=false;
                 		tetris.setLevel(LevelMid.getInstance());
-                		
-                	}
-                		
-                	else if(levelStr=="High") {
+                	} else if(levelStr=="High") {
                 		isCustom=false;
                 		tetris.setLevel(LevelHigh.getInstance());
-                		
-                	}
-                	else if(levelStr=="Custom") {
+                	} else if(levelStr=="Custom") {
                 		isCustom=true;
                 		tetris.setLevel(LevelCustom.getInstance());
-                		
                 	}
-                	
-                	
                 	cmbType.setSelectedItem(tetris.getLevel().getTileCnt());
                 	cmbSpeed.setSelectedItem(tetris.getLevel().getSpeed());
                 	cmbAcc.setSelectedItem(tetris.getLevel().getAccelaration());
-                    
                 }
             }
         });
@@ -329,8 +307,6 @@ public class SidePanel extends JPanel implements Panel{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                      tetris.getLevel().setAccelaration((float) cmbAcc.getSelectedItem());
-                    
-                    
                 }
             }
         });
@@ -338,15 +314,12 @@ public class SidePanel extends JPanel implements Panel{
 	}
 	
 	public void showButton() {
-
   		store = new JButton("StoreScore");
   		show = new JButton("ShowRank");
   		clear = new JButton("ClearRank");
 		submit = new JButton("SUBMIT");
 		exit=new JButton("X");
-		
 		endGame = new JButton("EndGame");
-		
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -354,8 +327,7 @@ public class SidePanel extends JPanel implements Panel{
 				//System.exit(0);		
 			}
 		});
-
-
+		
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -392,20 +364,18 @@ public class SidePanel extends JPanel implements Panel{
 		   
 		   }
 		});
-	
 		add(submit);
 		add(endGame);
 		add(store);
 		add(show);
 		add(clear);
 		add(exit);
-	
 	}
 
 	public SidePanel(GameController tetris) {
 		this.tetris = tetris;
 		setLayout(null);
-		setPreferredSize(new Dimension(SIDE_WIDTH, SIDE_HEIGHT));
+		setPreferredSize(new Dimension(side_width, side_height));
 		setBackground(new Color(255,182,193));		
 
 		inputUsername();
@@ -431,8 +401,7 @@ public class SidePanel extends JPanel implements Panel{
 		//Draw the next piece preview box
 		g.setFont(LARGE_FONT);
 		g.drawString("Next Piece ", 140, UNIT_HEIGHT);
-		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
-		
+		g.drawRect(centerX - square_size, centerY - square_size, square_size * 2, square_size * 2);
 		
 		Tile type = tetris.getNextPieceType();
 		
@@ -448,7 +417,6 @@ public class SidePanel extends JPanel implements Panel{
 			
 			labelAcc.setVisible(false);
 			cmbAcc.setVisible(true);
-
 		}
 		
 		if(isCustom==false) {
@@ -459,7 +427,6 @@ public class SidePanel extends JPanel implements Panel{
 			labelSpeed.setVisible(true);
 			labelSpeed.setText(Float.toString(tetris.getLevel().getSpeed()));
 			cmbSpeed.setVisible(false);
-			
 			
 			labelAcc.setVisible(true);
 			labelAcc.setText(Float.toString(tetris.getLevel().getAccelaration()));
@@ -480,8 +447,8 @@ public class SidePanel extends JPanel implements Panel{
 			int dimension = type.getDimension();
 		
 			//Calculate the top left corner (origin) of the piece.
-			int startX = (SQUARE_CENTER_X - (cols * TILE_SIZE / 2));
-			int startY = (SQUARE_CENTER_Y - (rows * TILE_SIZE / 2));
+			int startX = (centerX - (cols * tile_size / 2));
+			int startY = (centerY - (rows * tile_size / 2));
 		
 			//default rotation 0
 			int top = type.getTopInset(0);
@@ -490,38 +457,30 @@ public class SidePanel extends JPanel implements Panel{
 			for(int row = 0; row < dimension; row++) {
 				for(int col = 0; col < dimension; col++) {
 					if(type.isTile(col, row, 0)) {
-						draw.drawTile(type, startX + ((col - left) * TILE_SIZE), startY + ((row - top) * TILE_SIZE), g);
+						draw.drawTile(type, startX + ((col - left) * tile_size), startY + ((row - top) * tile_size), g);
 					}
 				}
 			}
 		}
-		
-		
 	}
 
     public void unlockSetting() {
-    	
     	labelUser.setText("Name");
     	textField.setVisible(true);
-
     	cmbLevel.setEnabled(true);
     	cmbType.setEnabled(true);
     	cmbSpeed.setEnabled(true);
     	cmbAcc.setEnabled(true);
-    	
     }
     
     public void lockSetting() {
-    	
-	 labelUser.setText("Name " + textField.getText());
-     textField.setVisible(false);
-     cmbLevel.setEnabled(false);
-     cmbType.setEnabled(false);
-     cmbSpeed.setEnabled(false);
-     cmbAcc.setEnabled(false);
-     
-     tetris.requestFocus();
-    	
+    	labelUser.setText("Name " + textField.getText());
+	    textField.setVisible(false);
+	    cmbLevel.setEnabled(false);
+	    cmbType.setEnabled(false);
+	    cmbSpeed.setEnabled(false);
+	    cmbAcc.setEnabled(false);
+	    tetris.requestFocus();
     }
     
     public void setIsCustom(boolean b) {
